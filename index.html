@@ -1,0 +1,3597 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ConvertAI — Free Online File Converter Tools</title>
+<meta name="description" content="Free online tools: image converter, PDF tools, video to MP3, currency converter, JSON/CSV converter and more. No upload, works in browser.">
+<meta name="keywords" content="image converter, pdf merge, video to mp3, json to csv, currency converter, free online tools">
+<meta property="og:title" content="ConvertAI — Free Online File Converter Tools">
+<meta property="og:description" content="25+ free online tools. Image, PDF, Video, Data converters. Works in browser, no file upload.">
+<meta property="og:type" content="website">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://convertai.vercel.app/">
+<!-- AdSense — BURAYA KENDİ KODUNU YAPIŞTIRACAKSIN -->
+<!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script> -->
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0a0a0f;
+  --surface: #111118;
+  --surface2: #18181f;
+  --border: rgba(255,255,255,0.07);
+  --border-hover: rgba(255,255,255,0.15);
+  --accent: #4f8cff;
+  --accent2: #a78bfa;
+  --accent3: #34d399;
+  --text: #f0f0f8;
+  --text-muted: #8888aa;
+  --text-dim: #3a3a55;
+  --danger: #f87171;
+  --success: #34d399;
+  --warn: #fbbf24;
+  --shadow: rgba(0,0,0,0.4);
+  --orb-opacity: 0.2;
+}
+
+[data-theme="light"] {
+  --bg: #f2f2f7;
+  --surface: #ffffff;
+  --surface2: #f7f7fc;
+  --border: rgba(0,0,0,0.07);
+  --border-hover: rgba(0,0,0,0.14);
+  --text: #0d0d1a;
+  --text-muted: #5a5a7a;
+  --text-dim: #c0c0d8;
+  --shadow: rgba(0,0,0,0.08);
+  --orb-opacity: 0.07;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+  transition: background 0.3s, color 0.3s;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(79,140,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79,140,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: var(--orb-opacity);
+  transition: opacity 0.3s;
+}
+.orb-1 { width: 500px; height: 500px; background: #4f8cff; top: -200px; left: -100px; }
+.orb-2 { width: 400px; height: 400px; background: #a78bfa; bottom: -150px; right: -100px; }
+
+/* HEADER */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10,10,15,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 1.5rem;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: background 0.3s;
+}
+
+[data-theme="light"] header { background: rgba(242,242,247,0.85); }
+
+.logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.2rem;
+  background: linear-gradient(135deg, #4f8cff, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* SEARCH BAR */
+.search-wrap {
+  flex: 1;
+  max-width: 420px;
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13.5px;
+  padding: 8px 14px 8px 36px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-input:focus { border-color: rgba(79,140,255,0.5); }
+.search-input::placeholder { color: var(--text-muted); }
+
+.search-icon {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.header-right { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+
+.theme-btn {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-size: 16px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.theme-btn:hover { border-color: var(--border-hover); color: var(--text); }
+
+.live-badge {
+  display: none;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  background: rgba(52,211,153,0.1);
+  color: var(--success);
+  border: 1px solid rgba(52,211,153,0.2);
+  padding: 3px 10px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 56px 2rem 44px;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent2);
+  background: rgba(167,139,250,0.1);
+  border: 1px solid rgba(167,139,250,0.2);
+  padding: 5px 14px;
+  border-radius: 100px;
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -1px;
+  margin-bottom: 14px;
+}
+
+.hero h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, #4f8cff 0%, #a78bfa 50%, #34d399 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  max-width: 460px;
+  margin: 0 auto 28px;
+  font-weight: 300;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.hero-stat strong {
+  display: block;
+  font-family: 'Syne', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.hero-stat span { font-size: 12px; color: var(--text-muted); }
+
+/* RECENT TOOLS */
+.recent-section {
+  position: relative;
+  z-index: 1;
+  max-width: 960px;
+  margin: 0 auto 4px;
+  padding: 0 1.5rem;
+  display: none;
+}
+
+.recent-section.visible { display: block; }
+
+.recent-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.recent-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.recent-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 5px 12px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.recent-chip:hover { border-color: var(--accent); color: var(--accent); }
+
+/* MAIN */
+main {
+  position: relative;
+  z-index: 1;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 1.5rem 80px;
+}
+
+/* SEARCH RESULTS */
+#search-results {
+  display: none;
+}
+
+#search-results.visible {
+  display: block;
+}
+
+/* TABS */
+.tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 5px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tabs::-webkit-scrollbar { display: none; }
+
+.tab-btn {
+  flex-shrink: 0;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.tab-btn:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+
+.tab-btn.active {
+  background: rgba(79,140,255,0.15);
+  color: var(--accent);
+  border: 1px solid rgba(79,140,255,0.25);
+}
+
+.section { display: none; }
+.section.active { display: block; }
+
+/* SECTION TITLE */
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* TOOL GRID */
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+/* TOOL CARD */
+.tool-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  animation: fadeUp 0.3s ease both;
+}
+
+.tool-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px var(--shadow);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.tool-card:nth-child(2) { animation-delay: 0.04s; }
+.tool-card:nth-child(3) { animation-delay: 0.08s; }
+.tool-card:nth-child(4) { animation-delay: 0.12s; }
+.tool-card:nth-child(5) { animation-delay: 0.16s; }
+.tool-card:nth-child(6) { animation-delay: 0.20s; }
+
+.tool-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.tool-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+}
+
+.tool-icon.blue   { background: rgba(79,140,255,0.12); }
+.tool-icon.purple { background: rgba(167,139,250,0.12); }
+.tool-icon.green  { background: rgba(52,211,153,0.12); }
+.tool-icon.orange { background: rgba(251,191,36,0.12); }
+.tool-icon.red    { background: rgba(248,113,113,0.12); }
+
+.tool-title { font-family: 'Syne', sans-serif; font-size: 0.92rem; font-weight: 700; }
+.tool-desc  { font-size: 11.5px; color: var(--text-muted); margin-top: 1px; }
+
+/* FORM ELEMENTS */
+.field { margin-bottom: 13px; }
+
+label.field-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+textarea, input[type=text], input[type=number], input[type=email], select {
+  width: 100%;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13.5px;
+  padding: 9px 12px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  resize: vertical;
+}
+
+textarea:focus, input:focus, select:focus { border-color: rgba(79,140,255,0.5); }
+textarea { min-height: 90px; font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+select option { background: var(--surface); }
+
+input[type=number] { padding-right: 4px; }
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: auto;
+  opacity: 1;
+  cursor: pointer;
+  filter: invert(0.7) sepia(0.5) saturate(3) hue-rotate(195deg) brightness(1.2);
+}
+
+[data-theme="light"] input[type=number]::-webkit-outer-spin-button,
+[data-theme="light"] input[type=number]::-webkit-inner-spin-button {
+  filter: none;
+}
+
+input[type=range] { width: 100%; accent-color: var(--accent); background: transparent; border: none; padding: 4px 0; }
+.range-value { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--accent); font-weight: 500; }
+
+/* DROP ZONE */
+.drop-zone {
+  border: 1.5px dashed var(--border);
+  border-radius: 12px;
+  padding: 24px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: rgba(79,140,255,0.015);
+  margin-bottom: 12px;
+}
+
+.drop-zone:hover, .drop-zone.drag-over {
+  border-color: var(--accent);
+  background: rgba(79,140,255,0.06);
+}
+
+.drop-icon { font-size: 26px; margin-bottom: 6px; }
+.drop-zone strong { font-size: 13px; }
+.drop-zone p { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+/* BUTTONS */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px;
+  border-radius: 10px;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn:active { transform: scale(0.97); }
+
+.btn-primary { background: linear-gradient(135deg, #4f8cff, #7b6bff); color: #fff; }
+.btn-primary:hover { opacity: 0.88; }
+
+.btn-ghost {
+  background: var(--surface2);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+.btn-ghost:hover { background: var(--border); color: var(--text); }
+
+.btn-success {
+  background: rgba(52,211,153,0.12);
+  color: var(--success);
+  border: 1px solid rgba(52,211,153,0.25);
+}
+.btn-success:hover { background: rgba(52,211,153,0.2); }
+
+.btn-warn {
+  background: rgba(251,191,36,0.1);
+  color: var(--warn);
+  border: 1px solid rgba(251,191,36,0.2);
+}
+
+.btn-row { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 11px; }
+
+/* STATUS */
+.status {
+  font-size: 12.5px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-top: 9px;
+  display: none;
+}
+
+.status.success { display:block; background: rgba(52,211,153,0.1); color: var(--success); border: 1px solid rgba(52,211,153,0.2); }
+.status.error   { display:block; background: rgba(248,113,113,0.1); color: var(--danger);  border: 1px solid rgba(248,113,113,0.2); }
+.status.info    { display:block; background: rgba(79,140,255,0.1);  color: var(--accent);   border: 1px solid rgba(79,140,255,0.2); }
+.status.warn    { display:block; background: rgba(251,191,36,0.1);  color: var(--warn);     border: 1px solid rgba(251,191,36,0.2); }
+
+/* OUTPUT BOX */
+.output-wrapper { position: relative; margin-top: 11px; }
+
+.output-box {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 11px 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text);
+  word-break: break-all;
+  min-height: 56px;
+  white-space: pre-wrap;
+  display: none;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.output-box.visible { display: block; }
+
+.copy-btn {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: 6px;
+  padding: 3px 9px;
+  font-size: 11px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.15s;
+  display: none;
+}
+
+.copy-btn:hover { background: var(--border); color: var(--text); }
+
+/* PROGRESS */
+.progress-bar { height: 3px; background: var(--border); border-radius: 100px; overflow: hidden; margin-top: 9px; display: none; }
+.progress-bar.visible { display: block; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 100px; width: 0%; transition: width 0.3s; }
+
+/* RESULT BOX */
+.result-box {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 13px;
+  display: none;
+}
+.result-box.visible { display: block; }
+
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13.5px;
+}
+.result-row:last-child { border-bottom: none; }
+.result-row span:last-child { font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+.result-row.highlight { background: rgba(79,140,255,0.07); font-weight: 600; color: var(--accent); }
+.result-row span:first-child { color: var(--text-muted); font-size: 13px; }
+.result-row.highlight span:first-child { color: var(--accent); }
+
+/* CURRENCY BIG RESULT */
+.currency-big {
+  background: var(--surface2);
+  border: 1px solid rgba(79,140,255,0.2);
+  border-radius: 12px;
+  padding: 18px;
+  text-align: center;
+  margin-top: 13px;
+  display: none;
+}
+.currency-big.visible { display: block; }
+.currency-amount { font-family: 'Syne', sans-serif; font-size: 1.9rem; font-weight: 700; color: var(--accent); }
+.currency-sub { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+/* FILE LIST */
+.file-list { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; }
+.file-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 7px 11px;
+  font-size: 12.5px;
+}
+.file-item-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.file-item-size { font-size: 11px; color: var(--text-muted); }
+.file-item-num  { font-size: 12px; color: var(--text-dim); min-width: 18px; }
+
+/* CHAR MAP */
+.char-map { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.char-badge {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 5px 8px;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* QUICK CURRENCY BUTTONS */
+.quick-btns { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.quick-btn {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: 7px;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.15s;
+}
+.quick-btn:hover { border-color: rgba(79,140,255,0.4); color: var(--accent); }
+
+/* FOOTER */
+footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 28px;
+  color: var(--text-dim);
+  font-size: 12px;
+  border-top: 1px solid var(--border);
+}
+
+canvas#work-canvas { display: none; }
+
+/* ADSENSE SLOTS */
+.ad-slot {
+  width: 100%;
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+.ad-slot-banner { height: 90px; margin: 8px 0 16px; }
+.ad-slot-rect   { height: 250px; margin: 16px 0; }
+.ad-slot ins    { display: block; width: 100%; }
+
+/* LANG SWITCHER */
+.lang-switcher {
+  display: flex;
+  gap: 2px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 3px;
+  flex-shrink: 0;
+}
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 7px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0.3px;
+}
+.lang-btn:hover { color: var(--text); }
+.lang-btn.active { background: var(--accent); color: #fff; }
+
+/* BATCH GRID */
+.batch-preview { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.batch-item {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 7px 11px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex: 1;
+  min-width: 200px;
+}
+.batch-item-status { font-size: 14px; }
+.batch-item-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--text-muted); }
+
+/* SWAP BTN */
+.swap-btn {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.2s;
+  margin-top: 20px;
+  flex-shrink: 0;
+}
+.swap-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* SEARCH EMPTY */
+.search-empty {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--text-muted);
+}
+.search-empty p { margin-top: 8px; font-size: 13px; }
+
+/* NO WRAP ON NARROW */
+@media (max-width: 640px) {
+  .tool-grid { grid-template-columns: 1fr; }
+  header { padding: 0 1rem; }
+  .hero { padding: 40px 1rem 36px; }
+  .tabs { padding: 4px; }
+  .tab-btn { padding: 7px 11px; font-size: 12.5px; }
+  .live-badge { display: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<canvas id="work-canvas"></canvas>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">ConvertAI</div>
+
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" type="text" id="global-search" placeholder="Search tools…" oninput="handleSearch(this.value)" data-i18n-placeholder="search_placeholder">
+  </div>
+
+  <div class="header-right">
+    <div class="live-badge" id="live-badge">⬤ Live Rate</div>
+    <div class="lang-switcher">
+      <button class="lang-btn" onclick="setLang('tr')">TR</button>
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('de')">DE</button>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+    </div>
+    <button class="theme-btn" onclick="toggleTheme()" title="Toggle theme" id="theme-btn">🌙</button>
+  </div>
+</header>
+
+<!-- AD SLOT — TOP BANNER -->
+<div style="max-width:960px;margin:8px auto 0;padding:0 1.5rem">
+  <div class="ad-slot ad-slot-banner" id="ad-top">
+    <span>Advertisement</span>
+    <!-- AdSense onayı sonrası buraya ins etiketi gelecek -->
+    <!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXX" data-ad-slot="XXXX" data-ad-format="auto"></ins> -->
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag" data-i18n="hero_tag">⚡ Files never leave your browser — 100% private</div>
+  <h1 data-i18n="hero_title">All Tools<br><em>One Place</em></h1>
+  <p data-i18n="hero_sub">Image, PDF, video & data converters. Free, fast, privacy-first.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><strong>25+</strong><span data-i18n="stat_tools">Tools</span></div>
+    <div class="hero-stat"><strong>100%</strong><span data-i18n="stat_free">Free</span></div>
+    <div class="hero-stat"><strong>170+</strong><span data-i18n="stat_currencies">Currencies</span></div>
+  </div>
+</section>
+
+<!-- RECENT TOOLS -->
+<div class="recent-section" id="recent-section">
+  <div class="recent-label" data-i18n="recent_label">Recently Used</div>
+  <div class="recent-chips" id="recent-chips"></div>
+</div>
+
+<!-- MAIN -->
+<main>
+
+  <!-- SEARCH RESULTS -->
+  <div id="search-results">
+    <div class="section-title">Arama Sonuçları</div>
+    <div class="tool-grid" id="search-grid"></div>
+    <div class="search-empty" id="search-empty" style="display:none">
+      <div style="font-size:36px">🔍</div>
+      <p>Araç bulunamadı.</p>
+    </div>
+  </div>
+
+  <!-- NORMAL VIEW -->
+  <div id="normal-view">
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('gorsel',this)" data-i18n="tab_image">🖼️ Image</button>
+      <button class="tab-btn" onclick="switchTab('video',this)" data-i18n="tab_video">🎬 Video</button>
+      <button class="tab-btn" onclick="switchTab('pdf',this)" data-i18n="tab_pdf">📄 PDF</button>
+      <button class="tab-btn" onclick="switchTab('veri',this)" data-i18n="tab_data">🔄 Data</button>
+      <button class="tab-btn" onclick="switchTab('metin',this)" data-i18n="tab_text">✍️ Text</button>
+      <button class="tab-btn" onclick="switchTab('hesap',this)" data-i18n="tab_calc">🧮 Calc</button>
+    </div>
+
+    <!-- ======== VİDEO ======== -->
+    <div class="section" id="section-video">
+      <div class="section-title">Video Araçları</div>
+      <div style="background:rgba(79,140,255,0.08);border:1px solid rgba(79,140,255,0.2);border-radius:10px;padding:10px 14px;margin-bottom:16px;font-size:12.5px;color:var(--accent)">
+        ⚡ FFmpeg.wasm kullanır — ilk açılışta ~25 MB indirme gerekir. Dosyalar sunucuya gönderilmez.
+      </div>
+      <div class="tool-grid">
+
+        <!-- VIDEO → MP3 -->
+        <div class="tool-card" data-tool-id="vid2mp3" data-search="video ses mp3 mp4 ses çıkar audio extract">
+          <div class="tool-card-header">
+            <div class="tool-icon blue">🎵</div>
+            <div><div class="tool-title">Video → MP3</div><div class="tool-desc">Videodan ses dosyası çıkar</div></div>
+          </div>
+          <div class="drop-zone" onclick="document.getElementById('v2a-input').click()">
+            <div class="drop-icon">🎬</div>
+            <strong>Video seç veya sürükle</strong>
+            <p id="v2a-dz-info">MP4, WebM, MOV, AVI desteklenir</p>
+          </div>
+          <input type="file" id="v2a-input" accept="video/*" style="display:none" onchange="v2aLoad(this)">
+          <div class="field">
+            <label class="field-label">Ses Kalitesi</label>
+            <select id="v2a-quality">
+              <option value="128k">128 kbps (standart)</option>
+              <option value="192k" selected>192 kbps (yüksek)</option>
+              <option value="320k">320 kbps (maksimum)</option>
+            </select>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="v2aRun()">⚡ Ses Çıkar</button>
+          </div>
+          <div class="status" id="v2a-status"></div>
+          <div class="progress-bar" id="v2a-progress"><div class="progress-fill" id="v2a-fill"></div></div>
+          <div class="btn-row" id="v2a-dl" style="display:none">
+            <button class="btn btn-success" onclick="v2aDownload()">⬇ MP3 İndir</button>
+          </div>
+        </div>
+
+        <!-- VIDEO FORMAT -->
+        <div class="tool-card" data-tool-id="vidfmt" data-search="video format dönüştür mp4 webm avi mov">
+          <div class="tool-card-header">
+            <div class="tool-icon purple">🔀</div>
+            <div><div class="tool-title">Video Format Dönüştürücü</div><div class="tool-desc">MP4, WebM, MOV arası dönüşüm</div></div>
+          </div>
+          <div class="drop-zone" onclick="document.getElementById('vf-input').click()">
+            <div class="drop-icon">📹</div>
+            <strong>Video seç veya sürükle</strong>
+            <p id="vf-dz-info">MP4, WebM, MOV, AVI</p>
+          </div>
+          <input type="file" id="vf-input" accept="video/*" style="display:none" onchange="vfLoad(this)">
+          <div class="field">
+            <label class="field-label">Çıktı Formatı</label>
+            <select id="vf-out">
+              <option value="mp4">MP4</option>
+              <option value="webm">WebM</option>
+              <option value="avi">AVI</option>
+              <option value="mov">MOV</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="field-label">Çözünürlük</label>
+            <select id="vf-res">
+              <option value="">Orijinal</option>
+              <option value="1920x1080">1080p</option>
+              <option value="1280x720">720p</option>
+              <option value="854x480">480p</option>
+              <option value="640x360">360p</option>
+            </select>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="vfRun()">⚡ Dönüştür</button>
+          </div>
+          <div class="status" id="vf-status"></div>
+          <div class="progress-bar" id="vf-progress"><div class="progress-fill" id="vf-fill"></div></div>
+          <div class="btn-row" id="vf-dl" style="display:none">
+            <button class="btn btn-success" onclick="vfDownload()">⬇ Video İndir</button>
+          </div>
+        </div>
+
+        <!-- VIDEO SIKIŞTIRMA -->
+        <div class="tool-card" data-tool-id="vidcmp" data-search="video sıkıştır compress boyut küçült">
+          <div class="tool-card-header">
+            <div class="tool-icon green">🗜️</div>
+            <div><div class="tool-title">Video Sıkıştırma</div><div class="tool-desc">Dosya boyutunu küçült</div></div>
+          </div>
+          <div class="drop-zone" onclick="document.getElementById('vc-input').click()">
+            <div class="drop-icon">🎥</div>
+            <strong>Video seç veya sürükle</strong>
+            <p id="vc-dz-info">MP4, WebM, MOV</p>
+          </div>
+          <input type="file" id="vc-input" accept="video/*" style="display:none" onchange="vcLoad(this)">
+          <div class="field">
+            <label class="field-label">Sıkıştırma Seviyesi</label>
+            <select id="vc-level">
+              <option value="23">Düşük (yüksek kalite)</option>
+              <option value="28" selected>Orta (dengeli)</option>
+              <option value="35">Yüksek (küçük dosya)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="field-label">Çözünürlük</label>
+            <select id="vc-res">
+              <option value="">Orijinal</option>
+              <option value="1280x720">720p</option>
+              <option value="854x480">480p</option>
+              <option value="640x360">360p</option>
+            </select>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="vcRun()">⚡ Sıkıştır</button>
+          </div>
+          <div class="status" id="vc-status"></div>
+          <div class="progress-bar" id="vc-progress"><div class="progress-fill" id="vc-fill"></div></div>
+          <div class="btn-row" id="vc-dl" style="display:none">
+            <button class="btn btn-success" onclick="vcDownload()">⬇ Video İndir</button>
+          </div>
+        </div>
+
+        <!-- VIDEO → GIF -->
+        <div class="tool-card" data-tool-id="vid2gif" data-search="video gif dönüştür animasyon kısa">
+          <div class="tool-card-header">
+            <div class="tool-icon orange">🎞️</div>
+            <div><div class="tool-title">Video → GIF</div><div class="tool-desc">Kısa klip veya tam video</div></div>
+          </div>
+          <div class="drop-zone" onclick="document.getElementById('v2g-input').click()">
+            <div class="drop-icon">🎬</div>
+            <strong>Video seç veya sürükle</strong>
+            <p id="v2g-dz-info">MP4, WebM, MOV</p>
+          </div>
+          <input type="file" id="v2g-input" accept="video/*" style="display:none" onchange="v2gLoad(this)">
+          <div style="display:flex;gap:10px">
+            <div class="field" style="flex:1"><label class="field-label">Başlangıç (sn)</label><input type="number" id="v2g-start" placeholder="0" min="0" value="0"></div>
+            <div class="field" style="flex:1"><label class="field-label">Süre (sn)</label><input type="number" id="v2g-dur" placeholder="5" min="1" max="30" value="5"></div>
+          </div>
+          <div class="field">
+            <label class="field-label">Genişlik (px)</label>
+            <select id="v2g-width">
+              <option value="480">480px</option>
+              <option value="320" selected>320px</option>
+              <option value="240">240px</option>
+            </select>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="v2gRun()">⚡ GIF Oluştur</button>
+          </div>
+          <div class="status" id="v2g-status"></div>
+          <div class="progress-bar" id="v2g-progress"><div class="progress-fill" id="v2g-fill"></div></div>
+          <div class="btn-row" id="v2g-dl" style="display:none">
+            <button class="btn btn-success" onclick="v2gDownload()">⬇ GIF İndir</button>
+          </div>
+        </div>
+
+        <!-- SES KESİCİ -->
+        <div class="tool-card" data-tool-id="audiocrop" data-search="ses kes kırp audio mp3 trim kesici">
+          <div class="tool-card-header">
+            <div class="tool-icon blue">✂️</div>
+            <div><div class="tool-title">Ses / Video Kesici</div><div class="tool-desc">Belirli aralığı kes ve kaydet</div></div>
+          </div>
+          <div class="drop-zone" onclick="document.getElementById('ac-input').click()">
+            <div class="drop-icon">🎵</div>
+            <strong>Ses veya video seç</strong>
+            <p id="ac-dz-info">MP3, MP4, WebM, WAV, MOV</p>
+          </div>
+          <input type="file" id="ac-input" accept="audio/*,video/*" style="display:none" onchange="acLoad(this)">
+          <div style="display:flex;gap:10px">
+            <div class="field" style="flex:1"><label class="field-label">Başlangıç (sn)</label><input type="number" id="ac-start" placeholder="0" min="0" value="0"></div>
+            <div class="field" style="flex:1"><label class="field-label">Bitiş (sn)</label><input type="number" id="ac-end" placeholder="30" min="1" value="30"></div>
+          </div>
+          <div class="field">
+            <label class="field-label">Çıktı Formatı</label>
+            <select id="ac-fmt">
+              <option value="mp3">MP3 (ses)</option>
+              <option value="mp4">MP4 (video)</option>
+              <option value="wav">WAV (ses)</option>
+            </select>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="acRun()">✂️ Kes</button>
+          </div>
+          <div class="status" id="ac-status"></div>
+          <div class="progress-bar" id="ac-progress"><div class="progress-fill" id="ac-fill"></div></div>
+          <div class="btn-row" id="ac-dl" style="display:none">
+            <button class="btn btn-success" onclick="acDownload()">⬇ İndir</button>
+          </div>
+        </div>
+
+        <!-- THUMBNAIL ÇIKAR -->
+        <div class="tool-card" data-tool-id="thumbnail" data-search="video thumbnail kare ekran görüntüsü frame png">
+          <div class="tool-card-header">
+            <div class="tool-icon purple">📸</div>
+            <div><div class="tool-title">Video Thumbnail Çıkar</div><div class="tool-desc">İstediğin saniyedeki kareyi al</div></div>
+          </div>
+          <div class="drop-zone" onclick="document.getElementById('th-input').click()">
+            <div class="drop-icon">🎬</div>
+            <strong>Video seç veya sürükle</strong>
+            <p id="th-dz-info">MP4, WebM, MOV</p>
+          </div>
+          <input type="file" id="th-input" accept="video/*" style="display:none" onchange="thLoad(this)">
+          <div class="field">
+            <label class="field-label">Zaman (saniye)</label>
+            <input type="number" id="th-time" placeholder="0" min="0" value="0" step="0.1">
+          </div>
+          <div class="field">
+            <label class="field-label">Format</label>
+            <select id="th-fmt">
+              <option value="image/png">PNG (kayıpsız)</option>
+              <option value="image/jpeg">JPG</option>
+            </select>
+          </div>
+          <!-- Gizli video ve canvas preview -->
+          <video id="th-video" style="display:none" preload="metadata"></video>
+          <canvas id="th-canvas" style="display:none"></canvas>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="thRun()">📸 Kareyi Al</button>
+          </div>
+          <div class="status" id="th-status"></div>
+          <div id="th-preview-wrap" style="display:none;margin-top:10px">
+            <img id="th-preview" style="width:100%;border-radius:10px;border:1px solid var(--border)" alt="Thumbnail">
+          </div>
+          <div class="btn-row" id="th-dl" style="display:none">
+            <button class="btn btn-success" onclick="thDownload()">⬇ İndir</button>
+          </div>
+        </div>
+
+        <!-- VIDEO BİLGİ -->
+        <div class="tool-card" data-tool-id="vidinfo" data-search="video bilgi metadata süre çözünürlük codec">
+          <div class="tool-card-header">
+            <div class="tool-icon green">🔍</div>
+            <div><div class="tool-title">Video Bilgisi</div><div class="tool-desc">Süre, çözünürlük, codec, boyut</div></div>
+          </div>
+          <div class="drop-zone" onclick="document.getElementById('vi-input').click()">
+            <div class="drop-icon">🎥</div>
+            <strong>Video seç veya sürükle</strong>
+            <p>MP4, WebM, MOV, AVI</p>
+          </div>
+          <input type="file" id="vi-input" accept="video/*" style="display:none" onchange="viRun(this)">
+          <video id="vi-video" style="display:none" preload="metadata"></video>
+          <div class="result-box" id="vi-result">
+            <div class="result-row"><span>Dosya Adı</span><span id="vi-name">—</span></div>
+            <div class="result-row"><span>Dosya Boyutu</span><span id="vi-size">—</span></div>
+            <div class="result-row"><span>Format</span><span id="vi-type">—</span></div>
+            <div class="result-row"><span>Süre</span><span id="vi-dur">—</span></div>
+            <div class="result-row"><span>Çözünürlük</span><span id="vi-res">—</span></div>
+            <div class="result-row highlight"><span>Video Boyutu</span><span id="vi-dims">—</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ======== GÖRSEL ======== -->
+    <div class="section active" id="section-gorsel">
+      <div class="section-title">Görsel Araçları</div>
+      <div class="tool-grid">
+
+        <!-- FORMAT DÖNÜŞTÜRÜCÜ -->
+        <div class="tool-card" data-tool-id="format" data-search="görsel format dönüştür png jpg webp gif">
+          <div class="tool-card-header">
+            <div class="tool-icon blue">🔀</div>
+            <div><div class="tool-title">Format Dönüştürücü</div><div class="tool-desc">PNG, JPG, WebP arası dönüşüm</div></div>
+          </div>
+          <div class="drop-zone" onclick="document.getElementById('fmt-input').click()">
+            <div class="drop-icon">📂</div>
+            <strong>Görsel seç veya sürükle</strong>
+            <p id="fmt-dz-info">PNG, JPG, WebP, GIF desteklenir</p>
+          </div>
+          <input type="file" id="fmt-input" accept="image/*" style="display:none" onchange="fmtLoad(this)">
+          <div class="field">
+            <label class="field-label">Çıktı Formatı</label>
+            <select id="fmt-out">
+              <option value="image/jpeg">JPG</option>
+              <option value="image/png">PNG</option>
+              <option value="image/webp">WebP</option>
+            </select>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="fmtConvert()">⚡ Dönüştür</button>
+            <button class="btn btn-ghost" onclick="fmtReset()">↺ Sıfırla</button>
+          </div>
+          <div class="status" id="fmt-status"></div>
+          <div class="progress-bar" id="fmt-progress"><div class="progress-fill" id="fmt-fill"></div></div>
+          <div class="btn-row" id="fmt-dl" style="display:none">
+            <button class="btn btn-success" onclick="fmtDownload()">⬇ İndir</button>
+          </div>
+        </div>
+
+        <!-- TOPLU DÖNÜŞTÜRÜCÜ -->
+        <div class="tool-card" data-tool-id="batch" data-search="toplu batch görsel format dönüştür çoklu">
+          <div class="tool-card-header">
+            <div class="tool-icon purple">📦</div>
+            <div><div class="tool-title">Toplu Format Dönüştürme</div><div class="tool-desc">Birden fazla görsel aynı anda</div></div>
+          </div>
+          <div class="drop-zone" onclick="document.getElementById('batch-input').click()">
+            <div class="drop-icon">🗂️</div>
+            <strong>Görseller seç veya sürükle</strong>
+            <p>Birden fazla dosya seçilebilir</p>
+          </div>
+          <input type="file" id="batch-input" accept="image/*" multiple style="display:none" onchange="batchLoad(this)">
+          <div id="batch-list" style="display:none" class="file-list"></div>
+          <div class="field">
+            <label class="field-label">Çıktı Formatı</label>
+            <select id="batch-out">
+              <option value="image/jpeg">JPG</option>
+              <option value="image/png">PNG</option>
+              <option value="image/webp">WebP</option>
+            </select>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="batchConvert()">⚡ Hepsini Dönüştür</button>
+            <button class="btn btn-ghost" onclick="batchReset()">↺ Sıfırla</button>
+          </div>
+          <div class="status" id="batch-status"></div>
+          <div class="btn-row" id="batch-dl" style="display:none">
+            <button class="btn btn-success" onclick="batchDownloadAll()">⬇ Tümünü İndir (ZIP)</button>
+          </div>
+        </div>
+
+        <!-- GÖRSEL SIKIŞTIRMA -->
+        <div class="tool-card" data-tool-id="compress" data-search="görsel sıkıştır compress boyut küçült">
+          <div class="tool-card-header">
+            <div class="tool-icon green">🗜️</div>
+            <div><div class="tool-title">Görsel Sıkıştırma</div><div class="tool-desc">Boyutu küçült, kaliteyi koru</div></div>
+          </div>
+          <div class="drop-zone" onclick="document.getElementById('cmp-input').click()">
+            <div class="drop-icon">🖼️</div>
+            <strong>Görsel seç veya sürükle</strong>
+            <p id="cmp-dz-info">JPG veya PNG</p>
+          </div>
+          <input type="file" id="cmp-input" accept="image/jpeg,image/png" style="display:none" onchange="cmpLoad(this)">
+          <div class="field">
+            <label class="field-label">Kalite — <span class="range-value" id="cmp-val">75</span></label>
+            <input type="range" min="10" max="99" value="75" id="cmp-range" oninput="document.getElementById('cmp-val').textContent=this.value">
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="cmpRun()">⚡ Sıkıştır</button>
+          </div>
+          <div class="status" id="cmp-status"></div>
+          <div class="btn-row" id="cmp-dl" style="display:none">
+            <button class="btn btn-success" onclick="cmpDownload()">⬇ İndir</button>
+          </div>
+        </div>
+
+        <!-- YENİDEN BOYUTLANDIRMA -->
+        <div class="tool-card" data-tool-id="resize" data-search="görsel boyutlandır resize genişlik yükseklik piksel">
+          <div class="tool-card-header">
+            <div class="tool-icon orange">📐</div>
+            <div><div class="tool-title">Yeniden Boyutlandır</div><div class="tool-desc">Piksel veya yüzde bazlı</div></div>
+          </div>
+          <div class="drop-zone" onclick="document.getElementById('rsz-input').click()">
+            <div class="drop-icon">↔️</div>
+            <strong>Görsel seç veya sürükle</strong>
+            <p id="rsz-dz-info">PNG, JPG, WebP</p>
+          </div>
+          <input type="file" id="rsz-input" accept="image/*" style="display:none" onchange="rszLoad(this)">
+          <div style="display:flex;gap:10px">
+            <div class="field" style="flex:1"><label class="field-label">Genişlik (px)</label><input type="number" id="rsz-w" placeholder="800" oninput="rszAspect('w')"></div>
+            <div class="field" style="flex:1"><label class="field-label">Yükseklik (px)</label><input type="number" id="rsz-h" placeholder="600" oninput="rszAspect('h')"></div>
+          </div>
+          <div class="field"><label style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text-muted);cursor:pointer"><input type="checkbox" id="rsz-ratio" checked> Oranı koru</label></div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="rszRun()">⚡ Boyutlandır</button>
+          </div>
+          <div class="status" id="rsz-status"></div>
+          <div class="btn-row" id="rsz-dl" style="display:none">
+            <button class="btn btn-success" onclick="rszDownload()">⬇ İndir</button>
+          </div>
+        </div>
+
+        <!-- GÖRSEL → BASE64 -->
+        <div class="tool-card" data-tool-id="imgb64" data-search="görsel base64 encode web embedding">
+          <div class="tool-card-header">
+            <div class="tool-icon blue">🔐</div>
+            <div><div class="tool-title">Görsel → Base64</div><div class="tool-desc">Web embedding için</div></div>
+          </div>
+          <div class="drop-zone" onclick="document.getElementById('b64img-input').click()">
+            <div class="drop-icon">🖼️</div>
+            <strong>Görsel seç</strong>
+            <p>Herhangi bir format</p>
+          </div>
+          <input type="file" id="b64img-input" accept="image/*" style="display:none" onchange="imgToB64(this)">
+          <div class="output-wrapper">
+            <div class="output-box" id="b64img-out"></div>
+            <button class="copy-btn" id="b64img-copy" onclick="copyBox('b64img-out','b64img-copy')">Kopyala</button>
+          </div>
+          <div class="status" id="b64img-status"></div>
+        </div>
+
+        <!-- EXIF / METADATA OKUYUCU -->
+        <div class="tool-card" data-tool-id="exif" data-search="exif metadata fotoğraf bilgi konum gps kamera tarih saat">
+          <div class="tool-card-header">
+            <div class="tool-icon purple">🔬</div>
+            <div><div class="tool-title">Fotoğraf / Video Metadata</div><div class="tool-desc">EXIF, GPS, kamera, saat bilgisi</div></div>
+          </div>
+          <div class="drop-zone" onclick="document.getElementById('exif-input').click()">
+            <div class="drop-icon">📷</div>
+            <strong>Fotoğraf veya video seç</strong>
+            <p>JPG, PNG, HEIC, MP4, MOV vb.</p>
+          </div>
+          <input type="file" id="exif-input" accept="image/*,video/*" style="display:none" onchange="exifRun(this)">
+          <div class="status" id="exif-status"></div>
+          <div id="exif-result" style="display:none;margin-top:12px">
+            <!-- GPS HARİTA LİNKİ -->
+            <div id="exif-map-row" style="display:none;background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2);border-radius:10px;padding:10px 14px;margin-bottom:10px;display:none;align-items:center;justify-content:space-between">
+              <div>
+                <div style="font-size:12px;font-weight:500;color:var(--success)">📍 GPS Konumu Bulundu</div>
+                <div style="font-size:11px;color:var(--text-muted);margin-top:2px" id="exif-coords">—</div>
+              </div>
+              <a id="exif-map-link" href="#" target="_blank" style="background:rgba(52,211,153,0.15);border:1px solid rgba(52,211,153,0.3);color:var(--success);border-radius:8px;padding:6px 12px;font-size:12px;text-decoration:none;font-weight:500">🗺️ Haritada Aç</a>
+            </div>
+            <!-- GRUPLAR -->
+            <div id="exif-groups"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ======== PDF ======== -->
+    <div class="section" id="section-pdf">
+      <div class="section-title">PDF Araçları</div>
+      <div class="tool-grid">
+
+        <!-- PDF BİRLEŞTİR -->
+        <div class="tool-card" data-tool-id="merge" data-search="pdf birleştir merge kombine">
+          <div class="tool-card-header">
+            <div class="tool-icon blue">🔗</div>
+            <div><div class="tool-title">PDF Birleştir</div><div class="tool-desc">Birden fazla PDF tek dosyada</div></div>
+          </div>
+          <div class="drop-zone" onclick="document.getElementById('mrg-input').click()">
+            <div class="drop-icon">📂</div>
+            <strong>PDF dosyaları seç veya sürükle</strong>
+            <p>Birden fazla dosya seçilebilir</p>
+          </div>
+          <input type="file" id="mrg-input" accept="application/pdf" multiple style="display:none" onchange="mrgLoad(this)">
+          <div id="mrg-list" class="file-list" style="display:none"></div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="mrgRun()">⚡ Birleştir</button>
+            <button class="btn btn-ghost" onclick="mrgReset()">↺ Sıfırla</button>
+          </div>
+          <div class="status" id="mrg-status"></div>
+          <div class="btn-row" id="mrg-dl" style="display:none">
+            <button class="btn btn-success" onclick="mrgDownload()">⬇ İndir</button>
+          </div>
+        </div>
+
+        <!-- PDF BÖL -->
+        <div class="tool-card" data-tool-id="split" data-search="pdf böl split sayfa aralık">
+          <div class="tool-card-header">
+            <div class="tool-icon purple">✂️</div>
+            <div><div class="tool-title">PDF Böl</div><div class="tool-desc">Sayfa aralığına göre böl</div></div>
+          </div>
+          <div class="drop-zone" onclick="document.getElementById('spl-input').click()">
+            <div class="drop-icon">📄</div>
+            <strong>PDF seç veya sürükle</strong>
+            <p id="spl-info">Tek PDF dosyası</p>
+          </div>
+          <input type="file" id="spl-input" accept="application/pdf" style="display:none" onchange="splLoad(this)">
+          <div class="field">
+            <label class="field-label">Sayfa Aralığı</label>
+            <input type="text" id="spl-range" placeholder="örn: 1-3, 5, 7-9">
+            <p style="font-size:11px;color:var(--text-muted);margin-top:4px">Virgülle birden fazla aralık girilebilir</p>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="splRun()">⚡ Böl</button>
+          </div>
+          <div class="status" id="spl-status"></div>
+          <div class="btn-row" id="spl-dl" style="display:none">
+            <button class="btn btn-success" onclick="splDownload()">⬇ İndir</button>
+          </div>
+        </div>
+
+        <!-- SAYFA SİL -->
+        <div class="tool-card" data-tool-id="delpages" data-search="pdf sayfa sil kaldır remove">
+          <div class="tool-card-header">
+            <div class="tool-icon red">🗑️</div>
+            <div><div class="tool-title">Sayfa Sil</div><div class="tool-desc">PDF'ten belirli sayfaları kaldır</div></div>
+          </div>
+          <div class="drop-zone" onclick="document.getElementById('del-input').click()">
+            <div class="drop-icon">📄</div>
+            <strong>PDF seç veya sürükle</strong>
+            <p id="del-info">PDF dosyası</p>
+          </div>
+          <input type="file" id="del-input" accept="application/pdf" style="display:none" onchange="delLoad(this)">
+          <div class="field">
+            <label class="field-label">Silinecek Sayfalar</label>
+            <input type="text" id="del-pages" placeholder="örn: 1, 3, 5-7">
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="delRun()">⚡ Sayfaları Sil</button>
+          </div>
+          <div class="status" id="del-status"></div>
+          <div class="btn-row" id="del-dl" style="display:none">
+            <button class="btn btn-success" onclick="delDownload()">⬇ İndir</button>
+          </div>
+        </div>
+
+        <!-- PDF → GÖRSEL -->
+        <div class="tool-card" data-tool-id="pdfimg" data-search="pdf görsel png resim dönüştür">
+          <div class="tool-card-header">
+            <div class="tool-icon green">🖼️</div>
+            <div><div class="tool-title">PDF → Görsel</div><div class="tool-desc">Her sayfayı PNG olarak dışa aktar</div></div>
+          </div>
+          <div class="drop-zone" onclick="document.getElementById('p2i-input').click()">
+            <div class="drop-icon">📄</div>
+            <strong>PDF seç veya sürükle</strong>
+            <p id="p2i-info">PDF dosyası</p>
+          </div>
+          <input type="file" id="p2i-input" accept="application/pdf" style="display:none" onchange="p2iLoad(this)">
+          <div class="field">
+            <label class="field-label">Çözünürlük</label>
+            <select id="p2i-scale">
+              <option value="1">Normal (96 dpi)</option>
+              <option value="2" selected>Yüksek (192 dpi)</option>
+              <option value="3">Ultra (288 dpi)</option>
+            </select>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="p2iRun()">⚡ Dönüştür</button>
+          </div>
+          <div class="status" id="p2i-status"></div>
+          <div id="p2i-buttons" style="display:flex;flex-direction:column;gap:6px;margin-top:10px"></div>
+        </div>
+
+        <!-- GÖRSEL → PDF -->
+        <div class="tool-card" data-tool-id="imgtopdf" data-search="görsel pdf oluştur png jpg">
+          <div class="tool-card-header">
+            <div class="tool-icon orange">📑</div>
+            <div><div class="tool-title">Görsel → PDF</div><div class="tool-desc">PNG / JPG dosyalarını PDF'e çevir</div></div>
+          </div>
+          <div class="drop-zone" onclick="document.getElementById('i2p-input').click()">
+            <div class="drop-icon">🖼️</div>
+            <strong>Görseller seç veya sürükle</strong>
+            <p>PNG, JPG — birden fazla seçilebilir</p>
+          </div>
+          <input type="file" id="i2p-input" accept="image/png,image/jpeg" multiple style="display:none" onchange="i2pLoad(this)">
+          <div id="i2p-list" class="file-list" style="display:none"></div>
+          <div class="field">
+            <label class="field-label">Sayfa Boyutu</label>
+            <select id="i2p-size">
+              <option value="A4">A4</option>
+              <option value="A3">A3</option>
+              <option value="Letter">Letter</option>
+              <option value="fit">Görsele Sığdır</option>
+            </select>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="i2pRun()">⚡ PDF Oluştur</button>
+            <button class="btn btn-ghost" onclick="i2pReset()">↺ Sıfırla</button>
+          </div>
+          <div class="status" id="i2p-status"></div>
+          <div class="btn-row" id="i2p-dl" style="display:none">
+            <button class="btn btn-success" onclick="i2pDownload()">⬇ İndir</button>
+          </div>
+        </div>
+
+        <!-- PDF BİLGİ -->
+        <div class="tool-card" data-tool-id="pdfinfo" data-search="pdf bilgi metadata sayfa sayısı yazar">
+          <div class="tool-card-header">
+            <div class="tool-icon blue">🔍</div>
+            <div><div class="tool-title">PDF Bilgisi</div><div class="tool-desc">Sayfa sayısı, boyut, meta veri</div></div>
+          </div>
+          <div class="drop-zone" onclick="document.getElementById('pi-input').click()">
+            <div class="drop-icon">📄</div>
+            <strong>PDF seç veya sürükle</strong>
+            <p>Herhangi bir PDF</p>
+          </div>
+          <input type="file" id="pi-input" accept="application/pdf" style="display:none" onchange="piRun(this)">
+          <div class="result-box" id="pi-result">
+            <div class="result-row"><span>Sayfa Sayısı</span><span id="pi-pages">—</span></div>
+            <div class="result-row"><span>Dosya Boyutu</span><span id="pi-size">—</span></div>
+            <div class="result-row"><span>Başlık</span><span id="pi-title">—</span></div>
+            <div class="result-row"><span>Yazar</span><span id="pi-author">—</span></div>
+            <div class="result-row"><span>Oluşturulma</span><span id="pi-date">—</span></div>
+            <div class="result-row highlight"><span>Uygulama</span><span id="pi-creator">—</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ======== VERİ ======== -->
+    <div class="section" id="section-veri">
+      <div class="section-title">Veri Araçları</div>
+      <div class="tool-grid">
+
+        <!-- JSON → CSV -->
+        <div class="tool-card" data-tool-id="json2csv" data-search="json csv dönüştür veri tablo">
+          <div class="tool-card-header">
+            <div class="tool-icon blue">📊</div>
+            <div><div class="tool-title">JSON → CSV</div><div class="tool-desc">Dizi formatındaki JSON</div></div>
+          </div>
+          <div class="field">
+            <label class="field-label">JSON Giriş</label>
+            <textarea id="j2c-in" placeholder='[{"ad":"Ali","yas":25},{"ad":"Veli","yas":30}]'></textarea>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="j2cRun()">⚡ Dönüştür</button>
+            <button class="btn btn-ghost" onclick="document.getElementById('j2c-in').value=j2cExample()">Örnek</button>
+          </div>
+          <div class="status" id="j2c-status"></div>
+          <div class="output-wrapper">
+            <div class="output-box" id="j2c-out"></div>
+            <button class="copy-btn" id="j2c-copy" onclick="copyBox('j2c-out','j2c-copy')">Kopyala</button>
+          </div>
+          <div class="btn-row" id="j2c-dl" style="display:none">
+            <button class="btn btn-success" onclick="j2cDownload()">⬇ CSV İndir</button>
+          </div>
+        </div>
+
+        <!-- CSV → JSON -->
+        <div class="tool-card" data-tool-id="csv2json" data-search="csv json dönüştür virgül tablo">
+          <div class="tool-card-header">
+            <div class="tool-icon purple">🔃</div>
+            <div><div class="tool-title">CSV → JSON</div><div class="tool-desc">Virgülle ayrılmış veriler</div></div>
+          </div>
+          <div class="field">
+            <label class="field-label">CSV Giriş</label>
+            <textarea id="c2j-in" placeholder="ad,soyad,yas&#10;Ali,Yılmaz,25&#10;Veli,Kaya,30"></textarea>
+          </div>
+          <div class="field">
+            <label class="field-label">Ayırıcı</label>
+            <select id="c2j-delim">
+              <option value=",">, (virgül)</option>
+              <option value=";">; (noktalı virgül)</option>
+              <option value="&#9;">Tab</option>
+            </select>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="c2jRun()">⚡ Dönüştür</button>
+            <button class="btn btn-ghost" onclick="document.getElementById('c2j-in').value=c2jExample()">Örnek</button>
+          </div>
+          <div class="status" id="c2j-status"></div>
+          <div class="output-wrapper">
+            <div class="output-box" id="c2j-out"></div>
+            <button class="copy-btn" id="c2j-copy" onclick="copyBox('c2j-out','c2j-copy')">Kopyala</button>
+          </div>
+        </div>
+
+        <!-- JSON FORMATLAYICI -->
+        <div class="tool-card" data-tool-id="jsonfmt" data-search="json formatla doğrula güzelleştir minify">
+          <div class="tool-card-header">
+            <div class="tool-icon green">✨</div>
+            <div><div class="tool-title">JSON Formatlayıcı</div><div class="tool-desc">Formatla, doğrula ve sıkıştır</div></div>
+          </div>
+          <div class="field">
+            <label class="field-label">JSON Giriş</label>
+            <textarea id="jf-in" placeholder='{"ad":"ali","liste":[1,2,3]}'></textarea>
+          </div>
+          <div class="field">
+            <label class="field-label">Girinti</label>
+            <select id="jf-indent">
+              <option value="2">2 boşluk</option>
+              <option value="4">4 boşluk</option>
+              <option value="	">Tab</option>
+            </select>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="jfFormat()">⚡ Formatla</button>
+            <button class="btn btn-ghost" onclick="jfMinify()">Sıkıştır</button>
+          </div>
+          <div class="status" id="jf-status"></div>
+          <div class="output-wrapper">
+            <div class="output-box" id="jf-out"></div>
+            <button class="copy-btn" id="jf-copy" onclick="copyBox('jf-out','jf-copy')">Kopyala</button>
+          </div>
+        </div>
+
+        <!-- RENK DÖNÜŞTÜRİCÜ -->
+        <div class="tool-card" data-tool-id="color" data-search="renk hex rgb hsl dönüştür css">
+          <div class="tool-card-header">
+            <div class="tool-icon orange">🎨</div>
+            <div><div class="tool-title">Renk Dönüştürücü</div><div class="tool-desc">HEX ↔ RGB ↔ HSL</div></div>
+          </div>
+          <div class="field">
+            <label class="field-label">Renk Seç</label>
+            <div style="display:flex;gap:10px;align-items:center">
+              <input type="color" id="clr-picker" value="#4f8cff" style="width:48px;height:38px;padding:3px;border-radius:9px;border:1px solid var(--border);background:var(--surface2);cursor:pointer" oninput="clrUpdate(this.value)">
+              <input type="text" id="clr-hex" value="#4f8cff" placeholder="#4f8cff" style="flex:1" oninput="clrHexInput(this.value)">
+            </div>
+          </div>
+          <div class="field"><label class="field-label">RGB</label><input type="text" id="clr-rgb" readonly style="cursor:default"></div>
+          <div class="field"><label class="field-label">HSL</label><input type="text" id="clr-hsl" readonly style="cursor:default"></div>
+          <div class="field"><label class="field-label">CSS Değişkeni</label><input type="text" id="clr-css" readonly style="cursor:default"></div>
+          <div id="clr-preview" style="height:44px;border-radius:10px;background:#4f8cff;border:1px solid var(--border);transition:background 0.2s;margin-top:4px"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ======== METİN ======== -->
+    <div class="section" id="section-metin">
+      <div class="section-title">Metin Araçları</div>
+      <div class="tool-grid">
+
+        <!-- TÜRKÇE KARAKTER -->
+        <div class="tool-card" data-tool-id="turkce" data-search="türkçe karakter düzelt ascii çğışüö">
+          <div class="tool-card-header">
+            <div class="tool-icon blue">🇹🇷</div>
+            <div><div class="tool-title">Türkçe Karakter Düzeltici</div><div class="tool-desc">ASCII → Türkçe karakter dönüşümü</div></div>
+          </div>
+          <div class="field">
+            <label class="field-label">Metin Giriş</label>
+            <textarea id="tr-in" placeholder="Bu bir ornek cumle. Gercekten guzel…" oninput="trRun()" style="min-height:100px"></textarea>
+          </div>
+          <div class="field">
+            <label class="field-label">Sonuç</label>
+            <div class="output-wrapper">
+              <div class="output-box visible" id="tr-out" style="min-height:70px;font-family:'DM Sans',sans-serif;font-size:13.5px"></div>
+              <button class="copy-btn" id="tr-copy" onclick="copyBox('tr-out','tr-copy')">Kopyala</button>
+            </div>
+          </div>
+          <div class="char-map">
+            <div class="char-badge">c→ç</div><div class="char-badge">g→ğ</div>
+            <div class="char-badge">i→ı</div><div class="char-badge">o→ö</div>
+            <div class="char-badge">s→ş</div><div class="char-badge">u→ü</div>
+          </div>
+        </div>
+
+        <!-- METİN DÖNÜŞÜMÜ -->
+        <div class="tool-card" data-tool-id="caseconv" data-search="metin büyük küçük harf slug dönüşüm">
+          <div class="tool-card-header">
+            <div class="tool-icon purple">🔡</div>
+            <div><div class="tool-title">Metin Dönüşümü</div><div class="tool-desc">Büyük/küçük harf, slug, ters</div></div>
+          </div>
+          <div class="field">
+            <label class="field-label">Metin Giriş</label>
+            <textarea id="cc-in" placeholder="Dönüştürmek istediğiniz metni yazın…" style="min-height:90px"></textarea>
+          </div>
+          <div class="btn-row" style="flex-wrap:wrap">
+            <button class="btn btn-ghost" onclick="ccRun('upper')">BÜYÜK</button>
+            <button class="btn btn-ghost" onclick="ccRun('lower')">küçük</button>
+            <button class="btn btn-ghost" onclick="ccRun('title')">Başlık</button>
+            <button class="btn btn-ghost" onclick="ccRun('slug')">slug</button>
+            <button class="btn btn-ghost" onclick="ccRun('reverse')">↩ Ters</button>
+          </div>
+          <div class="output-wrapper">
+            <div class="output-box" id="cc-out"></div>
+            <button class="copy-btn" id="cc-copy" onclick="copyBox('cc-out','cc-copy')">Kopyala</button>
+          </div>
+        </div>
+
+        <!-- BASE64 METİN -->
+        <div class="tool-card" data-tool-id="b64text" data-search="base64 encode decode metin şifrele">
+          <div class="tool-card-header">
+            <div class="tool-icon green">🔒</div>
+            <div><div class="tool-title">Base64 Metin</div><div class="tool-desc">Encode ve Decode</div></div>
+          </div>
+          <div class="field">
+            <label class="field-label">Metin veya Base64</label>
+            <textarea id="bt-in" placeholder="Metin veya Base64 kodunu girin…" style="min-height:90px"></textarea>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="btEncode()">🔒 Encode</button>
+            <button class="btn btn-ghost" onclick="btDecode()">🔓 Decode</button>
+          </div>
+          <div class="status" id="bt-status"></div>
+          <div class="output-wrapper">
+            <div class="output-box" id="bt-out"></div>
+            <button class="copy-btn" id="bt-copy" onclick="copyBox('bt-out','bt-copy')">Kopyala</button>
+          </div>
+        </div>
+
+        <!-- METİN ANALİZİ -->
+        <div class="tool-card" data-tool-id="textanalyze" data-search="metin analiz karakter kelime cümle sayı">
+          <div class="tool-card-header">
+            <div class="tool-icon orange">📏</div>
+            <div><div class="tool-title">Metin Analizi</div><div class="tool-desc">Karakter, kelime, cümle, okuma süresi</div></div>
+          </div>
+          <div class="field">
+            <label class="field-label">Metin Giriş</label>
+            <textarea id="ta-in" placeholder="Analiz edilecek metni buraya yapıştırın…" oninput="taRun()" style="min-height:110px"></textarea>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px">
+            <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px">
+              <div style="font-size:11px;color:var(--text-muted);margin-bottom:3px">KARAKTER</div>
+              <div style="font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700" id="ta-chars">0</div>
+            </div>
+            <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px">
+              <div style="font-size:11px;color:var(--text-muted);margin-bottom:3px">KELİME</div>
+              <div style="font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700" id="ta-words">0</div>
+            </div>
+            <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px">
+              <div style="font-size:11px;color:var(--text-muted);margin-bottom:3px">CÜMLE</div>
+              <div style="font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700" id="ta-sents">0</div>
+            </div>
+            <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px">
+              <div style="font-size:11px;color:var(--text-muted);margin-bottom:3px">OKUMA</div>
+              <div style="font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700" id="ta-read">0s</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ======== HESAP ======== -->
+    <div class="section" id="section-hesap">
+      <div class="section-title">Hesaplayıcılar</div>
+      <div class="tool-grid">
+
+        <!-- KDV -->
+        <div class="tool-card" data-tool-id="kdv" data-search="kdv vergi hesapla ekle çıkar">
+          <div class="tool-card-header">
+            <div class="tool-icon blue">🧾</div>
+            <div><div class="tool-title">KDV Hesaplayıcı</div><div class="tool-desc">KDV ekle veya çıkar</div></div>
+          </div>
+          <div class="field"><label class="field-label">Tutar (₺)</label><input type="number" id="kdv-amount" placeholder="1000" min="0" oninput="kdvRun()"></div>
+          <div class="field"><label class="field-label">KDV Oranı (%)</label><input type="number" id="kdv-rate" placeholder="20" min="0" max="100" value="20" oninput="kdvRun()"></div>
+          <div class="field">
+            <label class="field-label">İşlem</label>
+            <select id="kdv-type" onchange="kdvRun()">
+              <option value="add">KDV Ekle (KDV hariç fiyat)</option>
+              <option value="remove">KDV Çıkar (KDV dahil fiyat)</option>
+            </select>
+          </div>
+          <div class="result-box" id="kdv-result">
+            <div class="result-row"><span>KDV Hariç</span><span id="kdv-net">—</span></div>
+            <div class="result-row"><span>KDV Tutarı</span><span id="kdv-tax">—</span></div>
+            <div class="result-row highlight"><span>KDV Dahil Toplam</span><span id="kdv-total">—</span></div>
+          </div>
+        </div>
+
+        <!-- DÖVİZ -->
+        <div class="tool-card" data-tool-id="doviz" data-search="döviz kur çevirici para birimi usd eur tl">
+          <div class="tool-card-header">
+            <div class="tool-icon purple">💱</div>
+            <div><div class="tool-title">Döviz Çevirici</div><div class="tool-desc">Anlık kur — 170+ para birimi</div></div>
+          </div>
+          <div id="cur-loading" style="background:rgba(79,140,255,0.08);border:1px solid rgba(79,140,255,0.2);border-radius:9px;padding:9px 12px;margin-bottom:12px;font-size:12px;color:var(--accent)">⏳ Kurlar yükleniyor…</div>
+          <div id="cur-ok" style="display:none;background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2);border-radius:9px;padding:9px 12px;margin-bottom:12px;display:none;justify-content:space-between;align-items:center">
+            <span style="font-size:12px;color:var(--success)">✓ Anlık kur aktif</span>
+            <span style="font-size:11px;color:var(--text-muted)" id="cur-updated">—</span>
+          </div>
+          <div class="field"><label class="field-label">Tutar</label><input type="number" id="cur-amount" placeholder="100" oninput="curCalc()"></div>
+          <div style="display:flex;gap:8px;align-items:flex-end">
+            <div class="field" style="flex:1"><label class="field-label">Kaynak</label><select id="cur-from" onchange="curCalc()"></select></div>
+            <button class="swap-btn" onclick="curSwap()" title="Değiştir">⇄</button>
+            <div class="field" style="flex:1"><label class="field-label">Hedef</label><select id="cur-to" onchange="curCalc()"></select></div>
+          </div>
+          <div class="currency-big" id="cur-result">
+            <div class="currency-amount" id="cur-value">—</div>
+            <div class="currency-sub" id="cur-sub"></div>
+          </div>
+          <div style="display:none;margin-top:10px" id="cur-popular-wrap">
+            <label class="field-label" style="margin-bottom:7px">Hızlı Seçim</label>
+            <div class="quick-btns" id="cur-quick"></div>
+          </div>
+        </div>
+
+        <!-- ALAN / ÇEVRE -->
+        <div class="tool-card" data-tool-id="shape" data-search="alan çevre geometri kare daire üçgen hesap">
+          <div class="tool-card-header">
+            <div class="tool-icon green">📐</div>
+            <div><div class="tool-title">Alan / Çevre Hesaplayıcı</div><div class="tool-desc">Geometrik şekiller</div></div>
+          </div>
+          <div class="field">
+            <label class="field-label">Şekil</label>
+            <select id="shp-type" onchange="shpUpdate()">
+              <option value="kare">Kare</option>
+              <option value="dikdortgen">Dikdörtgen</option>
+              <option value="daire">Daire</option>
+              <option value="ucgen">Üçgen</option>
+            </select>
+          </div>
+          <div id="shp-inputs"></div>
+          <div class="btn-row"><button class="btn btn-primary" onclick="shpCalc()">⚡ Hesapla</button></div>
+          <div class="result-box" id="shp-result">
+            <div class="result-row"><span>Alan</span><span id="shp-area">—</span></div>
+            <div class="result-row highlight"><span>Çevre</span><span id="shp-peri">—</span></div>
+          </div>
+        </div>
+
+        <!-- YÜZDE -->
+        <div class="tool-card" data-tool-id="percent" data-search="yüzde hesap indirim artış oran">
+          <div class="tool-card-header">
+            <div class="tool-icon orange">%</div>
+            <div><div class="tool-title">Yüzde Hesaplayıcı</div><div class="tool-desc">İndirim, artış, oran</div></div>
+          </div>
+          <div class="field">
+            <label class="field-label">Tür</label>
+            <select id="pct-type" onchange="pctUpdate()">
+              <option value="of">Bir sayının yüzdesi</option>
+              <option value="change">Yüzde değişimi</option>
+              <option value="what">X, Y'nin yüzde kaçı</option>
+            </select>
+          </div>
+          <div id="pct-form"></div>
+          <div class="btn-row"><button class="btn btn-primary" onclick="pctCalc()">⚡ Hesapla</button></div>
+          <div class="currency-big" id="pct-result">
+            <div class="currency-amount" id="pct-value">—</div>
+            <div class="currency-sub" id="pct-sub"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /normal-view -->
+</main>
+
+<!-- AD SLOT — BOTTOM RECTANGLE -->
+<div style="max-width:960px;margin:0 auto 24px;padding:0 1.5rem">
+  <div class="ad-slot ad-slot-rect" id="ad-bottom">
+    <span>Advertisement</span>
+    <!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXX" data-ad-slot="XXXX" data-ad-format="auto"></ins> -->
+  </div>
+</div>
+
+<footer>
+  <p style="margin-bottom:4px" data-i18n="footer_main">ConvertAI &mdash; All processing happens in your browser. Files are never uploaded.</p>
+  <p data-i18n="footer_sub">Privacy-first · Completely free · No registration</p>
+</footer>
+
+<!-- LIBRARIES -->
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+<script>
+'use strict';
+
+// ── PDF.js worker ──────────────────────────────────────────────────
+if (typeof pdfjsLib !== 'undefined') {
+  pdfjsLib.GlobalWorkerOptions.workerSrc =
+    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+}
+
+// ── THEME ──────────────────────────────────────────────────────────
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.getElementById('theme-btn').textContent = isDark ? '🌙' : '☀️';
+  localStorage.setItem('theme', isDark ? 'light' : 'dark');
+}
+
+(function initTheme() {
+  const saved = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+  document.getElementById('theme-btn').textContent = saved === 'dark' ? '☀️' : '🌙';
+})();
+
+// ── i18n ───────────────────────────────────────────────────────────
+const i18n = {
+  en: {
+    search_placeholder: 'Search tools… (pdf, image, currency…)',
+    hero_tag:   '⚡ Files never leave your browser — 100% private',
+    hero_title: 'All Tools<br><em>One Place</em>',
+    hero_sub:   'Image, PDF, video & data converters. Free, fast, privacy-first.',
+    stat_tools: 'Tools', stat_free: 'Free', stat_currencies: 'Currencies',
+    recent_label: 'Recently Used',
+    tab_image: '🖼️ Image', tab_video: '🎬 Video', tab_pdf: '📄 PDF',
+    tab_data: '🔄 Data', tab_text: '✍️ Text', tab_calc: '🧮 Calc',
+    footer_main: 'ConvertAI — All processing happens in your browser. Files are never uploaded.',
+    footer_sub: 'Privacy-first · Completely free · No registration',
+    live_rate: '⬤ Live Rate',
+  },
+  tr: {
+    search_placeholder: 'Araç ara… (pdf, görsel, döviz…)',
+    hero_tag:   '⚡ Dosyalar sunucuya gönderilmez — tamamen tarayıcıda çalışır',
+    hero_title: 'Tüm Araçlar<br><em>Tek Yerde</em>',
+    hero_sub:   'Görsel, PDF, video ve veri dönüştürücüler. Ücretsiz, hızlı, gizlilik odaklı.',
+    stat_tools: 'Araç', stat_free: 'Ücretsiz', stat_currencies: 'Para Birimi',
+    recent_label: 'Son Kullanılanlar',
+    tab_image: '🖼️ Görsel', tab_video: '🎬 Video', tab_pdf: '📄 PDF',
+    tab_data: '🔄 Veri', tab_text: '✍️ Metin', tab_calc: '🧮 Hesap',
+    footer_main: 'ConvertAI — Tüm işlemler tarayıcınızda gerçekleşir. Dosyalar sunucuya gönderilmez.',
+    footer_sub: 'Gizlilik odaklı · Tamamen ücretsiz · Kayıt gerektirmez',
+    live_rate: '⬤ Anlık Kur',
+  },
+  de: {
+    search_placeholder: 'Tools suchen… (pdf, bild, währung…)',
+    hero_tag:   '⚡ Dateien verlassen nie Ihren Browser — 100% privat',
+    hero_title: 'Alle Tools<br><em>An einem Ort</em>',
+    hero_sub:   'Bild-, PDF-, Video- und Datenkonverter. Kostenlos, schnell, datenschutzorientiert.',
+    stat_tools: 'Tools', stat_free: 'Kostenlos', stat_currencies: 'Währungen',
+    recent_label: 'Zuletzt verwendet',
+    tab_image: '🖼️ Bild', tab_video: '🎬 Video', tab_pdf: '📄 PDF',
+    tab_data: '🔄 Daten', tab_text: '✍️ Text', tab_calc: '🧮 Rechner',
+    footer_main: 'ConvertAI — Alle Verarbeitung erfolgt in Ihrem Browser. Dateien werden nie hochgeladen.',
+    footer_sub: 'Datenschutz zuerst · Völlig kostenlos · Keine Registrierung',
+    live_rate: '⬤ Live-Kurs',
+  },
+  fr: {
+    search_placeholder: 'Rechercher des outils… (pdf, image, devise…)',
+    hero_tag:   '⚡ Les fichiers ne quittent jamais votre navigateur — 100% privé',
+    hero_title: 'Tous les Outils<br><em>En Un Seul Endroit</em>',
+    hero_sub:   'Convertisseurs d\'images, PDF, vidéo et données. Gratuit, rapide, respect de la vie privée.',
+    stat_tools: 'Outils', stat_free: 'Gratuit', stat_currencies: 'Devises',
+    recent_label: 'Récemment utilisés',
+    tab_image: '🖼️ Image', tab_video: '🎬 Vidéo', tab_pdf: '📄 PDF',
+    tab_data: '🔄 Données', tab_text: '✍️ Texte', tab_calc: '🧮 Calcul',
+    footer_main: 'ConvertAI — Tout le traitement se fait dans votre navigateur. Les fichiers ne sont jamais téléchargés.',
+    footer_sub: 'Respect de la vie privée · Entièrement gratuit · Sans inscription',
+    live_rate: '⬤ Taux en direct',
+  },
+};
+
+let currentLang = 'en';
+
+function setLang(lang) {
+  if (!i18n[lang]) return;
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+  document.documentElement.lang = lang === 'tr' ? 'tr' : lang === 'de' ? 'de' : lang === 'fr' ? 'fr' : 'en';
+
+  // Update lang buttons
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+  });
+
+  // Update all data-i18n elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (i18n[lang][key]) el.innerHTML = i18n[lang][key];
+  });
+
+  // Update placeholders
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (i18n[lang][key]) el.placeholder = i18n[lang][key];
+  });
+
+  // Live badge
+  const badge = document.getElementById('live-badge');
+  if (badge) badge.textContent = i18n[lang].live_rate || i18n.en.live_rate;
+
+  // Page title
+  const titles = { tr: 'ConvertAI — Ücretsiz Online Araçlar', en: 'ConvertAI — Free Online Converter Tools', de: 'ConvertAI — Kostenlose Online-Konverter', fr: 'ConvertAI — Convertisseurs en ligne gratuits' };
+  document.title = titles[lang] || titles.en;
+}
+
+(function initLang() {
+  const saved = localStorage.getItem('lang') || (navigator.language || '').slice(0,2) || 'en';
+  const valid = ['tr','en','de','fr'];
+  setLang(valid.includes(saved) ? saved : 'en');
+})();
+const toolNames = {
+  format:'Format Dönüştürücü', batch:'Toplu Dönüştürme', compress:'Görsel Sıkıştırma',
+  resize:'Yeniden Boyutlandır', imgb64:'Görsel → Base64', exif:'Fotoğraf Metadata',
+  vid2mp3:'Video → MP3', vidfmt:'Video Format', vidcmp:'Video Sıkıştırma', vid2gif:'Video → GIF',
+  audiocrop:'Ses/Video Kesici', thumbnail:'Thumbnail Çıkar', vidinfo:'Video Bilgisi',
+  merge:'PDF Birleştir', split:'PDF Böl', delpages:'Sayfa Sil',
+  pdfimg:'PDF → Görsel', imgtopdf:'Görsel → PDF', pdfinfo:'PDF Bilgisi',
+  json2csv:'JSON → CSV', csv2json:'CSV → JSON', jsonfmt:'JSON Formatlayıcı', color:'Renk Dönüştürücü',
+  turkce:'Türkçe Karakter', caseconv:'Metin Dönüşümü', b64text:'Base64 Metin', textanalyze:'Metin Analizi',
+  kdv:'KDV Hesaplayıcı', doviz:'Döviz Çevirici', shape:'Alan/Çevre', percent:'Yüzde Hesaplayıcı'
+};
+
+const toolTabs = {
+  format:'gorsel', batch:'gorsel', compress:'gorsel', resize:'gorsel', imgb64:'gorsel', exif:'gorsel',
+  vid2mp3:'video', vidfmt:'video', vidcmp:'video', vid2gif:'video',
+  audiocrop:'video', thumbnail:'video', vidinfo:'video',
+  merge:'pdf', split:'pdf', delpages:'pdf', pdfimg:'pdf', imgtopdf:'pdf', pdfinfo:'pdf',
+  json2csv:'veri', csv2json:'veri', jsonfmt:'veri', color:'veri',
+  turkce:'metin', caseconv:'metin', b64text:'metin', textanalyze:'metin',
+  kdv:'hesap', doviz:'hesap', shape:'hesap', percent:'hesap'
+};
+
+function addRecent(toolId) {
+  let recent = JSON.parse(localStorage.getItem('recent') || '[]');
+  recent = [toolId, ...recent.filter(id => id !== toolId)].slice(0, 6);
+  localStorage.setItem('recent', JSON.stringify(recent));
+  renderRecent();
+}
+
+function renderRecent() {
+  const recent = JSON.parse(localStorage.getItem('recent') || '[]');
+  const section = document.getElementById('recent-section');
+  const chips = document.getElementById('recent-chips');
+  if (!recent.length) { section.classList.remove('visible'); return; }
+  section.classList.add('visible');
+  chips.innerHTML = '';
+  recent.forEach(id => {
+    const chip = document.createElement('button');
+    chip.className = 'recent-chip';
+    chip.textContent = toolNames[id] || id;
+    chip.onclick = () => {
+      clearSearch();
+      const tab = toolTabs[id];
+      const tabBtn = document.querySelector(`.tab-btn[onclick*="${tab}"]`);
+      if (tabBtn) tabBtn.click();
+      setTimeout(() => {
+        const card = document.querySelector(`[data-tool-id="${id}"]`);
+        if (card) { card.scrollIntoView({ behavior: 'smooth', block: 'center' }); card.style.outline = '2px solid var(--accent)'; setTimeout(() => card.style.outline = '', 1500); }
+      }, 100);
+    };
+    chips.appendChild(chip);
+  });
+}
+
+renderRecent();
+
+// ── TABS ───────────────────────────────────────────────────────────
+function switchTab(name, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('section-' + name).classList.add('active');
+  if (btn) btn.classList.add('active');
+}
+
+// ── SEARCH ─────────────────────────────────────────────────────────
+function handleSearch(val) {
+  const q = val.trim().toLowerCase();
+  const results = document.getElementById('search-results');
+  const normal = document.getElementById('normal-view');
+  const grid = document.getElementById('search-grid');
+  const empty = document.getElementById('search-empty');
+
+  if (!q) { results.classList.remove('visible'); normal.style.display = ''; return; }
+
+  results.classList.add('visible');
+  normal.style.display = 'none';
+
+  const cards = document.querySelectorAll('[data-search]');
+  const matches = [];
+  cards.forEach(card => {
+    const keywords = (card.getAttribute('data-search') || '') + ' ' + (card.querySelector('.tool-title')?.textContent || '');
+    if (keywords.toLowerCase().includes(q)) matches.push(card);
+  });
+
+  grid.innerHTML = '';
+  if (!matches.length) { empty.style.display = 'block'; return; }
+  empty.style.display = 'none';
+  matches.forEach(card => {
+    const clone = card.cloneNode(true);
+    clone.style.animationDelay = '0s';
+    grid.appendChild(clone);
+  });
+}
+
+function clearSearch() {
+  document.getElementById('global-search').value = '';
+  handleSearch('');
+}
+
+// ── HELPERS ────────────────────────────────────────────────────────
+const canvas = document.getElementById('work-canvas');
+
+function st(id, type, msg) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.className = 'status ' + type;
+  el.textContent = msg;
+}
+
+function copyBox(outId, btnId) {
+  const text = document.getElementById(outId).textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById(btnId);
+    if (!btn) return;
+    const orig = btn.textContent;
+    btn.textContent = '✓ Kopyalandı';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+
+function showBtn(id) { const el = document.getElementById(id); if (el) el.style.display = 'flex'; }
+function hideBtn(id) { const el = document.getElementById(id); if (el) el.style.display = 'none'; }
+
+function showCopy(id) {
+  const btn = document.getElementById(id);
+  if (btn) btn.style.display = 'block';
+}
+
+function showOutput(outId, copyId, text) {
+  const out = document.getElementById(outId);
+  out.textContent = text;
+  out.classList.add('visible');
+  showCopy(copyId);
+}
+
+function progress(fillId, barId) {
+  const bar = document.getElementById(barId);
+  const fill = document.getElementById(fillId);
+  bar.classList.add('visible');
+  let w = 0;
+  const iv = setInterval(() => { w = Math.min(w + Math.random() * 18, 88); fill.style.width = w + '%'; }, 80);
+  return { iv, fill, bar };
+}
+
+function finishProgress(p) {
+  clearInterval(p.iv);
+  p.fill.style.width = '100%';
+  setTimeout(() => { p.bar.classList.remove('visible'); p.fill.style.width = '0%'; }, 600);
+}
+
+function pdfBlob(bytes, name) {
+  const blob = new Blob([bytes], { type: 'application/pdf' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = name; a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 3000);
+}
+
+function parseRanges(str, total) {
+  const pages = new Set();
+  str.split(',').map(s => s.trim()).filter(Boolean).forEach(part => {
+    if (part.includes('-')) {
+      const [a, b] = part.split('-').map(Number);
+      for (let i = a; i <= b && i <= total; i++) if (i >= 1) pages.add(i);
+    } else {
+      const n = Number(part);
+      if (n >= 1 && n <= total) pages.add(n);
+    }
+  });
+  return [...pages].sort((a, b) => a - b);
+}
+
+// ── DRAG & DROP ────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.drop-zone').forEach(dz => {
+    dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag-over'); });
+    dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
+    dz.addEventListener('drop', e => {
+      e.preventDefault();
+      dz.classList.remove('drag-over');
+      const input = dz.nextElementSibling;
+      if (input && input.type === 'file' && e.dataTransfer.files.length) {
+        const dt = new DataTransfer();
+        Array.from(e.dataTransfer.files).forEach(f => dt.items.add(f));
+        input.files = dt.files;
+        input.dispatchEvent(new Event('change'));
+      }
+    });
+  });
+});
+
+// ═══════════════════════════════════════
+// GÖRSEL — FORMAT DÖNÜŞTÜRÜCÜ
+// ═══════════════════════════════════════
+let fmtFile = null, fmtDataUrl = null, fmtExt = 'jpg';
+
+function fmtLoad(input) {
+  fmtFile = input.files[0];
+  if (!fmtFile) return;
+  addRecent('format');
+  document.getElementById('fmt-dz-info').textContent = fmtFile.name + ' (' + (fmtFile.size / 1024).toFixed(0) + ' KB)';
+  st('fmt-status', 'info', '✓ ' + fmtFile.name + ' yüklendi');
+  hideBtn('fmt-dl');
+}
+
+function fmtConvert() {
+  if (!fmtFile) { st('fmt-status', 'error', '⚠ Önce görsel seçin.'); return; }
+  const p = progress('fmt-fill', 'fmt-progress');
+  const fmt = document.getElementById('fmt-out').value;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (fmt === 'image/jpeg') { ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, canvas.width, canvas.height); }
+      ctx.drawImage(img, 0, 0);
+      finishProgress(p);
+      fmtDataUrl = canvas.toDataURL(fmt, 1.0);
+      fmtExt = fmt.split('/')[1].replace('jpeg', 'jpg');
+      showBtn('fmt-dl');
+      st('fmt-status', 'success', '✓ Dönüştürme tamamlandı — İndir butonuna tıklayın');
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(fmtFile);
+}
+
+function fmtDownload() {
+  if (!fmtDataUrl) return;
+  const a = document.createElement('a');
+  a.href = fmtDataUrl;
+  a.download = fmtFile.name.replace(/\.[^.]+$/, '') + '.' + fmtExt;
+  a.click();
+}
+
+function fmtReset() {
+  fmtFile = null; fmtDataUrl = null;
+  document.getElementById('fmt-input').value = '';
+  document.getElementById('fmt-dz-info').textContent = 'PNG, JPG, WebP, GIF desteklenir';
+  document.getElementById('fmt-status').className = 'status';
+  hideBtn('fmt-dl');
+}
+
+// ═══════════════════════════════════════
+// GÖRSEL — TOPLU DÖNÜŞTÜRME
+// ═══════════════════════════════════════
+let batchFiles = [], batchResults = [];
+
+function batchLoad(input) {
+  batchFiles = Array.from(input.files);
+  if (!batchFiles.length) return;
+  addRecent('batch');
+  const list = document.getElementById('batch-list');
+  list.style.display = 'flex';
+  list.innerHTML = '';
+  batchFiles.forEach((f, i) => {
+    const item = document.createElement('div');
+    item.className = 'file-item';
+    item.innerHTML = `<span class="file-item-num">${i+1}</span><span class="file-item-name">${f.name}</span><span class="file-item-size">${(f.size/1024).toFixed(0)} KB</span>`;
+    list.appendChild(item);
+  });
+  st('batch-status', 'info', '✓ ' + batchFiles.length + ' görsel seçildi');
+  hideBtn('batch-dl');
+  batchResults = [];
+}
+
+async function batchConvert() {
+  if (!batchFiles.length) { st('batch-status', 'error', '⚠ Önce görsel seçin.'); return; }
+  const fmt = document.getElementById('batch-out').value;
+  const ext = fmt.split('/')[1].replace('jpeg', 'jpg');
+  batchResults = [];
+  st('batch-status', 'info', '⏳ Dönüştürülüyor…');
+
+  for (let i = 0; i < batchFiles.length; i++) {
+    const file = batchFiles[i];
+    const dataUrl = await new Promise(res => {
+      const reader = new FileReader();
+      reader.onload = e => {
+        const img = new Image();
+        img.onload = () => {
+          canvas.width = img.naturalWidth;
+          canvas.height = img.naturalHeight;
+          const ctx = canvas.getContext('2d');
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          if (fmt === 'image/jpeg') { ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, canvas.width, canvas.height); }
+          ctx.drawImage(img, 0, 0);
+          res(canvas.toDataURL(fmt, 1.0));
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+    batchResults.push({ name: file.name.replace(/\.[^.]+$/, '') + '.' + ext, dataUrl });
+  }
+
+  showBtn('batch-dl');
+  st('batch-status', 'success', '✓ ' + batchResults.length + ' görsel dönüştürüldü — ZIP olarak indir');
+}
+
+async function batchDownloadAll() {
+  if (!batchResults.length) return;
+  if (typeof JSZip === 'undefined') {
+    // Fallback: individual downloads
+    batchResults.forEach(r => { const a = document.createElement('a'); a.href = r.dataUrl; a.download = r.name; a.click(); });
+    return;
+  }
+  const zip = new JSZip();
+  batchResults.forEach(r => {
+    const base64 = r.dataUrl.split(',')[1];
+    zip.file(r.name, base64, { base64: true });
+  });
+  const blob = await zip.generateAsync({ type: 'blob' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'donusturulen_gorseller.zip'; a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 3000);
+}
+
+function batchReset() {
+  batchFiles = []; batchResults = [];
+  document.getElementById('batch-input').value = '';
+  document.getElementById('batch-list').style.display = 'none';
+  document.getElementById('batch-list').innerHTML = '';
+  document.getElementById('batch-status').className = 'status';
+  hideBtn('batch-dl');
+}
+
+// ═══════════════════════════════════════
+// GÖRSEL — SIKIŞTIRMA
+// ═══════════════════════════════════════
+let cmpFile = null, cmpDataUrl = null;
+
+function cmpLoad(input) {
+  cmpFile = input.files[0];
+  if (!cmpFile) return;
+  addRecent('compress');
+  document.getElementById('cmp-dz-info').textContent = cmpFile.name + ' (' + (cmpFile.size/1024).toFixed(0) + ' KB)';
+  st('cmp-status', 'info', '✓ ' + cmpFile.name + ' yüklendi');
+  hideBtn('cmp-dl');
+}
+
+function cmpRun() {
+  if (!cmpFile) { st('cmp-status', 'error', '⚠ Önce görsel seçin.'); return; }
+  const quality = parseInt(document.getElementById('cmp-range').value) / 100;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#fff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0);
+      cmpDataUrl = canvas.toDataURL('image/jpeg', quality);
+      const origKB = (cmpFile.size / 1024).toFixed(1);
+      const newKB  = ((cmpDataUrl.length * 0.75) / 1024).toFixed(1);
+      const pct    = Math.max(0, (((cmpFile.size - newKB * 1024) / cmpFile.size) * 100)).toFixed(0);
+      showBtn('cmp-dl');
+      st('cmp-status', 'success', '✓ ' + origKB + ' KB → ~' + newKB + ' KB (%' + pct + ' küçüldü)');
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(cmpFile);
+}
+
+function cmpDownload() {
+  if (!cmpDataUrl) return;
+  const a = document.createElement('a');
+  a.href = cmpDataUrl;
+  a.download = 'sikistirilmis_' + cmpFile.name.replace(/\.[^.]+$/, '') + '.jpg';
+  a.click();
+}
+
+// ═══════════════════════════════════════
+// GÖRSEL — YENİDEN BOYUTLANDIRMA
+// ═══════════════════════════════════════
+let rszFile = null, rszOW = 0, rszOH = 0, rszDataUrl = null, rszFilename = '';
+
+function rszLoad(input) {
+  rszFile = input.files[0];
+  if (!rszFile) return;
+  addRecent('resize');
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      rszOW = img.naturalWidth; rszOH = img.naturalHeight;
+      document.getElementById('rsz-w').value = rszOW;
+      document.getElementById('rsz-h').value = rszOH;
+      document.getElementById('rsz-dz-info').textContent = rszFile.name + ' — ' + rszOW + '×' + rszOH + ' px';
+      st('rsz-status', 'info', '✓ Yüklendi: ' + rszOW + '×' + rszOH + ' px');
+      hideBtn('rsz-dl');
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(rszFile);
+}
+
+function rszAspect(changed) {
+  if (!document.getElementById('rsz-ratio').checked) return;
+  if (!rszOW || !rszOH) return;
+  if (changed === 'w') {
+    const w = parseInt(document.getElementById('rsz-w').value) || 0;
+    document.getElementById('rsz-h').value = Math.round(w * rszOH / rszOW) || '';
+  } else {
+    const h = parseInt(document.getElementById('rsz-h').value) || 0;
+    document.getElementById('rsz-w').value = Math.round(h * rszOW / rszOH) || '';
+  }
+}
+
+function rszRun() {
+  if (!rszFile) { st('rsz-status', 'error', '⚠ Önce görsel seçin.'); return; }
+  const nw = parseInt(document.getElementById('rsz-w').value);
+  const nh = parseInt(document.getElementById('rsz-h').value);
+  if (!nw || !nh || nw < 1 || nh < 1) { st('rsz-status', 'error', '⚠ Geçerli boyutlar girin.'); return; }
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      canvas.width = nw; canvas.height = nh;
+      canvas.getContext('2d').drawImage(img, 0, 0, nw, nh);
+      rszDataUrl = canvas.toDataURL('image/png', 1.0);
+      rszFilename = nw + 'x' + nh + '_' + rszFile.name.replace(/\.[^.]+$/, '') + '.png';
+      showBtn('rsz-dl');
+      st('rsz-status', 'success', '✓ ' + nw + '×' + nh + ' px hazır — indir butonuna tıklayın');
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(rszFile);
+}
+
+function rszDownload() {
+  if (!rszDataUrl) return;
+  const a = document.createElement('a');
+  a.href = rszDataUrl; a.download = rszFilename; a.click();
+}
+
+// ═══════════════════════════════════════
+// GÖRSEL — BASE64
+// ═══════════════════════════════════════
+function imgToB64(input) {
+  const file = input.files[0];
+  if (!file) return;
+  addRecent('imgb64');
+  const reader = new FileReader();
+  reader.onload = e => {
+    showOutput('b64img-out', 'b64img-copy', e.target.result);
+    st('b64img-status', 'success', '✓ ' + (e.target.result.length / 1024).toFixed(1) + ' KB base64 üretildi');
+  };
+  reader.readAsDataURL(file);
+}
+
+// ═══════════════════════════════════════
+// PDF — BİRLEŞTİR
+// ═══════════════════════════════════════
+let mrgFiles = [], mrgBytes = null;
+
+function mrgLoad(input) {
+  mrgFiles = Array.from(input.files);
+  if (!mrgFiles.length) return;
+  addRecent('merge');
+  const list = document.getElementById('mrg-list');
+  list.style.display = 'flex';
+  list.innerHTML = '';
+  mrgFiles.forEach((f, i) => {
+    const item = document.createElement('div');
+    item.className = 'file-item';
+    item.innerHTML = `<span class="file-item-num">${i+1}</span><span class="file-item-name">${f.name}</span><span class="file-item-size">${(f.size/1024).toFixed(0)} KB</span>`;
+    list.appendChild(item);
+  });
+  st('mrg-status', 'info', '✓ ' + mrgFiles.length + ' PDF seçildi');
+  hideBtn('mrg-dl');
+}
+
+async function mrgRun() {
+  if (mrgFiles.length < 2) { st('mrg-status', 'error', '⚠ En az 2 PDF seçin.'); return; }
+  st('mrg-status', 'info', '⏳ Birleştiriliyor…');
+  try {
+    const { PDFDocument } = PDFLib;
+    const merged = await PDFDocument.create();
+    for (const file of mrgFiles) {
+      const buf = await file.arrayBuffer();
+      const pdf = await PDFDocument.load(buf);
+      const pages = await merged.copyPages(pdf, pdf.getPageIndices());
+      pages.forEach(p => merged.addPage(p));
+    }
+    mrgBytes = await merged.save();
+    showBtn('mrg-dl');
+    st('mrg-status', 'success', '✓ ' + mrgFiles.length + ' PDF birleştirildi — toplam ' + merged.getPageCount() + ' sayfa');
+  } catch(e) { st('mrg-status', 'error', '⚠ Hata: ' + e.message); }
+}
+
+function mrgDownload() { if (mrgBytes) pdfBlob(mrgBytes, 'birlestirilmis.pdf'); }
+
+function mrgReset() {
+  mrgFiles = []; mrgBytes = null;
+  document.getElementById('mrg-input').value = '';
+  document.getElementById('mrg-list').style.display = 'none';
+  document.getElementById('mrg-list').innerHTML = '';
+  document.getElementById('mrg-status').className = 'status';
+  hideBtn('mrg-dl');
+}
+
+// ═══════════════════════════════════════
+// PDF — BÖL
+// ═══════════════════════════════════════
+let splFile = null, splBytes = null, splTotal = 0;
+
+async function splLoad(input) {
+  splFile = input.files[0];
+  if (!splFile) return;
+  addRecent('split');
+  try {
+    const { PDFDocument } = PDFLib;
+    const pdf = await PDFDocument.load(await splFile.arrayBuffer());
+    splTotal = pdf.getPageCount();
+    document.getElementById('spl-info').textContent = splFile.name + ' — ' + splTotal + ' sayfa';
+    st('spl-status', 'info', '✓ ' + splTotal + ' sayfa yüklendi');
+    hideBtn('spl-dl');
+  } catch(e) { st('spl-status', 'error', '⚠ PDF okunamadı.'); }
+}
+
+async function splRun() {
+  if (!splFile) { st('spl-status', 'error', '⚠ Önce PDF seçin.'); return; }
+  const rangeStr = document.getElementById('spl-range').value.trim();
+  if (!rangeStr) { st('spl-status', 'error', '⚠ Sayfa aralığı girin.'); return; }
+  const pages = parseRanges(rangeStr, splTotal);
+  if (!pages.length) { st('spl-status', 'error', '⚠ Geçerli sayfa bulunamadı.'); return; }
+  st('spl-status', 'info', '⏳ Bölünüyor…');
+  try {
+    const { PDFDocument } = PDFLib;
+    const src = await PDFDocument.load(await splFile.arrayBuffer());
+    const out = await PDFDocument.create();
+    const copied = await out.copyPages(src, pages.map(p => p - 1));
+    copied.forEach(p => out.addPage(p));
+    splBytes = await out.save();
+    showBtn('spl-dl');
+    st('spl-status', 'success', '✓ ' + pages.length + ' sayfa ayrıldı (' + pages.join(', ') + ')');
+  } catch(e) { st('spl-status', 'error', '⚠ Hata: ' + e.message); }
+}
+
+function splDownload() { if (splBytes) pdfBlob(splBytes, 'bolunmus.pdf'); }
+
+// ═══════════════════════════════════════
+// PDF — SAYFA SİL
+// ═══════════════════════════════════════
+let delFile = null, delBytes = null, delTotal = 0;
+
+async function delLoad(input) {
+  delFile = input.files[0];
+  if (!delFile) return;
+  addRecent('delpages');
+  try {
+    const { PDFDocument } = PDFLib;
+    const pdf = await PDFDocument.load(await delFile.arrayBuffer());
+    delTotal = pdf.getPageCount();
+    document.getElementById('del-info').textContent = delFile.name + ' — ' + delTotal + ' sayfa';
+    st('del-status', 'info', '✓ ' + delTotal + ' sayfa yüklendi');
+    hideBtn('del-dl');
+  } catch(e) { st('del-status', 'error', '⚠ PDF okunamadı.'); }
+}
+
+async function delRun() {
+  if (!delFile) { st('del-status', 'error', '⚠ Önce PDF seçin.'); return; }
+  const rangeStr = document.getElementById('del-pages').value.trim();
+  if (!rangeStr) { st('del-status', 'error', '⚠ Silinecek sayfaları girin.'); return; }
+  const toDelete = new Set(parseRanges(rangeStr, delTotal).map(p => p - 1));
+  if (toDelete.size >= delTotal) { st('del-status', 'error', '⚠ En az 1 sayfa kalmalı.'); return; }
+  st('del-status', 'info', '⏳ İşleniyor…');
+  try {
+    const { PDFDocument } = PDFLib;
+    const src = await PDFDocument.load(await delFile.arrayBuffer());
+    const keep = src.getPageIndices().filter(i => !toDelete.has(i));
+    const out = await PDFDocument.create();
+    const copied = await out.copyPages(src, keep);
+    copied.forEach(p => out.addPage(p));
+    delBytes = await out.save();
+    showBtn('del-dl');
+    st('del-status', 'success', '✓ ' + toDelete.size + ' sayfa silindi — ' + keep.length + ' sayfa kaldı');
+  } catch(e) { st('del-status', 'error', '⚠ Hata: ' + e.message); }
+}
+
+function delDownload() { if (delBytes) pdfBlob(delBytes, 'duzenlenmis.pdf'); }
+
+// ═══════════════════════════════════════
+// PDF — PDF → GÖRSEL
+// ═══════════════════════════════════════
+let p2iFile = null;
+
+async function p2iLoad(input) {
+  p2iFile = input.files[0];
+  if (!p2iFile) return;
+  addRecent('pdfimg');
+  try {
+    const { PDFDocument } = PDFLib;
+    const pdf = await PDFDocument.load(await p2iFile.arrayBuffer());
+    document.getElementById('p2i-info').textContent = p2iFile.name + ' — ' + pdf.getPageCount() + ' sayfa';
+    st('p2i-status', 'info', '✓ ' + pdf.getPageCount() + ' sayfa yüklendi');
+    document.getElementById('p2i-buttons').style.display = 'none';
+    document.getElementById('p2i-buttons').innerHTML = '';
+  } catch(e) { st('p2i-status', 'error', '⚠ PDF okunamadı.'); }
+}
+
+async function p2iRun() {
+  if (!p2iFile) { st('p2i-status', 'error', '⚠ Önce PDF seçin.'); return; }
+  if (typeof pdfjsLib === 'undefined') { st('p2i-status', 'error', '⚠ PDF.js yüklenemedi. İnternet bağlantınızı kontrol edin.'); return; }
+  const scale = parseFloat(document.getElementById('p2i-scale').value);
+  st('p2i-status', 'info', '⏳ Dönüştürülüyor, lütfen bekleyin…');
+  const container = document.getElementById('p2i-buttons');
+  container.innerHTML = '';
+  container.style.display = 'flex';
+  try {
+    const buf = await p2iFile.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const page = await pdf.getPage(i);
+      const vp = page.getViewport({ scale });
+      const c = document.createElement('canvas');
+      c.width = vp.width; c.height = vp.height;
+      await page.render({ canvasContext: c.getContext('2d'), viewport: vp }).promise;
+      const dataUrl = c.toDataURL('image/png');
+      const btn = document.createElement('button');
+      btn.className = 'btn btn-success';
+      btn.style.cssText = 'width:100%;justify-content:space-between';
+      btn.innerHTML = '⬇ Sayfa ' + i + ' indir <span style="font-size:11px;opacity:0.6">' + Math.round(vp.width) + '×' + Math.round(vp.height) + ' px</span>';
+      const filename = p2iFile.name.replace('.pdf', '') + '_sayfa' + i + '.png';
+      btn.onclick = () => { const a = document.createElement('a'); a.href = dataUrl; a.download = filename; a.click(); };
+      container.appendChild(btn);
+    }
+    st('p2i-status', 'success', '✓ ' + pdf.numPages + ' sayfa hazır — indirmek istediğiniz sayfayı seçin');
+  } catch(e) { st('p2i-status', 'error', '⚠ Hata: ' + e.message); }
+}
+
+// ═══════════════════════════════════════
+// PDF — GÖRSEL → PDF
+// ═══════════════════════════════════════
+let i2pFiles = [], i2pBytes = null;
+
+function i2pLoad(input) {
+  i2pFiles = Array.from(input.files);
+  if (!i2pFiles.length) return;
+  addRecent('imgtopdf');
+  const list = document.getElementById('i2p-list');
+  list.style.display = 'flex';
+  list.innerHTML = '';
+  i2pFiles.forEach((f, i) => {
+    const item = document.createElement('div');
+    item.className = 'file-item';
+    item.innerHTML = `<span class="file-item-num">${i+1}</span><span class="file-item-name">${f.name}</span><span class="file-item-size">${(f.size/1024).toFixed(0)} KB</span>`;
+    list.appendChild(item);
+  });
+  st('i2p-status', 'info', '✓ ' + i2pFiles.length + ' görsel seçildi');
+  hideBtn('i2p-dl');
+}
+
+async function i2pRun() {
+  if (!i2pFiles.length) { st('i2p-status', 'error', '⚠ Önce görsel seçin.'); return; }
+  st('i2p-status', 'info', '⏳ PDF oluşturuluyor…');
+  const { PDFDocument, PageSizes } = PDFLib;
+  const pageSizes = { A4: PageSizes.A4, A3: PageSizes.A3, Letter: PageSizes.Letter };
+  try {
+    const doc = await PDFDocument.create();
+    for (const file of i2pFiles) {
+      const buf = await file.arrayBuffer();
+      const isJpg = file.type === 'image/jpeg';
+      const img = isJpg ? await doc.embedJpg(buf) : await doc.embedPng(buf);
+      const size = document.getElementById('i2p-size').value;
+      let pw, ph;
+      if (size === 'fit') { pw = img.width; ph = img.height; }
+      else { [pw, ph] = pageSizes[size]; }
+      const page = doc.addPage([pw, ph]);
+      const scale = Math.min(pw / img.width, ph / img.height);
+      const w = img.width * scale, h = img.height * scale;
+      page.drawImage(img, { x: (pw - w) / 2, y: (ph - h) / 2, width: w, height: h });
+    }
+    i2pBytes = await doc.save();
+    showBtn('i2p-dl');
+    st('i2p-status', 'success', '✓ ' + i2pFiles.length + ' görsel PDF\'e dönüştürüldü');
+  } catch(e) { st('i2p-status', 'error', '⚠ Hata: ' + e.message); }
+}
+
+function i2pDownload() { if (i2pBytes) pdfBlob(i2pBytes, 'gorseller.pdf'); }
+
+function i2pReset() {
+  i2pFiles = []; i2pBytes = null;
+  document.getElementById('i2p-input').value = '';
+  document.getElementById('i2p-list').style.display = 'none';
+  document.getElementById('i2p-list').innerHTML = '';
+  document.getElementById('i2p-status').className = 'status';
+  hideBtn('i2p-dl');
+}
+
+// ═══════════════════════════════════════
+// PDF — BİLGİ
+// ═══════════════════════════════════════
+async function piRun(input) {
+  const file = input.files[0];
+  if (!file) return;
+  addRecent('pdfinfo');
+  const result = document.getElementById('pi-result');
+  result.classList.add('visible');
+  try {
+    const { PDFDocument } = PDFLib;
+    const pdf = await PDFDocument.load(await file.arrayBuffer(), { ignoreEncryption: true });
+    document.getElementById('pi-pages').textContent   = pdf.getPageCount() + ' sayfa';
+    document.getElementById('pi-size').textContent    = (file.size / 1024).toFixed(1) + ' KB';
+    document.getElementById('pi-title').textContent   = pdf.getTitle()  || '—';
+    document.getElementById('pi-author').textContent  = pdf.getAuthor() || '—';
+    const d = pdf.getCreationDate();
+    document.getElementById('pi-date').textContent    = d ? d.toLocaleDateString('tr-TR') : '—';
+    document.getElementById('pi-creator').textContent = pdf.getCreator() || '—';
+  } catch {
+    document.getElementById('pi-pages').textContent   = '—';
+    document.getElementById('pi-size').textContent    = (file.size / 1024).toFixed(1) + ' KB';
+    document.getElementById('pi-title').textContent   = 'Okunamadı (şifreli olabilir)';
+    document.getElementById('pi-author').textContent  = '—';
+    document.getElementById('pi-date').textContent    = '—';
+    document.getElementById('pi-creator').textContent = '—';
+  }
+}
+
+// ═══════════════════════════════════════
+// VERİ — JSON → CSV
+// ═══════════════════════════════════════
+function j2cExample() { return JSON.stringify([{ad:'Ali',soyad:'Yılmaz',yas:25,sehir:'İstanbul'},{ad:'Veli',soyad:'Kaya',yas:30,sehir:'Ankara'}], null, 2); }
+
+function j2cRun() {
+  const raw = document.getElementById('j2c-in').value.trim();
+  if (!raw) return;
+  addRecent('json2csv');
+  try {
+    const data = JSON.parse(raw);
+    if (!Array.isArray(data) || !data.length) throw new Error('Lütfen JSON dizisi girin: [...]');
+    const keys = Object.keys(data[0]);
+    const lines = [keys.join(',')];
+    data.forEach(row => {
+      lines.push(keys.map(k => {
+        const v = String(row[k] ?? '').replace(/"/g, '""');
+        return (v.includes(',') || v.includes('\n')) ? '"' + v + '"' : v;
+      }).join(','));
+    });
+    showOutput('j2c-out', 'j2c-copy', lines.join('\n'));
+    showBtn('j2c-dl');
+    st('j2c-status', 'success', '✓ ' + data.length + ' satır dönüştürüldü');
+  } catch(e) { st('j2c-status', 'error', '⚠ ' + e.message); }
+}
+
+function j2cDownload() {
+  const csv = document.getElementById('j2c-out').textContent;
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = 'donusturulen.csv'; a.click();
+}
+
+// ═══════════════════════════════════════
+// VERİ — CSV → JSON
+// ═══════════════════════════════════════
+function c2jExample() { return 'ad,soyad,yas,sehir\nAli,Yılmaz,25,İstanbul\nVeli,Kaya,30,Ankara'; }
+
+function c2jRun() {
+  const raw = document.getElementById('c2j-in').value.trim();
+  if (!raw) return;
+  addRecent('csv2json');
+  const delim = document.getElementById('c2j-delim').value;
+  try {
+    const lines = raw.split('\n').filter(l => l.trim());
+    const headers = lines[0].split(delim).map(h => h.trim().replace(/^"|"$/g, ''));
+    const result = lines.slice(1).map(line => {
+      const vals = line.split(delim).map(v => v.trim().replace(/^"|"$/g, ''));
+      const obj = {};
+      headers.forEach((h, i) => {
+        const v = vals[i] ?? '';
+        obj[h] = (!isNaN(v) && v !== '') ? Number(v) : v;
+      });
+      return obj;
+    });
+    showOutput('c2j-out', 'c2j-copy', JSON.stringify(result, null, 2));
+    st('c2j-status', 'success', '✓ ' + result.length + ' kayıt dönüştürüldü');
+  } catch(e) { st('c2j-status', 'error', '⚠ Hata: ' + e.message); }
+}
+
+// ═══════════════════════════════════════
+// VERİ — JSON FORMATLAYICI
+// ═══════════════════════════════════════
+function jfFormat() {
+  const raw = document.getElementById('jf-in').value.trim();
+  if (!raw) return;
+  addRecent('jsonfmt');
+  try {
+    const indent = document.getElementById('jf-indent').value;
+    showOutput('jf-out', 'jf-copy', JSON.stringify(JSON.parse(raw), null, indent === '\t' ? '\t' : parseInt(indent)));
+    st('jf-status', 'success', '✓ Geçerli JSON — formatlandı');
+  } catch(e) { st('jf-status', 'error', '⚠ Geçersiz JSON: ' + e.message); }
+}
+
+function jfMinify() {
+  const raw = document.getElementById('jf-in').value.trim();
+  if (!raw) return;
+  try {
+    showOutput('jf-out', 'jf-copy', JSON.stringify(JSON.parse(raw)));
+    st('jf-status', 'success', '✓ JSON sıkıştırıldı');
+  } catch(e) { st('jf-status', 'error', '⚠ Geçersiz JSON'); }
+}
+
+// ═══════════════════════════════════════
+// VERİ — RENK DÖNÜŞTÜRİCÜ
+// ═══════════════════════════════════════
+function clrHexToRgb(hex) {
+  return { r: parseInt(hex.slice(1,3),16), g: parseInt(hex.slice(3,5),16), b: parseInt(hex.slice(5,7),16) };
+}
+
+function clrRgbToHsl(r, g, b) {
+  r /= 255; g /= 255; b /= 255;
+  const max = Math.max(r,g,b), min = Math.min(r,g,b);
+  let h, s, l = (max + min) / 2;
+  if (max === min) { h = s = 0; }
+  else {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch(max) {
+      case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+      case g: h = (b - r) / d + 2; break;
+      default: h = (r - g) / d + 4;
+    }
+    h /= 6;
+  }
+  return { h: Math.round(h*360), s: Math.round(s*100), l: Math.round(l*100) };
+}
+
+function clrUpdate(hex) {
+  if (!/^#[0-9a-fA-F]{6}$/.test(hex)) return;
+  addRecent('color');
+  document.getElementById('clr-hex').value = hex;
+  document.getElementById('clr-picker').value = hex;
+  const {r,g,b} = clrHexToRgb(hex);
+  const {h,s,l} = clrRgbToHsl(r,g,b);
+  document.getElementById('clr-rgb').value = `rgb(${r}, ${g}, ${b})`;
+  document.getElementById('clr-hsl').value = `hsl(${h}, ${s}%, ${l}%)`;
+  document.getElementById('clr-css').value = `--color: ${hex};`;
+  document.getElementById('clr-preview').style.background = hex;
+}
+
+function clrHexInput(v) { if (/^#[0-9a-fA-F]{6}$/.test(v)) clrUpdate(v); }
+
+clrUpdate('#4f8cff');
+
+// ═══════════════════════════════════════
+// METİN — TÜRKÇE KARAKTER
+// ═══════════════════════════════════════
+const trReplacements = [
+  [/\bgercekten\b/gi, m => m[0]==='G' ? 'Gerçekten' : 'gerçekten'],
+  [/\bgercek\b/gi, m => m[0]==='G' ? 'Gerçek' : 'gerçek'],
+  [/\bguzel\b/gi, m => m[0]==='G' ? 'Güzel' : 'güzel'],
+  [/\bcumle\b/gi, m => m[0]==='C' ? 'Cümle' : 'cümle'],
+  [/\bolcek\b/gi, m => m[0]==='O' ? 'Ölçek' : 'ölçek'],
+  [/\bsehir\b/gi, m => m[0]==='S' ? 'Şehir' : 'şehir'],
+  [/\burun\b/gi, m => m[0]==='U' ? 'Ürün' : 'ürün'],
+  [/\bkucuk\b/gi, m => m[0]==='K' ? 'Küçük' : 'küçük'],
+  [/\bbuyuk\b/gi, m => m[0]==='B' ? 'Büyük' : 'büyük'],
+  [/\bsimdi\b/gi, m => m[0]==='S' ? 'Şimdi' : 'şimdi'],
+  [/\bsikayet\b/gi, m => m[0]==='S' ? 'Şikayet' : 'şikayet'],
+  [/\bcalisma\b/gi, m => m[0]==='C' ? 'Çalışma' : 'çalışma'],
+  [/\bcalis\b/gi, m => m[0]==='C' ? 'Çalış' : 'çalış'],
+  [/\bcogu\b/gi, m => m[0]==='C' ? 'Çoğu' : 'çoğu'],
+  [/\bcogunluk\b/gi, m => m[0]==='C' ? 'Çoğunluk' : 'çoğunluk'],
+  [/\bIstanbul\b/g, 'İstanbul'],
+  [/\bIzmir\b/g, 'İzmir'],
+  [/\bIstanbul/g, 'İstanbul'],
+];
+
+function trRun() {
+  let text = document.getElementById('tr-in').value;
+  if (!text.trim()) { document.getElementById('tr-out').textContent = ''; document.getElementById('tr-copy').style.display='none'; return; }
+  addRecent('turkce');
+  trReplacements.forEach(([pattern, repl]) => { text = text.replace(pattern, repl); });
+  document.getElementById('tr-out').textContent = text;
+  document.getElementById('tr-copy').style.display = 'block';
+}
+
+// ═══════════════════════════════════════
+// METİN — CASE CONVERT
+// ═══════════════════════════════════════
+function ccRun(type) {
+  const text = document.getElementById('cc-in').value;
+  if (!text) return;
+  addRecent('caseconv');
+  let result;
+  switch(type) {
+    case 'upper':   result = text.toLocaleUpperCase('tr'); break;
+    case 'lower':   result = text.toLocaleLowerCase('tr'); break;
+    case 'title':   result = text.replace(/\S+/g, w => w[0].toLocaleUpperCase('tr') + w.slice(1).toLocaleLowerCase('tr')); break;
+    case 'slug':    result = text.toLocaleLowerCase('tr').replace(/[çÇ]/g,'c').replace(/[ğĞ]/g,'g').replace(/[ıİ]/g,'i').replace(/[öÖ]/g,'o').replace(/[şŞ]/g,'s').replace(/[üÜ]/g,'u').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''); break;
+    case 'reverse': result = [...text].reverse().join(''); break;
+    default: return;
+  }
+  showOutput('cc-out', 'cc-copy', result);
+}
+
+// ═══════════════════════════════════════
+// METİN — BASE64
+// ═══════════════════════════════════════
+function btEncode() {
+  const text = document.getElementById('bt-in').value;
+  if (!text) return;
+  addRecent('b64text');
+  try {
+    showOutput('bt-out', 'bt-copy', btoa(unescape(encodeURIComponent(text))));
+    st('bt-status', 'success', '✓ Encode tamamlandı');
+  } catch { st('bt-status', 'error', '⚠ Encode hatası'); }
+}
+
+function btDecode() {
+  const text = document.getElementById('bt-in').value.trim();
+  if (!text) return;
+  addRecent('b64text');
+  try {
+    showOutput('bt-out', 'bt-copy', decodeURIComponent(escape(atob(text))));
+    st('bt-status', 'success', '✓ Decode tamamlandı');
+  } catch { st('bt-status', 'error', '⚠ Geçersiz Base64 verisi'); }
+}
+
+// ═══════════════════════════════════════
+// METİN — ANALİZ
+// ═══════════════════════════════════════
+function taRun() {
+  const text = document.getElementById('ta-in').value;
+  addRecent('textanalyze');
+  const chars = text.length;
+  const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+  const sents = text.trim() ? (text.match(/[.!?…]+/g) || []).length || 1 : 0;
+  const readSec = Math.round(words / 3);
+  document.getElementById('ta-chars').textContent = chars.toLocaleString('tr');
+  document.getElementById('ta-words').textContent = words.toLocaleString('tr');
+  document.getElementById('ta-sents').textContent = sents.toLocaleString('tr');
+  document.getElementById('ta-read').textContent  = readSec < 60 ? readSec + 's' : Math.ceil(readSec / 60) + ' dk';
+}
+
+// ═══════════════════════════════════════
+// HESAP — KDV
+// ═══════════════════════════════════════
+function kdvRun() {
+  const amount = parseFloat(document.getElementById('kdv-amount').value);
+  const rate   = parseFloat(document.getElementById('kdv-rate').value);
+  if (!amount || amount <= 0 || isNaN(rate) || rate < 0) return;
+  addRecent('kdv');
+  const r = rate / 100;
+  const type = document.getElementById('kdv-type').value;
+  let net, tax, total;
+  if (type === 'add') { net = amount; tax = net * r; total = net + tax; }
+  else { total = amount; net = total / (1 + r); tax = total - net; }
+  const fmt = n => n.toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' ₺';
+  document.getElementById('kdv-net').textContent   = fmt(net);
+  document.getElementById('kdv-tax').textContent   = fmt(tax);
+  document.getElementById('kdv-total').textContent = fmt(total);
+  document.getElementById('kdv-result').classList.add('visible');
+}
+
+// ═══════════════════════════════════════
+// HESAP — DÖVİZ (CANLI KUR)
+// ═══════════════════════════════════════
+let liveRates = {}, rateDate = '';
+
+const curNames = {
+  AED:'BAE Dirhemi',AFN:'Afgan Afgani',ALL:'Arnavut Leki',AMD:'Ermeni Dramı',ANG:'Hollanda Antil Guldeni',
+  AOA:'Angola Kwanzası',ARS:'Arjantin Pesosu',AUD:'Avustralya Doları',AWG:'Aruba Florini',AZN:'Azerbaycan Manatı',
+  BAM:'Bosna Konvertibil Markı',BBD:'Barbados Doları',BDT:'Bangladeş Takası',BGN:'Bulgar Levası',BHD:'Bahreyn Dinarı',
+  BMD:'Bermuda Doları',BND:'Brunei Doları',BOB:'Bolivya Bolivyanosu',BRL:'Brezilya Reali',BSD:'Bahama Doları',
+  BTN:'Bhutan Ngultrumu',BWP:'Botsvana Pulası',BYN:'Belarus Rublesi',BZD:'Belize Doları',CAD:'Kanada Doları',
+  CDF:'Kongo Frangı',CHF:'İsviçre Frangı',CLP:'Şili Pesosu',CNY:'Çin Yuanı',COP:'Kolombiya Pesosu',
+  CRC:'Kosta Rika Kolonu',CUP:'Küba Pesosu',CVE:'Yeşil Burun Escudosu',CZK:'Çek Korunası',DJF:'Cibuti Frangı',
+  DKK:'Danimarka Kronü',DOP:'Dominik Pesosu',DZD:'Cezayir Dinarı',EGP:'Mısır Poundu',ERN:'Eritre Nakfası',
+  ETB:'Etiyopya Bırı',EUR:'Euro',FJD:'Fiji Doları',GBP:'İngiliz Sterlini',GEL:'Gürcü Larisi',
+  GHS:'Gana Sedisi',GMD:'Gambiya Dalasisi',GTQ:'Guatemala Quetzalı',GYD:'Guyana Doları',HKD:'Hong Kong Doları',
+  HNL:'Honduras Lempirası',HRK:'Hırvatistan Kunası',HTG:'Haiti Gurdu',HUF:'Macar Forinti',IDR:'Endonezya Rupisi',
+  ILS:'İsrail Şekeli',INR:'Hint Rupisi',IQD:'Irak Dinarı',IRR:'İran Riyali',ISK:'İzlanda Kronü',
+  JMD:'Jamaika Doları',JOD:'Ürdün Dinarı',JPY:'Japon Yeni',KES:'Kenya Şilini',KGS:'Kırgız Somu',
+  KHR:'Kamboçya Rieli',KRW:'Güney Kore Wonu',KWD:'Kuveyt Dinarı',KZT:'Kazakistan Tengesi',LAK:'Laos Kipi',
+  LBP:'Lübnan Poundu',LKR:'Sri Lanka Rupisi',LYD:'Libya Dinarı',MAD:'Fas Dirhemi',MDL:'Moldova Leyi',
+  MKD:'Makedon Dinarı',MMK:'Myanmar Kyatı',MNT:'Moğol Tögrögü',MOP:'Makao Patacası',MRU:'Moritanya Ugiyası',
+  MUR:'Mauritius Rupisi',MVR:'Maldiv Rufiyası',MWK:'Malawi Kwaçası',MXN:'Meksika Pesosu',MYR:'Malezya Ringgiti',
+  MZN:'Mozambik Metalcali',NAD:'Namibya Doları',NGN:'Nijerya Nayrası',NIO:'Nikaragua Kordobası',NOK:'Norveç Kronü',
+  NPR:'Nepal Rupisi',NZD:'Yeni Zelanda Doları',OMR:'Umman Riyali',PAB:'Panama Balboası',PEN:'Peru Solu',
+  PGK:'Papua Yeni Gine Kinası',PHP:'Filipin Pesosu',PKR:'Pakistan Rupisi',PLN:'Polonya Zlotisi',PYG:'Paraguay Guaranisi',
+  QAR:'Katar Riyali',RON:'Romen Leyi',RSD:'Sırp Dinarı',RUB:'Rus Rublesi',RWF:'Ruanda Frangı',
+  SAR:'Suudi Arabistan Riyali',SBD:'Solomon Adaları Doları',SCR:'Seyşel Rupisi',SDG:'Sudan Poundu',SEK:'İsveç Kronü',
+  SGD:'Singapur Doları',SOS:'Somali Şilini',SRD:'Surinam Doları',STN:'São Tomé ve Príncipe Dobrası',SYP:'Suriye Poundu',
+  SZL:'Esvatini Lilangeni',THB:'Tayland Bahtı',TJS:'Tacikistan Somonisi',TMT:'Türkmen Manatı',TND:'Tunus Dinarı',
+  TOP:'Tonga Paangası',TRY:'Türk Lirası',TTD:'Trinidad ve Tobago Doları',TWD:'Tayvan Yeni Doları',TZS:'Tanzanya Şilini',
+  UAH:'Ukrayna Grivnası',UGX:'Uganda Şilini',USD:'Amerikan Doları',UYU:'Uruguay Pesosu',UZS:'Özbek Somu',
+  VES:'Venezuela Bolivarı',VND:'Vietnam Dongu',VUV:'Vanuatu Vatusu',WST:'Samoa Talası',XAF:'Orta Afrika CFA Frangı',
+  XCD:'Doğu Karayip Doları',XOF:'Batı Afrika CFA Frangı',XPF:'CFP Frangı',YER:'Yemen Riyali',ZAR:'Güney Afrika Randı',
+  ZMW:'Zambiya Kwaçası',ZWL:'Zimbabve Doları'
+};
+
+const popularCur = ['TRY','USD','EUR','GBP','JPY','CHF','CAD','AUD','SAR','AED','RUB','CNY'];
+
+async function loadRates() {
+  try {
+    const res = await fetch('https://api.exchangerate.host/latest?base=EUR');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    liveRates = { ...data.rates, EUR: 1 };
+    rateDate = data.date || new Date().toLocaleDateString('tr-TR');
+    buildCurrencySelects();
+    document.getElementById('cur-loading').style.display = 'none';
+    const ok = document.getElementById('cur-ok');
+    ok.style.display = 'flex';
+    document.getElementById('cur-updated').textContent = 'Son: ' + new Date().toLocaleTimeString('tr-TR', {hour:'2-digit',minute:'2-digit'});
+    document.getElementById('live-badge').style.display = 'flex';
+    curCalc();
+  } catch {
+    document.getElementById('cur-loading').innerHTML = '<span style="color:var(--warn)">⚠ Kur verisi alınamadı. İnternet bağlantınızı kontrol edin.</span>';
+  }
+}
+
+function buildCurrencySelects() {
+  const codes = Object.keys(liveRates).sort();
+  ['cur-from','cur-to'].forEach((id, idx) => {
+    const sel = document.getElementById(id);
+    sel.innerHTML = '';
+    codes.forEach(code => {
+      const opt = document.createElement('option');
+      opt.value = code;
+      opt.textContent = code + ' — ' + (curNames[code] || code);
+      if (idx === 0 && code === 'TRY') opt.selected = true;
+      if (idx === 1 && code === 'USD') opt.selected = true;
+      sel.appendChild(opt);
+    });
+    sel.onchange = curCalc;
+  });
+  const quick = document.getElementById('cur-quick');
+  quick.innerHTML = '';
+  popularCur.forEach(code => {
+    if (!liveRates[code]) return;
+    const btn = document.createElement('button');
+    btn.className = 'quick-btn';
+    btn.textContent = code;
+    btn.title = curNames[code] || code;
+    btn.onclick = () => { document.getElementById('cur-to').value = code; curCalc(); };
+    quick.appendChild(btn);
+  });
+  document.getElementById('cur-popular-wrap').style.display = 'block';
+}
+
+function curCalc() {
+  if (!Object.keys(liveRates).length) return;
+  const amount = parseFloat(document.getElementById('cur-amount').value);
+  if (!amount || amount <= 0) { document.getElementById('cur-result').classList.remove('visible'); return; }
+  addRecent('doviz');
+  const from = document.getElementById('cur-from').value;
+  const to   = document.getElementById('cur-to').value;
+  if (!liveRates[from] || !liveRates[to]) return;
+  const result = (amount / liveRates[from]) * liveRates[to];
+  const rate   = liveRates[to] / liveRates[from];
+  document.getElementById('cur-value').textContent = result.toLocaleString('tr-TR', {minimumFractionDigits:2, maximumFractionDigits:4}) + ' ' + to;
+  document.getElementById('cur-sub').textContent   = '1 ' + from + ' = ' + rate.toFixed(6) + ' ' + to + ' · ' + rateDate;
+  document.getElementById('cur-result').classList.add('visible');
+}
+
+function curSwap() {
+  const f = document.getElementById('cur-from');
+  const t = document.getElementById('cur-to');
+  const tmp = f.value; f.value = t.value; t.value = tmp;
+  curCalc();
+}
+
+loadRates();
+setInterval(loadRates, 60 * 60 * 1000);
+
+// ═══════════════════════════════════════
+// HESAP — ŞEKİL
+// ═══════════════════════════════════════
+function shpUpdate() {
+  const type = document.getElementById('shp-type').value;
+  const c = document.getElementById('shp-inputs');
+  const tpls = {
+    kare:      '<div class="field"><label class="field-label">Kenar (cm)</label><input type="number" id="sh1" placeholder="5" min="0"></div>',
+    dikdortgen:'<div class="field"><label class="field-label">Uzunluk (cm)</label><input type="number" id="sh1" placeholder="8" min="0"></div><div class="field"><label class="field-label">Genişlik (cm)</label><input type="number" id="sh2" placeholder="5" min="0"></div>',
+    daire:     '<div class="field"><label class="field-label">Yarıçap (cm)</label><input type="number" id="sh1" placeholder="5" min="0"></div>',
+    ucgen:     '<div class="field"><label class="field-label">Taban (cm)</label><input type="number" id="sh1" placeholder="6" min="0"></div><div class="field"><label class="field-label">Yükseklik (cm)</label><input type="number" id="sh2" placeholder="4" min="0"></div><div class="field"><label class="field-label">Kenar a (cm)</label><input type="number" id="sh3" placeholder="5" min="0"></div><div class="field"><label class="field-label">Kenar b (cm)</label><input type="number" id="sh4" placeholder="5" min="0"></div>'
+  };
+  c.innerHTML = tpls[type] || '';
+  document.getElementById('shp-result').classList.remove('visible');
+}
+
+shpUpdate();
+
+function shpCalc() {
+  const type = document.getElementById('shp-type').value;
+  const v = id => parseFloat(document.getElementById(id)?.value) || 0;
+  let area = 0, peri = 0;
+  addRecent('shape');
+  if (type === 'kare')       { const s=v('sh1'); area=s*s; peri=4*s; }
+  if (type === 'dikdortgen') { const a=v('sh1'),b=v('sh2'); area=a*b; peri=2*(a+b); }
+  if (type === 'daire')      { const r=v('sh1'); area=Math.PI*r*r; peri=2*Math.PI*r; }
+  if (type === 'ucgen')      { const t=v('sh1'),h=v('sh2'),a=v('sh3'),b=v('sh4'),c2=v('sh1'); area=0.5*t*h; peri=a+b+c2; }
+  document.getElementById('shp-area').textContent = area.toFixed(4).replace(/\.?0+$/, '') + ' cm²';
+  document.getElementById('shp-peri').textContent = peri.toFixed(4).replace(/\.?0+$/, '') + ' cm';
+  document.getElementById('shp-result').classList.add('visible');
+}
+
+// ═══════════════════════════════════════
+// HESAP — YÜZDE
+// ═══════════════════════════════════════
+function pctUpdate() {
+  const type = document.getElementById('pct-type').value;
+  const tpls = {
+    of:     '<div class="field"><label class="field-label">Yüzde (%)</label><input type="number" id="p1" placeholder="25" min="0"></div><div class="field"><label class="field-label">Sayı</label><input type="number" id="p2" placeholder="200"></div>',
+    change: '<div class="field"><label class="field-label">Başlangıç Değeri</label><input type="number" id="p1" placeholder="100"></div><div class="field"><label class="field-label">Bitiş Değeri</label><input type="number" id="p2" placeholder="125"></div>',
+    what:   '<div class="field"><label class="field-label">X (küçük sayı)</label><input type="number" id="p1" placeholder="25"></div><div class="field"><label class="field-label">Y (büyük sayı)</label><input type="number" id="p2" placeholder="200"></div>'
+  };
+  document.getElementById('pct-form').innerHTML = tpls[type] || '';
+  document.getElementById('pct-result').classList.remove('visible');
+}
+
+pctUpdate();
+
+function pctCalc() {
+  const type = document.getElementById('pct-type').value;
+  const p1 = parseFloat(document.getElementById('p1')?.value) || 0;
+  const p2 = parseFloat(document.getElementById('p2')?.value) || 0;
+  addRecent('percent');
+  let value = 0, sub = '';
+  if (type === 'of')     { value = (p1/100)*p2; sub = '%' + p1 + ' × ' + p2 + ' = ' + value.toFixed(4).replace(/\.?0+$/,''); }
+  if (type === 'change') { if(p1===0){st('pct-result','error','⚠ Başlangıç 0 olamaz');return;} value=((p2-p1)/p1)*100; sub=(value>=0?'▲ Artış: ':'▼ Düşüş: ')+Math.abs(value).toFixed(2)+'%'; }
+  if (type === 'what')   { if(p2===0){return;} value=(p1/p2)*100; sub=p1+', '+p2+' sayısının %'+value.toFixed(4).replace(/\.?0+$/,'')+"'i"; }
+  document.getElementById('pct-value').textContent = value.toFixed(2) + (type === 'of' ? '' : '%');
+  document.getElementById('pct-sub').textContent   = sub;
+  document.getElementById('pct-result').classList.add('visible');
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/exifr@7.1.3/dist/full.umd.js"></script>
+<script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
+<script>
+// ═══════════════════════════════════════
+// FFmpeg INIT
+// ═══════════════════════════════════════
+let ffmpegReady = false, ffmpegLoading = false, ffmpegInstance = null;
+
+async function getFFmpeg() {
+  if (ffmpegReady && ffmpegInstance) return ffmpegInstance;
+  if (ffmpegLoading) {
+    await new Promise(res => { const iv = setInterval(() => { if (ffmpegReady) { clearInterval(iv); res(); } }, 200); });
+    return ffmpegInstance;
+  }
+  ffmpegLoading = true;
+  const { createFFmpeg, fetchFile } = FFmpeg;
+  ffmpegInstance = createFFmpeg({
+    log: false,
+    corePath: 'https://unpkg.com/@ffmpeg/core@0.11.0/dist/ffmpeg-core.js'
+  });
+  window._ffFetchFile = fetchFile;
+  await ffmpegInstance.load();
+  ffmpegReady = true;
+  ffmpegLoading = false;
+  return ffmpegInstance;
+}
+
+function animProgress(fillId, barId, durationMs) {
+  const bar = document.getElementById(barId);
+  const fill = document.getElementById(fillId);
+  bar.classList.add('visible');
+  fill.style.width = '0%';
+  const start = Date.now();
+  const iv = setInterval(() => {
+    const pct = Math.min(88, ((Date.now() - start) / durationMs) * 88);
+    fill.style.width = pct + '%';
+  }, 200);
+  return { iv, fill, bar };
+}
+
+function finishAnim(p) {
+  clearInterval(p.iv);
+  p.fill.style.width = '100%';
+  setTimeout(() => { p.bar.classList.remove('visible'); p.fill.style.width = '0%'; }, 700);
+}
+
+function blobDl(data, mime, filename) {
+  const blob = new Blob([data.buffer], { type: mime });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename; a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 3000);
+}
+
+// ═══════════════════════════════════════
+// VIDEO → MP3
+// ═══════════════════════════════════════
+let v2aFile = null, v2aData = null;
+
+function v2aLoad(input) {
+  v2aFile = input.files[0];
+  if (!v2aFile) return;
+  addRecent('vid2mp3');
+  document.getElementById('v2a-dz-info').textContent = v2aFile.name + ' (' + (v2aFile.size/1024/1024).toFixed(1) + ' MB)';
+  st('v2a-status', 'info', '✓ ' + v2aFile.name + ' yüklendi');
+  hideBtn('v2a-dl');
+}
+
+async function v2aRun() {
+  if (!v2aFile) { st('v2a-status', 'error', '⚠ Önce video seçin.'); return; }
+  const quality = document.getElementById('v2a-quality').value;
+  st('v2a-status', 'info', '⏳ FFmpeg yükleniyor (~25 MB)…');
+  const p = animProgress('v2a-fill', 'v2a-progress', 30000);
+  try {
+    const ffmpeg = await getFFmpeg();
+    st('v2a-status', 'info', '⏳ Ses çıkarılıyor…');
+    const ext = v2aFile.name.slice(v2aFile.name.lastIndexOf('.'));
+    const inName = 'vin' + ext;
+    ffmpeg.FS('writeFile', inName, await window._ffFetchFile(v2aFile));
+    await ffmpeg.run('-i', inName, '-vn', '-ab', quality, '-ar', '44100', '-ac', '2', 'out.mp3');
+    v2aData = ffmpeg.FS('readFile', 'out.mp3');
+    try { ffmpeg.FS('unlink', inName); ffmpeg.FS('unlink', 'out.mp3'); } catch {}
+    finishAnim(p);
+    showBtn('v2a-dl');
+    st('v2a-status', 'success', '✓ MP3 hazır (' + (v2aData.length/1024/1024).toFixed(2) + ' MB)');
+  } catch(e) { finishAnim(p); st('v2a-status', 'error', '⚠ Hata: ' + e.message); }
+}
+
+function v2aDownload() {
+  if (!v2aData) return;
+  blobDl(v2aData, 'audio/mpeg', v2aFile.name.replace(/\.[^.]+$/, '') + '.mp3');
+}
+
+// ═══════════════════════════════════════
+// VIDEO FORMAT DÖNÜŞTÜRÜCÜ
+// ═══════════════════════════════════════
+let vfFile = null, vfData = null, vfExt = 'mp4';
+
+function vfLoad(input) {
+  vfFile = input.files[0];
+  if (!vfFile) return;
+  addRecent('vidfmt');
+  document.getElementById('vf-dz-info').textContent = vfFile.name + ' (' + (vfFile.size/1024/1024).toFixed(1) + ' MB)';
+  st('vf-status', 'info', '✓ ' + vfFile.name + ' yüklendi');
+  hideBtn('vf-dl');
+}
+
+async function vfRun() {
+  if (!vfFile) { st('vf-status', 'error', '⚠ Önce video seçin.'); return; }
+  vfExt = document.getElementById('vf-out').value;
+  const res = document.getElementById('vf-res').value;
+  st('vf-status', 'info', '⏳ FFmpeg yükleniyor…');
+  const p = animProgress('vf-fill', 'vf-progress', 90000);
+  try {
+    const ffmpeg = await getFFmpeg();
+    st('vf-status', 'info', '⏳ Dönüştürülüyor… (büyük dosyalar uzun sürebilir)');
+    const inExt  = vfFile.name.slice(vfFile.name.lastIndexOf('.'));
+    const inName = 'vin' + inExt;
+    const outName = 'vout.' + vfExt;
+    ffmpeg.FS('writeFile', inName, await window._ffFetchFile(vfFile));
+    const args = ['-i', inName];
+    if (res) args.push('-vf', 'scale=' + res.replace('x', ':'));
+    if (vfExt === 'mp4')  args.push('-c:v','libx264','-preset','fast','-crf','23','-c:a','aac');
+    else if (vfExt==='webm') args.push('-c:v','libvpx','-crf','10','-b:v','1M','-c:a','libvorbis');
+    else if (vfExt==='avi')  args.push('-c:v','mpeg4','-c:a','mp3');
+    else if (vfExt==='mov')  args.push('-c:v','libx264','-c:a','aac');
+    args.push(outName);
+    await ffmpeg.run(...args);
+    vfData = ffmpeg.FS('readFile', outName);
+    try { ffmpeg.FS('unlink', inName); ffmpeg.FS('unlink', outName); } catch {}
+    finishAnim(p);
+    showBtn('vf-dl');
+    st('vf-status', 'success', '✓ ' + vfExt.toUpperCase() + ' hazır (' + (vfData.length/1024/1024).toFixed(2) + ' MB)');
+  } catch(e) { finishAnim(p); st('vf-status', 'error', '⚠ Hata: ' + e.message); }
+}
+
+function vfDownload() {
+  if (!vfData) return;
+  const mimes = { mp4:'video/mp4', webm:'video/webm', avi:'video/x-msvideo', mov:'video/quicktime' };
+  blobDl(vfData, mimes[vfExt] || 'video/mp4', vfFile.name.replace(/\.[^.]+$/, '') + '.' + vfExt);
+}
+
+// ═══════════════════════════════════════
+// VIDEO SIKIŞTIRMA
+// ═══════════════════════════════════════
+let vcFile = null, vcData = null;
+
+function vcLoad(input) {
+  vcFile = input.files[0];
+  if (!vcFile) return;
+  addRecent('vidcmp');
+  document.getElementById('vc-dz-info').textContent = vcFile.name + ' (' + (vcFile.size/1024/1024).toFixed(1) + ' MB)';
+  st('vc-status', 'info', '✓ ' + vcFile.name + ' yüklendi');
+  hideBtn('vc-dl');
+}
+
+async function vcRun() {
+  if (!vcFile) { st('vc-status', 'error', '⚠ Önce video seçin.'); return; }
+  const crf = document.getElementById('vc-level').value;
+  const res = document.getElementById('vc-res').value;
+  st('vc-status', 'info', '⏳ FFmpeg yükleniyor…');
+  const p = animProgress('vc-fill', 'vc-progress', 90000);
+  try {
+    const ffmpeg = await getFFmpeg();
+    st('vc-status', 'info', '⏳ Sıkıştırılıyor…');
+    const inExt  = vcFile.name.slice(vcFile.name.lastIndexOf('.'));
+    const inName = 'vin' + inExt;
+    ffmpeg.FS('writeFile', inName, await window._ffFetchFile(vcFile));
+    const args = ['-i', inName, '-c:v', 'libx264', '-crf', crf, '-preset', 'fast'];
+    if (res) args.push('-vf', 'scale=' + res.replace('x', ':'));
+    args.push('-c:a', 'aac', '-b:a', '128k', 'vout.mp4');
+    await ffmpeg.run(...args);
+    vcData = ffmpeg.FS('readFile', 'vout.mp4');
+    try { ffmpeg.FS('unlink', inName); ffmpeg.FS('unlink', 'vout.mp4'); } catch {}
+    finishAnim(p);
+    showBtn('vc-dl');
+    const origMB = (vcFile.size/1024/1024).toFixed(1);
+    const newMB  = (vcData.length/1024/1024).toFixed(2);
+    const pct    = Math.max(0, (100 - vcData.length/vcFile.size*100)).toFixed(0);
+    st('vc-status', 'success', '✓ ' + origMB + ' MB → ' + newMB + ' MB (%' + pct + ' küçüldü)');
+  } catch(e) { finishAnim(p); st('vc-status', 'error', '⚠ Hata: ' + e.message); }
+}
+
+function vcDownload() {
+  if (!vcData) return;
+  blobDl(vcData, 'video/mp4', 'sikistirilmis_' + vcFile.name.replace(/\.[^.]+$/, '') + '.mp4');
+}
+
+// ═══════════════════════════════════════
+// VIDEO → GIF
+// ═══════════════════════════════════════
+let v2gFile = null, v2gData = null;
+
+function v2gLoad(input) {
+  v2gFile = input.files[0];
+  if (!v2gFile) return;
+  addRecent('vid2gif');
+  document.getElementById('v2g-dz-info').textContent = v2gFile.name + ' (' + (v2gFile.size/1024/1024).toFixed(1) + ' MB)';
+  st('v2g-status', 'info', '✓ ' + v2gFile.name + ' yüklendi');
+  hideBtn('v2g-dl');
+}
+
+async function v2gRun() {
+  if (!v2gFile) { st('v2g-status', 'error', '⚠ Önce video seçin.'); return; }
+  const start = parseFloat(document.getElementById('v2g-start').value) || 0;
+  const dur   = Math.min(30, parseFloat(document.getElementById('v2g-dur').value) || 5);
+  const width = document.getElementById('v2g-width').value;
+  st('v2g-status', 'info', '⏳ FFmpeg yükleniyor…');
+  const p = animProgress('v2g-fill', 'v2g-progress', 40000);
+  try {
+    const ffmpeg = await getFFmpeg();
+    st('v2g-status', 'info', '⏳ GIF oluşturuluyor…');
+    const inExt  = v2gFile.name.slice(v2gFile.name.lastIndexOf('.'));
+    const inName = 'vin' + inExt;
+    ffmpeg.FS('writeFile', inName, await window._ffFetchFile(v2gFile));
+    // Palette + GIF (yüksek kalite)
+    await ffmpeg.run('-ss', String(start), '-t', String(dur), '-i', inName,
+      '-vf', 'fps=12,scale=' + width + ':-1:flags=lanczos,palettegen', 'palette.png');
+    await ffmpeg.run('-ss', String(start), '-t', String(dur), '-i', inName,
+      '-i', 'palette.png', '-filter_complex',
+      'fps=12,scale=' + width + ':-1:flags=lanczos[x];[x][1:v]paletteuse', 'out.gif');
+    v2gData = ffmpeg.FS('readFile', 'out.gif');
+    try { ffmpeg.FS('unlink', inName); ffmpeg.FS('unlink', 'palette.png'); ffmpeg.FS('unlink', 'out.gif'); } catch {}
+    finishAnim(p);
+    showBtn('v2g-dl');
+    st('v2g-status', 'success', '✓ GIF hazır (' + (v2gData.length/1024).toFixed(0) + ' KB)');
+  } catch(e) { finishAnim(p); st('v2g-status', 'error', '⚠ Hata: ' + e.message); }
+}
+
+function v2gDownload() {
+  if (!v2gData) return;
+  blobDl(v2gData, 'image/gif', v2gFile.name.replace(/\.[^.]+$/, '') + '.gif');
+}
+
+// ═══════════════════════════════════════
+// SES / VIDEO KESİCİ
+// ═══════════════════════════════════════
+let acFile = null, acData = null, acOutFmt = 'mp3';
+
+function acLoad(input) {
+  acFile = input.files[0];
+  if (!acFile) return;
+  addRecent('audiocrop');
+  document.getElementById('ac-dz-info').textContent = acFile.name + ' (' + (acFile.size/1024/1024).toFixed(1) + ' MB)';
+  st('ac-status', 'info', '✓ ' + acFile.name + ' yüklendi');
+  hideBtn('ac-dl');
+}
+
+async function acRun() {
+  if (!acFile) { st('ac-status', 'error', '⚠ Önce dosya seçin.'); return; }
+  const start = parseFloat(document.getElementById('ac-start').value) || 0;
+  const end   = parseFloat(document.getElementById('ac-end').value);
+  acOutFmt    = document.getElementById('ac-fmt').value;
+  if (!end || end <= start) { st('ac-status', 'error', '⚠ Bitiş, başlangıçtan büyük olmalı.'); return; }
+  const dur = end - start;
+  st('ac-status', 'info', '⏳ FFmpeg yükleniyor…');
+  const p = animProgress('ac-fill', 'ac-progress', 20000);
+  try {
+    const ffmpeg = await getFFmpeg();
+    st('ac-status', 'info', '⏳ Kesiliyor…');
+    const inExt  = acFile.name.slice(acFile.name.lastIndexOf('.'));
+    const inName = 'acin' + inExt;
+    const outName = 'acout.' + acOutFmt;
+    ffmpeg.FS('writeFile', inName, await window._ffFetchFile(acFile));
+    const args = ['-ss', String(start), '-t', String(dur), '-i', inName];
+    if (acOutFmt === 'mp3')      args.push('-vn', '-ab', '192k', '-ar', '44100');
+    else if (acOutFmt === 'wav') args.push('-vn', '-ar', '44100', '-acodec', 'pcm_s16le');
+    else if (acOutFmt === 'mp4') args.push('-c:v', 'libx264', '-c:a', 'aac', '-preset', 'fast');
+    args.push(outName);
+    await ffmpeg.run(...args);
+    acData = ffmpeg.FS('readFile', outName);
+    try { ffmpeg.FS('unlink', inName); ffmpeg.FS('unlink', outName); } catch {}
+    finishAnim(p);
+    showBtn('ac-dl');
+    st('ac-status', 'success', '✓ ' + start + 's – ' + end + 's arası kesildi (' + (acData.length/1024).toFixed(0) + ' KB)');
+  } catch(e) { finishAnim(p); st('ac-status', 'error', '⚠ Hata: ' + e.message); }
+}
+
+function acDownload() {
+  if (!acData) return;
+  const mimes = { mp3:'audio/mpeg', wav:'audio/wav', mp4:'video/mp4' };
+  blobDl(acData, mimes[acOutFmt], acFile.name.replace(/\.[^.]+$/, '') + '_kesilmis.' + acOutFmt);
+}
+
+// ═══════════════════════════════════════
+// THUMBNAIL ÇIKAR
+// ═══════════════════════════════════════
+let thFile = null, thDataUrl = null;
+
+function thLoad(input) {
+  thFile = input.files[0];
+  if (!thFile) return;
+  addRecent('thumbnail');
+  const video = document.getElementById('th-video');
+  const url = URL.createObjectURL(thFile);
+  video.src = url;
+  video.onloadedmetadata = () => {
+    document.getElementById('th-dz-info').textContent = thFile.name + ' — ' + Math.round(video.duration) + ' sn';
+    document.getElementById('th-time').max = Math.floor(video.duration);
+    st('th-status', 'info', '✓ ' + thFile.name + ' yüklendi (' + Math.round(video.duration) + ' sn)');
+  };
+  hideBtn('th-dl');
+  document.getElementById('th-preview-wrap').style.display = 'none';
+}
+
+function thRun() {
+  if (!thFile) { st('th-status', 'error', '⚠ Önce video seçin.'); return; }
+  const video = document.getElementById('th-video');
+  const time  = parseFloat(document.getElementById('th-time').value) || 0;
+  const fmt   = document.getElementById('th-fmt').value;
+  video.currentTime = time;
+  video.onseeked = () => {
+    const c = document.getElementById('th-canvas');
+    c.width  = video.videoWidth;
+    c.height = video.videoHeight;
+    c.getContext('2d').drawImage(video, 0, 0);
+    thDataUrl = c.toDataURL(fmt, 1.0);
+    const preview = document.getElementById('th-preview');
+    preview.src = thDataUrl;
+    document.getElementById('th-preview-wrap').style.display = 'block';
+    showBtn('th-dl');
+    st('th-status', 'success', '✓ ' + video.videoWidth + '×' + video.videoHeight + ' px — ' + time + '. saniye karesi alındı');
+    video.onseeked = null;
+  };
+}
+
+function thDownload() {
+  if (!thDataUrl) return;
+  const ext = document.getElementById('th-fmt').value === 'image/png' ? 'png' : 'jpg';
+  const time = document.getElementById('th-time').value || '0';
+  const a = document.createElement('a');
+  a.href = thDataUrl;
+  a.download = thFile.name.replace(/\.[^.]+$/, '') + '_' + time + 'sn.' + ext;
+  a.click();
+}
+
+// ═══════════════════════════════════════
+// FOTOĞRAF / VİDEO METADATA (EXIF)
+// ═══════════════════════════════════════
+const exifLabels = {
+  // Temel
+  Make:'Marka', Model:'Model', Software:'Yazılım', Orientation:'Yön',
+  // Zaman
+  DateTime:'Tarih/Saat', DateTimeOriginal:'Orijinal Çekim', DateTimeDigitized:'Dijitalize',
+  // Kamera ayarları
+  ExposureTime:'Pozlama Süresi', FNumber:'Diyafram (f)', ISO:'ISO', ISOSpeedRatings:'ISO Hızı',
+  FocalLength:'Odak Uzaklığı', FocalLengthIn35mmFilm:'35mm Eşdeğeri',
+  ExposureProgram:'Pozlama Programı', ExposureMode:'Pozlama Modu',
+  MeteringMode:'Ölçüm Modu', Flash:'Flaş', WhiteBalance:'Beyaz Dengesi',
+  ShutterSpeedValue:'Deklanşör Hızı', ApertureValue:'Diyafram Değeri',
+  BrightnessValue:'Parlaklık', ExposureBiasValue:'Pozlama Telafisi',
+  MaxApertureValue:'Maks. Diyafram', SubjectDistance:'Konu Mesafesi',
+  LightSource:'Işık Kaynağı', SensingMethod:'Algılama Yöntemi',
+  // Görüntü
+  ImageWidth:'Genişlik', ImageHeight:'Yükseklik',
+  PixelXDimension:'Piksel Genişliği', PixelYDimension:'Piksel Yüksekliği',
+  ColorSpace:'Renk Uzayı', BitsPerSample:'Bit Derinliği',
+  Compression:'Sıkıştırma', PhotometricInterpretation:'Fotometrik',
+  ResolutionUnit:'Çözünürlük Birimi', XResolution:'X Çözünürlüğü', YResolution:'Y Çözünürlüğü',
+  // GPS
+  GPSLatitude:'GPS Enlem', GPSLongitude:'GPS Boylam', GPSAltitude:'GPS Rakım',
+  GPSSpeed:'GPS Hızı', GPSImgDirection:'GPS Yön', GPSDateStamp:'GPS Tarihi',
+  GPSTimeStamp:'GPS Saati', GPSProcessingMethod:'GPS Yöntemi',
+  // Lens
+  LensModel:'Lens Modeli', LensMake:'Lens Markası',
+  LensSpecification:'Lens Özellikleri', LensInfo:'Lens Bilgisi',
+  // Dosya
+  FileSource:'Dosya Kaynağı', SceneType:'Sahne Tipi', SceneCaptureType:'Sahne Yakalama',
+  // Diğer
+  UserComment:'Kullanıcı Yorumu', ImageDescription:'Açıklama',
+  Copyright:'Telif Hakkı', Artist:'Sanatçı',
+  SubSecTime:'Alt Saniye', SubSecTimeOriginal:'Alt Saniye (Orijinal)',
+};
+
+const exifGroups = {
+  'Kamera Bilgisi':   ['Make','Model','LensMake','LensModel','LensSpecification','Software'],
+  'Çekim Ayarları':   ['ExposureTime','FNumber','ISO','ISOSpeedRatings','FocalLength','FocalLengthIn35mmFilm','ExposureProgram','ExposureMode','Flash','WhiteBalance','ShutterSpeedValue','ApertureValue','ExposureBiasValue','MeteringMode','BrightnessValue','LightSource'],
+  'Tarih / Saat':     ['DateTimeOriginal','DateTime','DateTimeDigitized','SubSecTime','SubSecTimeOriginal','GPSDateStamp','GPSTimeStamp'],
+  'Görüntü Boyutu':   ['ImageWidth','ImageHeight','PixelXDimension','PixelYDimension','XResolution','YResolution','ResolutionUnit','ColorSpace','BitsPerSample','Orientation'],
+  'GPS Konumu':       ['GPSLatitude','GPSLongitude','GPSAltitude','GPSSpeed','GPSImgDirection','GPSProcessingMethod'],
+  'Telif / Açıklama': ['ImageDescription','UserComment','Artist','Copyright'],
+};
+
+async function exifRun(input) {
+  const file = input.files[0];
+  if (!file) return;
+  addRecent('exif');
+  st('exif-status', 'info', '⏳ Metadata okunuyor…');
+
+  const result = document.getElementById('exif-result');
+  const groups = document.getElementById('exif-groups');
+  const mapRow = document.getElementById('exif-map-row');
+  result.style.display = 'none';
+  groups.innerHTML = '';
+  mapRow.style.display = 'none';
+
+  // Dosya temel bilgileri
+  const fileMeta = {
+    'Dosya Adı': file.name,
+    'Dosya Boyutu': (file.size / 1024).toFixed(1) + ' KB (' + (file.size/1024/1024).toFixed(2) + ' MB)',
+    'MIME Türü': file.type || 'Bilinmiyor',
+    'Son Değiştirilme': file.lastModified ? new Date(file.lastModified).toLocaleString('tr-TR') : '—',
+  };
+
+  try {
+    // exifr ile EXIF oku
+    let exifData = {};
+    if (typeof exifr !== 'undefined') {
+      try {
+        exifData = await exifr.parse(file, { tiff: true, xmp: true, icc: false, iptc: true, jfif: true, ihdr: true, gps: true }) || {};
+      } catch { exifData = {}; }
+    }
+
+    // GPS hesapla
+    let lat = null, lng = null;
+    if (exifData.latitude && exifData.longitude) {
+      lat = exifData.latitude;
+      lng = exifData.longitude;
+    } else if (exifData.GPSLatitude && exifData.GPSLongitude) {
+      const toDecimal = (arr, ref) => {
+        const d = Array.isArray(arr) ? (arr[0] + arr[1]/60 + arr[2]/3600) : arr;
+        return (ref === 'S' || ref === 'W') ? -d : d;
+      };
+      lat = toDecimal(exifData.GPSLatitude, exifData.GPSLatitudeRef);
+      lng = toDecimal(exifData.GPSLongitude, exifData.GPSLongitudeRef);
+    }
+
+    if (lat !== null && lng !== null) {
+      mapRow.style.display = 'flex';
+      document.getElementById('exif-coords').textContent = lat.toFixed(6) + '°, ' + lng.toFixed(6) + '°';
+      document.getElementById('exif-map-link').href = 'https://www.google.com/maps?q=' + lat + ',' + lng;
+    }
+
+    // Render gruplar
+    result.style.display = 'block';
+
+    // Dosya bilgileri her zaman göster
+    renderExifGroup('📁 Dosya Bilgisi', fileMeta, groups);
+
+    // EXIF grupları
+    let totalFields = 0;
+    for (const [groupName, keys] of Object.entries(exifGroups)) {
+      const groupData = {};
+      keys.forEach(key => {
+        let val = exifData[key];
+        if (val === undefined || val === null) return;
+        // Formatla
+        if (key === 'ExposureTime') val = typeof val === 'number' ? (val < 1 ? '1/' + Math.round(1/val) + ' sn' : val + ' sn') : val;
+        else if (key === 'FNumber') val = 'f/' + (typeof val === 'number' ? val.toFixed(1) : val);
+        else if (key === 'FocalLength') val = (typeof val === 'number' ? val.toFixed(0) : val) + ' mm';
+        else if (key === 'FocalLengthIn35mmFilm') val = val + ' mm';
+        else if (key === 'GPSAltitude') val = (typeof val === 'number' ? val.toFixed(1) : val) + ' m';
+        else if (key === 'GPSSpeed') val = val + ' km/h';
+        else if (val instanceof Date) val = val.toLocaleString('tr-TR');
+        else if (Array.isArray(val)) val = val.join(', ');
+        else if (typeof val === 'number') val = val % 1 === 0 ? val : val.toFixed(4);
+        groupData[exifLabels[key] || key] = String(val);
+        totalFields++;
+      });
+      if (Object.keys(groupData).length > 0) {
+        const icon = groupName.includes('GPS') ? '📍' : groupName.includes('Kamera') ? '📷' : groupName.includes('Çekim') ? '⚙️' : groupName.includes('Tarih') ? '🕐' : groupName.includes('Görüntü') ? '📐' : '📝';
+        renderExifGroup(icon + ' ' + groupName, groupData, groups);
+      }
+    }
+
+    // Bilinmeyen alanlar
+    const knownKeys = new Set(Object.values(exifGroups).flat());
+    const unknownData = {};
+    Object.keys(exifData).forEach(key => {
+      if (knownKeys.has(key)) return;
+      const val = exifData[key];
+      if (val === null || val === undefined || typeof val === 'object') return;
+      unknownData[key] = String(val).slice(0, 100);
+    });
+    if (Object.keys(unknownData).length > 0) {
+      renderExifGroup('🔧 Diğer Alanlar', unknownData, groups);
+    }
+
+    st('exif-status', 'success', '✓ ' + totalFields + ' metadata alanı okundu' + (lat ? ' · GPS konumu bulundu' : ''));
+  } catch(e) {
+    // EXIF yoksa sadece dosya bilgisini göster
+    result.style.display = 'block';
+    renderExifGroup('📁 Dosya Bilgisi', fileMeta, groups);
+    st('exif-status', 'warn', '⚠ EXIF verisi bulunamadı (sadece dosya bilgisi gösteriliyor)');
+  }
+}
+
+function renderExifGroup(title, data, container) {
+  const keys = Object.keys(data);
+  if (!keys.length) return;
+  const wrap = document.createElement('div');
+  wrap.style.cssText = 'margin-bottom:12px;background:var(--surface2);border:1px solid var(--border);border-radius:12px;overflow:hidden';
+  const header = document.createElement('div');
+  header.style.cssText = 'padding:9px 14px;font-size:12px;font-weight:600;color:var(--text-muted);background:rgba(255,255,255,0.03);border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:0.5px;cursor:pointer;display:flex;justify-content:space-between;align-items:center';
+  header.innerHTML = '<span>' + title + '</span><span style="font-size:10px;opacity:0.5">' + keys.length + ' alan</span>';
+  const body = document.createElement('div');
+  keys.forEach((k, i) => {
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;justify-content:space-between;align-items:flex-start;padding:8px 14px;font-size:12.5px;gap:12px' + (i < keys.length-1 ? ';border-bottom:1px solid var(--border)' : '');
+    const label = document.createElement('span');
+    label.style.cssText = 'color:var(--text-muted);flex-shrink:0;min-width:120px;font-size:12px';
+    label.textContent = k;
+    const value = document.createElement('span');
+    value.style.cssText = 'font-family:"JetBrains Mono",monospace;font-size:11.5px;text-align:right;word-break:break-all;color:var(--text)';
+    value.textContent = data[k];
+    row.appendChild(label);
+    row.appendChild(value);
+    body.appendChild(row);
+  });
+  // Collapse toggle
+  header.onclick = () => { body.style.display = body.style.display === 'none' ? '' : 'none'; };
+  wrap.appendChild(header);
+  wrap.appendChild(body);
+  container.appendChild(wrap);
+}
+
+// ═══════════════════════════════════════
+// VİDEO BİLGİSİ
+// ═══════════════════════════════════════
+function viRun(input) {
+  const file = input.files[0];
+  if (!file) return;
+  addRecent('vidinfo');
+  const video = document.getElementById('vi-video');
+  const url = URL.createObjectURL(file);
+  video.src = url;
+  video.onloadedmetadata = () => {
+    const dur = video.duration;
+    const hrs = Math.floor(dur / 3600);
+    const min = Math.floor((dur % 3600) / 60);
+    const sec = Math.floor(dur % 60);
+    const durStr = (hrs > 0 ? hrs + 's ' : '') + (min > 0 ? min + 'd ' : '') + sec + 'sn';
+    const sizeMB = (file.size / 1024 / 1024).toFixed(2);
+    const sizeKB = (file.size / 1024).toFixed(0);
+    document.getElementById('vi-name').textContent   = file.name;
+    document.getElementById('vi-size').textContent   = sizeMB + ' MB (' + sizeKB + ' KB)';
+    document.getElementById('vi-type').textContent   = file.type || file.name.slice(file.name.lastIndexOf('.')+1).toUpperCase();
+    document.getElementById('vi-dur').textContent    = durStr + ' (' + dur.toFixed(2) + ' sn)';
+    document.getElementById('vi-res').textContent    = video.videoWidth + ' × ' + video.videoHeight + ' px';
+    document.getElementById('vi-dims').textContent   = video.videoWidth + '×' + video.videoHeight;
+    document.getElementById('vi-result').classList.add('visible');
+    URL.revokeObjectURL(url);
+  };
+}
+</script>
+</body>
+</html>
