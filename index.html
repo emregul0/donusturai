@@ -2913,22 +2913,30 @@ const curNames = {
 const popularCur = ['TRY','USD','EUR','GBP','JPY','CHF','CAD','AUD','SAR','AED','RUB','CNY'];
 
 async function loadRates() {
-  try {
-    const res = await fetch('https://api.exchangerate.host/latest?base=EUR');
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const data = await res.json();
-    liveRates = { ...data.rates, EUR: 1 };
-    rateDate = data.date || new Date().toLocaleDateString('tr-TR');
-    buildCurrencySelects();
-    document.getElementById('cur-loading').style.display = 'none';
-    const ok = document.getElementById('cur-ok');
-    ok.style.display = 'flex';
-    document.getElementById('cur-updated').textContent = 'Son: ' + new Date().toLocaleTimeString('tr-TR', {hour:'2-digit',minute:'2-digit'});
-    document.getElementById('live-badge').style.display = 'flex';
-    curCalc();
-  } catch {
-    document.getElementById('cur-loading').innerHTML = '<span style="color:var(--warn)">⚠ Kur verisi alınamadı. İnternet bağlantınızı kontrol edin.</span>';
+  const apis = [
+    { url: 'https://open.er-api.com/v6/latest/EUR', parse: d => ({ rates: d.rates, date: d.time_last_update_utc ? new Date(d.time_last_update_utc).toLocaleDateString('tr-TR') : '' }) },
+    { url: 'https://api.frankfurter.app/latest?from=EUR', parse: d => ({ rates: d.rates, date: d.date }) },
+  ];
+  for (const api of apis) {
+    try {
+      const res = await fetch(api.url);
+      if (!res.ok) continue;
+      const raw = await res.json();
+      const { rates, date } = api.parse(raw);
+      if (!rates || Object.keys(rates).length < 10) continue;
+      liveRates = { ...rates, EUR: 1 };
+      rateDate = date || new Date().toLocaleDateString('tr-TR');
+      buildCurrencySelects();
+      document.getElementById('cur-loading').style.display = 'none';
+      const ok = document.getElementById('cur-ok');
+      ok.style.display = 'flex';
+      document.getElementById('cur-updated').textContent = 'Son: ' + new Date().toLocaleTimeString('tr-TR', {hour:'2-digit',minute:'2-digit'});
+      document.getElementById('live-badge').style.display = 'flex';
+      curCalc();
+      return;
+    } catch { continue; }
   }
+  document.getElementById('cur-loading').innerHTML = '<span style="color:var(--warn)">⚠ Kur verisi alınamadı. İnternet bağlantınızı kontrol edin.</span>';
 }
 
 function buildCurrencySelects() {
