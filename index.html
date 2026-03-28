@@ -270,45 +270,130 @@ main {
 }
 
 /* TABS */
-.tabs {
+/* DROPDOWN NAV */
+.nav-bar {
   display: flex;
-  gap: 4px;
+  gap: 6px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+  position: relative;
+  z-index: 50;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text-muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.18s;
+  white-space: nowrap;
+}
+
+.nav-btn:hover, .nav-item.open .nav-btn {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(79,140,255,0.07);
+}
+
+.nav-btn .arrow {
+  font-size: 9px;
+  opacity: 0.5;
+  transition: transform 0.2s;
+}
+
+.nav-item.open .nav-btn .arrow { transform: rotate(180deg); }
+
+/* DROPDOWN */
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 220px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 5px;
-  margin-bottom: 24px;
-  overflow-x: auto;
-  scrollbar-width: none;
+  padding: 6px;
+  display: none;
+  z-index: 200;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+  animation: dropIn 0.15s ease;
 }
 
-.tabs::-webkit-scrollbar { display: none; }
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
-.tab-btn {
-  flex-shrink: 0;
-  background: transparent;
+.nav-item:hover .nav-dropdown { display: block; }
+.nav-item:hover .nav-btn { border-color: var(--accent); color: var(--accent); background: rgba(79,140,255,0.07); }
+.nav-item:hover .nav-btn .arrow { transform: rotate(180deg); }
+
+.nav-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-size: 13px;
+  color: var(--text-muted);
   border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.nav-dropdown-item:hover {
+  background: rgba(79,140,255,0.1);
+  color: var(--text);
+}
+
+.nav-dropdown-item .di { font-size: 16px; width: 24px; text-align: center; flex-shrink: 0; }
+.nav-dropdown-item .dt { font-weight: 500; font-size: 13px; }
+.nav-dropdown-item .dd { font-size: 11px; color: var(--text-dim); margin-top: 1px; }
+
+/* SINGLE TOOL VIEW */
+#tool-view {
+  display: none;
+  max-width: 560px;
+  margin: 24px auto 0;
+}
+
+#tool-view.visible { display: block; }
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
   color: var(--text-muted);
   font-family: 'DM Sans', sans-serif;
   font-size: 13px;
   font-weight: 500;
-  padding: 8px 16px;
-  border-radius: 10px;
+  padding: 8px 14px;
   cursor: pointer;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  white-space: nowrap;
+  margin-bottom: 20px;
+  transition: all 0.15s;
 }
 
-.tab-btn:hover { color: var(--text); background: rgba(255,255,255,0.05); }
-
-.tab-btn.active {
-  background: rgba(79,140,255,0.15);
-  color: var(--accent);
-  border: 1px solid rgba(79,140,255,0.25);
-}
+.back-btn:hover { color: var(--accent); border-color: var(--accent); }
 
 .section { display: none; }
 .section.active { display: block; }
@@ -817,15 +902,87 @@ canvas#work-canvas { display: none; }
 
   <!-- NORMAL VIEW -->
   <div id="normal-view">
-    <!-- TABS -->
-    <div class="tabs">
-      <button class="tab-btn active" onclick="switchTab('gorsel',this)" data-i18n="tab_image">🖼️ Image</button>
-      <button class="tab-btn" onclick="switchTab('video',this)" data-i18n="tab_video">🎬 Video</button>
-      <button class="tab-btn" onclick="switchTab('pdf',this)" data-i18n="tab_pdf">📄 PDF</button>
-      <button class="tab-btn" onclick="switchTab('veri',this)" data-i18n="tab_data">🔄 Data</button>
-      <button class="tab-btn" onclick="switchTab('metin',this)" data-i18n="tab_text">✍️ Text</button>
-      <button class="tab-btn" onclick="switchTab('hesap',this)" data-i18n="tab_calc">🧮 Calc</button>
+
+    <!-- DROPDOWN NAV -->
+    <div class="nav-bar" id="nav-bar">
+
+      <div class="nav-item" id="nav-gorsel">
+        <button class="nav-btn" onclick="toggleNav('gorsel')">🖼️ <span data-i18n="tab_image">Image</span> <span class="arrow">▼</span></button>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-item" onclick="openTool('format')"><span class="di">🔀</span><div><div class="dt">Format Dönüştürücü</div><div class="dd">PNG, JPG, WebP</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('batch')"><span class="di">📦</span><div><div class="dt">Toplu Dönüştürme</div><div class="dd">Birden fazla görsel</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('compress')"><span class="di">🗜️</span><div><div class="dt">Görsel Sıkıştırma</div><div class="dd">Boyutu küçült</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('resize')"><span class="di">📐</span><div><div class="dt">Yeniden Boyutlandır</div><div class="dd">Piksel bazlı</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('imgb64')"><span class="di">🔐</span><div><div class="dt">Görsel → Base64</div><div class="dd">Web embedding</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('exif')"><span class="di">🔬</span><div><div class="dt">Fotoğraf Metadata</div><div class="dd">EXIF, GPS, kamera</div></div></button>
+        </div>
+      </div>
+
+      <div class="nav-item" id="nav-video">
+        <button class="nav-btn" onclick="toggleNav('video')">🎬 <span data-i18n="tab_video">Video</span> <span class="arrow">▼</span></button>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-item" onclick="openTool('vid2mp3')"><span class="di">🎵</span><div><div class="dt">Video → MP3</div><div class="dd">Ses çıkar</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('vidfmt')"><span class="di">🔀</span><div><div class="dt">Format Dönüştürücü</div><div class="dd">MP4, WebM, MOV</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('vidcmp')"><span class="di">🗜️</span><div><div class="dt">Video Sıkıştırma</div><div class="dd">Boyutu küçült</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('vid2gif')"><span class="di">🎞️</span><div><div class="dt">Video → GIF</div><div class="dd">Animasyon oluştur</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('audiocrop')"><span class="di">✂️</span><div><div class="dt">Ses / Video Kesici</div><div class="dd">Belirli aralığı kes</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('thumbnail')"><span class="di">📸</span><div><div class="dt">Thumbnail Çıkar</div><div class="dd">Kare yakala</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('vidinfo')"><span class="di">🔍</span><div><div class="dt">Video Bilgisi</div><div class="dd">Süre, çözünürlük</div></div></button>
+        </div>
+      </div>
+
+      <div class="nav-item" id="nav-pdf">
+        <button class="nav-btn" onclick="toggleNav('pdf')">📄 <span data-i18n="tab_pdf">PDF</span> <span class="arrow">▼</span></button>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-item" onclick="openTool('merge')"><span class="di">🔗</span><div><div class="dt">PDF Birleştir</div><div class="dd">Çoklu PDF → tek</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('split')"><span class="di">✂️</span><div><div class="dt">PDF Böl</div><div class="dd">Sayfa aralığı seç</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('delpages')"><span class="di">🗑️</span><div><div class="dt">Sayfa Sil</div><div class="dd">Belirli sayfaları kaldır</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('pdfimg')"><span class="di">🖼️</span><div><div class="dt">PDF → Görsel</div><div class="dd">Her sayfayı PNG yap</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('imgtopdf')"><span class="di">📑</span><div><div class="dt">Görsel → PDF</div><div class="dd">PNG/JPG → PDF</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('pdfinfo')"><span class="di">🔍</span><div><div class="dt">PDF Bilgisi</div><div class="dd">Metadata görüntüle</div></div></button>
+        </div>
+      </div>
+
+      <div class="nav-item" id="nav-veri">
+        <button class="nav-btn" onclick="toggleNav('veri')">🔄 <span data-i18n="tab_data">Data</span> <span class="arrow">▼</span></button>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-item" onclick="openTool('json2csv')"><span class="di">📊</span><div><div class="dt">JSON → CSV</div><div class="dd">Veri dönüştür</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('csv2json')"><span class="di">🔃</span><div><div class="dt">CSV → JSON</div><div class="dd">Tablo → JSON</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('jsonfmt')"><span class="di">✨</span><div><div class="dt">JSON Formatlayıcı</div><div class="dd">Doğrula ve güzelleştir</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('color')"><span class="di">🎨</span><div><div class="dt">Renk Dönüştürücü</div><div class="dd">HEX ↔ RGB ↔ HSL</div></div></button>
+        </div>
+      </div>
+
+      <div class="nav-item" id="nav-metin">
+        <button class="nav-btn" onclick="toggleNav('metin')">✍️ <span data-i18n="tab_text">Text</span> <span class="arrow">▼</span></button>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-item" onclick="openTool('turkce')"><span class="di">🇹🇷</span><div><div class="dt">Türkçe Karakter</div><div class="dd">ASCII → Türkçe</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('caseconv')"><span class="di">🔡</span><div><div class="dt">Metin Dönüşümü</div><div class="dd">Büyük/küçük harf</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('b64text')"><span class="di">🔒</span><div><div class="dt">Base64 Metin</div><div class="dd">Encode / Decode</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('textanalyze')"><span class="di">📏</span><div><div class="dt">Metin Analizi</div><div class="dd">Karakter, kelime sayısı</div></div></button>
+        </div>
+      </div>
+
+      <div class="nav-item" id="nav-hesap">
+        <button class="nav-btn" onclick="toggleNav('hesap')">🧮 <span data-i18n="tab_calc">Calc</span> <span class="arrow">▼</span></button>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-item" onclick="openTool('kdv')"><span class="di">🧾</span><div><div class="dt">KDV Hesaplayıcı</div><div class="dd">KDV ekle / çıkar</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('doviz')"><span class="di">💱</span><div><div class="dt">Döviz Çevirici</div><div class="dd">Anlık kur, 170+ birim</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('shape')"><span class="di">📐</span><div><div class="dt">Alan / Çevre</div><div class="dd">Geometrik şekiller</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('percent')"><span class="di">%</span><div><div class="dt">Yüzde Hesaplayıcı</div><div class="dd">İndirim, artış, oran</div></div></button>
+        </div>
+      </div>
+
+    </div><!-- /nav-bar -->
+
+    <!-- SINGLE TOOL VIEW -->
+    <div id="tool-view">
+      <button class="back-btn" onclick="closeTool()">← Geri</button>
+      <div id="tool-view-content"></div>
     </div>
+
+    <!-- ALL SECTIONS (hidden, used as templates) -->
+    <div id="all-sections" style="display:none">
 
     <!-- ======== VİDEO ======== -->
     <div class="section" id="section-video">
@@ -1724,6 +1881,7 @@ canvas#work-canvas { display: none; }
       </div>
     </div>
 
+  </div><!-- /all-sections -->
   </div><!-- /normal-view -->
 </main>
 
@@ -1908,6 +2066,7 @@ function renderRecent() {
   const recent = JSON.parse(localStorage.getItem('recent') || '[]');
   const section = document.getElementById('recent-section');
   const chips = document.getElementById('recent-chips');
+  if (!section || !chips) return;
   if (!recent.length) { section.classList.remove('visible'); return; }
   section.classList.add('visible');
   chips.innerHTML = '';
@@ -1931,12 +2090,49 @@ function renderRecent() {
 
 renderRecent();
 
-// ── TABS ───────────────────────────────────────────────────────────
+// ── DROPDOWN NAV ──────────────────────────────────────────────────
+const toolTabMap = {
+  format:'gorsel', batch:'gorsel', compress:'gorsel', resize:'gorsel', imgb64:'gorsel', exif:'gorsel',
+  vid2mp3:'video', vidfmt:'video', vidcmp:'video', vid2gif:'video', audiocrop:'video', thumbnail:'video', vidinfo:'video',
+  merge:'pdf', split:'pdf', delpages:'pdf', pdfimg:'pdf', imgtopdf:'pdf', pdfinfo:'pdf',
+  json2csv:'veri', csv2json:'veri', jsonfmt:'veri', color:'veri',
+  turkce:'metin', caseconv:'metin', b64text:'metin', textanalyze:'metin',
+  kdv:'hesap', doviz:'hesap', shape:'hesap', percent:'hesap'
+};
+
+function toggleNav(cat) { /* hover ile açılıyor, click gerekmez */ }
+
+// Hover dropdown — click outside kapatmaya gerek yok (CSS hover ile çalışıyor)
+
+function openTool(toolId) {
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('open'));
+  const card = document.querySelector(`[data-tool-id="${toolId}"]`);
+  if (!card) return;
+  const content = document.getElementById('tool-view-content');
+  content.innerHTML = card.outerHTML;
+  document.getElementById('tool-view').classList.add('visible');
+  window.scrollTo({ top: document.getElementById('nav-bar').offsetTop - 20, behavior: 'smooth' });
+  // Update URL hash for SEO/sharing
+  history.replaceState(null, '', '#' + toolId);
+}
+
+function closeTool() {
+  document.getElementById('tool-view').classList.remove('visible');
+  document.getElementById('tool-view-content').innerHTML = '';
+  history.replaceState(null, '', window.location.pathname);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Open tool from URL hash on load
+(function checkHash() {
+  const hash = window.location.hash.replace('#', '');
+  if (hash && document.querySelector(`[data-tool-id="${hash}"]`)) {
+    openTool(hash);
+  }
+})();
+
 function switchTab(name, btn) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('section-' + name).classList.add('active');
-  if (btn) btn.classList.add('active');
+  // kept for compatibility
 }
 
 // ── SEARCH ─────────────────────────────────────────────────────────
