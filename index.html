@@ -319,7 +319,7 @@ main {
 /* DROPDOWN */
 .nav-dropdown {
   position: absolute;
-  top: calc(100% + 8px);
+  top: calc(100% + 4px);
   left: 0;
   min-width: 220px;
   background: var(--surface);
@@ -330,6 +330,19 @@ main {
   z-index: 200;
   box-shadow: 0 16px 40px rgba(0,0,0,0.3);
   animation: dropIn 0.15s ease;
+  /* Boşluğu köprüle — mouse dropdown'a geçerken kaybolmasın */
+  padding-top: 10px;
+  margin-top: -4px;
+}
+
+/* Görünmez köprü: buton ile dropdown arasındaki boşluğu kapatır */
+.nav-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  height: 10px;
 }
 
 @keyframes dropIn {
@@ -909,67 +922,67 @@ canvas#work-canvas { display: none; }
       <div class="nav-item" id="nav-gorsel">
         <button class="nav-btn" onclick="toggleNav('gorsel')">🖼️ <span data-i18n="tab_image">Image</span> <span class="arrow">▼</span></button>
         <div class="nav-dropdown">
-          <button class="nav-dropdown-item" onclick="openTool('format')"><span class="di">🔀</span><div><div class="dt">Format Dönüştürücü</div><div class="dd">PNG, JPG, WebP</div></div></button>
-          <button class="nav-dropdown-item" onclick="openTool('batch')"><span class="di">📦</span><div><div class="dt">Toplu Dönüştürme</div><div class="dd">Birden fazla görsel</div></div></button>
-          <button class="nav-dropdown-item" onclick="openTool('compress')"><span class="di">🗜️</span><div><div class="dt">Görsel Sıkıştırma</div><div class="dd">Boyutu küçült</div></div></button>
-          <button class="nav-dropdown-item" onclick="openTool('resize')"><span class="di">📐</span><div><div class="dt">Yeniden Boyutlandır</div><div class="dd">Piksel bazlı</div></div></button>
-          <button class="nav-dropdown-item" onclick="openTool('imgb64')"><span class="di">🔐</span><div><div class="dt">Görsel → Base64</div><div class="dd">Web embedding</div></div></button>
-          <button class="nav-dropdown-item" onclick="openTool('exif')"><span class="di">🔬</span><div><div class="dt">Fotoğraf Metadata</div><div class="dd">EXIF, GPS, kamera</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('format')"><span class="di">🔀</span><div><div class="dt" data-i18n="dt_format">Format Converter</div><div class="dd" data-i18n="dd_format">PNG, JPG, WebP</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('batch')"><span class="di">📦</span><div><div class="dt" data-i18n="dt_batch">Batch Convert</div><div class="dd" data-i18n="dd_batch">Multiple images at once</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('compress')"><span class="di">🗜️</span><div><div class="dt" data-i18n="dt_compress">Image Compressor</div><div class="dd" data-i18n="dd_compress">Reduce file size</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('resize')"><span class="di">📐</span><div><div class="dt" data-i18n="dt_resize">Resize Image</div><div class="dd" data-i18n="dd_resize">Pixel based</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('imgb64')"><span class="di">🔐</span><div><div class="dt" data-i18n="dt_imgb64">Image → Base64</div><div class="dd" data-i18n="dd_imgb64">Web embedding</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('exif')"><span class="di">🔬</span><div><div class="dt" data-i18n="dt_exif">Photo Metadata</div><div class="dd" data-i18n="dd_exif">EXIF, GPS, camera</div></div></button>
         </div>
       </div>
 
       <div class="nav-item" id="nav-video">
         <button class="nav-btn" onclick="toggleNav('video')">🎬 <span data-i18n="tab_video">Video</span> <span class="arrow">▼</span></button>
         <div class="nav-dropdown">
-          <button class="nav-dropdown-item" onclick="openTool('vid2mp3')"><span class="di">🎵</span><div><div class="dt">Video → MP3</div><div class="dd">Ses çıkar</div></div></button>
-          <button class="nav-dropdown-item" onclick="openTool('vidfmt')"><span class="di">🔀</span><div><div class="dt">Format Dönüştürücü</div><div class="dd">MP4, WebM, MOV</div></div></button>
-          <button class="nav-dropdown-item" onclick="openTool('vidcmp')"><span class="di">🗜️</span><div><div class="dt">Video Sıkıştırma</div><div class="dd">Boyutu küçült</div></div></button>
-          <button class="nav-dropdown-item" onclick="openTool('vid2gif')"><span class="di">🎞️</span><div><div class="dt">Video → GIF</div><div class="dd">Animasyon oluştur</div></div></button>
-          <button class="nav-dropdown-item" onclick="openTool('audiocrop')"><span class="di">✂️</span><div><div class="dt">Ses / Video Kesici</div><div class="dd">Belirli aralığı kes</div></div></button>
-          <button class="nav-dropdown-item" onclick="openTool('thumbnail')"><span class="di">📸</span><div><div class="dt">Thumbnail Çıkar</div><div class="dd">Kare yakala</div></div></button>
-          <button class="nav-dropdown-item" onclick="openTool('vidinfo')"><span class="di">🔍</span><div><div class="dt">Video Bilgisi</div><div class="dd">Süre, çözünürlük</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('vid2mp3')"><span class="di">🎵</span><div><div class="dt" data-i18n="dt_vid2mp3">Video → MP3</div><div class="dd" data-i18n="dd_vid2mp3">Extract audio</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('vidfmt')"><span class="di">🔀</span><div><div class="dt" data-i18n="dt_vidfmt">Video Converter</div><div class="dd" data-i18n="dd_vidfmt">MP4, WebM, MOV</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('vidcmp')"><span class="di">🗜️</span><div><div class="dt" data-i18n="dt_vidcmp">Video Compressor</div><div class="dd" data-i18n="dd_vidcmp">Reduce file size</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('vid2gif')"><span class="di">🎞️</span><div><div class="dt" data-i18n="dt_vid2gif">Video → GIF</div><div class="dd" data-i18n="dd_vid2gif">Create animation</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('audiocrop')"><span class="di">✂️</span><div><div class="dt" data-i18n="dt_audiocrop">Audio / Video Cutter</div><div class="dd" data-i18n="dd_audiocrop">Cut a segment</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('thumbnail')"><span class="di">📸</span><div><div class="dt" data-i18n="dt_thumbnail">Extract Thumbnail</div><div class="dd" data-i18n="dd_thumbnail">Capture a frame</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('vidinfo')"><span class="di">🔍</span><div><div class="dt" data-i18n="dt_vidinfo">Video Info</div><div class="dd" data-i18n="dd_vidinfo">Duration, resolution</div></div></button>
         </div>
       </div>
 
       <div class="nav-item" id="nav-pdf">
         <button class="nav-btn" onclick="toggleNav('pdf')">📄 <span data-i18n="tab_pdf">PDF</span> <span class="arrow">▼</span></button>
         <div class="nav-dropdown">
-          <button class="nav-dropdown-item" onclick="openTool('merge')"><span class="di">🔗</span><div><div class="dt">PDF Birleştir</div><div class="dd">Çoklu PDF → tek</div></div></button>
-          <button class="nav-dropdown-item" onclick="openTool('split')"><span class="di">✂️</span><div><div class="dt">PDF Böl</div><div class="dd">Sayfa aralığı seç</div></div></button>
-          <button class="nav-dropdown-item" onclick="openTool('delpages')"><span class="di">🗑️</span><div><div class="dt">Sayfa Sil</div><div class="dd">Belirli sayfaları kaldır</div></div></button>
-          <button class="nav-dropdown-item" onclick="openTool('pdfimg')"><span class="di">🖼️</span><div><div class="dt">PDF → Görsel</div><div class="dd">Her sayfayı PNG yap</div></div></button>
-          <button class="nav-dropdown-item" onclick="openTool('imgtopdf')"><span class="di">📑</span><div><div class="dt">Görsel → PDF</div><div class="dd">PNG/JPG → PDF</div></div></button>
-          <button class="nav-dropdown-item" onclick="openTool('pdfinfo')"><span class="di">🔍</span><div><div class="dt">PDF Bilgisi</div><div class="dd">Metadata görüntüle</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('merge')"><span class="di">🔗</span><div><div class="dt" data-i18n="dt_merge">Merge PDF</div><div class="dd" data-i18n="dd_merge">Multiple PDFs → one</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('split')"><span class="di">✂️</span><div><div class="dt" data-i18n="dt_split">Split PDF</div><div class="dd" data-i18n="dd_split">Select page range</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('delpages')"><span class="di">🗑️</span><div><div class="dt" data-i18n="dt_delpages">Delete Pages</div><div class="dd" data-i18n="dd_delpages">Remove specific pages</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('pdfimg')"><span class="di">🖼️</span><div><div class="dt" data-i18n="dt_pdfimg">PDF → Image</div><div class="dd" data-i18n="dd_pdfimg">Each page as PNG</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('imgtopdf')"><span class="di">📑</span><div><div class="dt" data-i18n="dt_imgtopdf">Image → PDF</div><div class="dd" data-i18n="dd_imgtopdf">PNG/JPG → PDF</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('pdfinfo')"><span class="di">🔍</span><div><div class="dt" data-i18n="dt_pdfinfo">PDF Info</div><div class="dd" data-i18n="dd_pdfinfo">View metadata</div></div></button>
         </div>
       </div>
 
       <div class="nav-item" id="nav-veri">
         <button class="nav-btn" onclick="toggleNav('veri')">🔄 <span data-i18n="tab_data">Data</span> <span class="arrow">▼</span></button>
         <div class="nav-dropdown">
-          <button class="nav-dropdown-item" onclick="openTool('json2csv')"><span class="di">📊</span><div><div class="dt">JSON → CSV</div><div class="dd">Veri dönüştür</div></div></button>
-          <button class="nav-dropdown-item" onclick="openTool('csv2json')"><span class="di">🔃</span><div><div class="dt">CSV → JSON</div><div class="dd">Tablo → JSON</div></div></button>
-          <button class="nav-dropdown-item" onclick="openTool('jsonfmt')"><span class="di">✨</span><div><div class="dt">JSON Formatlayıcı</div><div class="dd">Doğrula ve güzelleştir</div></div></button>
-          <button class="nav-dropdown-item" onclick="openTool('color')"><span class="di">🎨</span><div><div class="dt">Renk Dönüştürücü</div><div class="dd">HEX ↔ RGB ↔ HSL</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('json2csv')"><span class="di">📊</span><div><div class="dt" data-i18n="dt_json2csv">JSON → CSV</div><div class="dd" data-i18n="dd_json2csv">Convert data</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('csv2json')"><span class="di">🔃</span><div><div class="dt" data-i18n="dt_csv2json">CSV → JSON</div><div class="dd" data-i18n="dd_csv2json">Table → JSON</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('jsonfmt')"><span class="di">✨</span><div><div class="dt" data-i18n="dt_jsonfmt">JSON Formatter</div><div class="dd" data-i18n="dd_jsonfmt">Validate & beautify</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('color')"><span class="di">🎨</span><div><div class="dt" data-i18n="dt_color">Color Converter</div><div class="dd" data-i18n="dd_color">HEX ↔ RGB ↔ HSL</div></div></button>
         </div>
       </div>
 
       <div class="nav-item" id="nav-metin">
         <button class="nav-btn" onclick="toggleNav('metin')">✍️ <span data-i18n="tab_text">Text</span> <span class="arrow">▼</span></button>
         <div class="nav-dropdown">
-          <button class="nav-dropdown-item" onclick="openTool('turkce')"><span class="di">🇹🇷</span><div><div class="dt">Türkçe Karakter</div><div class="dd">ASCII → Türkçe</div></div></button>
-          <button class="nav-dropdown-item" onclick="openTool('caseconv')"><span class="di">🔡</span><div><div class="dt">Metin Dönüşümü</div><div class="dd">Büyük/küçük harf</div></div></button>
-          <button class="nav-dropdown-item" onclick="openTool('b64text')"><span class="di">🔒</span><div><div class="dt">Base64 Metin</div><div class="dd">Encode / Decode</div></div></button>
-          <button class="nav-dropdown-item" onclick="openTool('textanalyze')"><span class="di">📏</span><div><div class="dt">Metin Analizi</div><div class="dd">Karakter, kelime sayısı</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('turkce')"><span class="di">🇹🇷</span><div><div class="dt" data-i18n="dt_turkce">Turkish Characters</div><div class="dd" data-i18n="dd_turkce">ASCII → Turkish</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('caseconv')"><span class="di">🔡</span><div><div class="dt" data-i18n="dt_caseconv">Case Converter</div><div class="dd" data-i18n="dd_caseconv">Upper/lowercase</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('b64text')"><span class="di">🔒</span><div><div class="dt" data-i18n="dt_b64text">Base64 Text</div><div class="dd" data-i18n="dd_b64text">Encode / Decode</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('textanalyze')"><span class="di">📏</span><div><div class="dt" data-i18n="dt_textanalyze">Text Analysis</div><div class="dd" data-i18n="dd_textanalyze">Word, char count</div></div></button>
         </div>
       </div>
 
       <div class="nav-item" id="nav-hesap">
         <button class="nav-btn" onclick="toggleNav('hesap')">🧮 <span data-i18n="tab_calc">Calc</span> <span class="arrow">▼</span></button>
         <div class="nav-dropdown">
-          <button class="nav-dropdown-item" onclick="openTool('kdv')"><span class="di">🧾</span><div><div class="dt">KDV Hesaplayıcı</div><div class="dd">KDV ekle / çıkar</div></div></button>
-          <button class="nav-dropdown-item" onclick="openTool('doviz')"><span class="di">💱</span><div><div class="dt">Döviz Çevirici</div><div class="dd">Anlık kur, 170+ birim</div></div></button>
-          <button class="nav-dropdown-item" onclick="openTool('shape')"><span class="di">📐</span><div><div class="dt">Alan / Çevre</div><div class="dd">Geometrik şekiller</div></div></button>
-          <button class="nav-dropdown-item" onclick="openTool('percent')"><span class="di">%</span><div><div class="dt">Yüzde Hesaplayıcı</div><div class="dd">İndirim, artış, oran</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('kdv')"><span class="di">🧾</span><div><div class="dt" data-i18n="dt_kdv">VAT Calculator</div><div class="dd" data-i18n="dd_kdv">Add / remove VAT</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('doviz')"><span class="di">💱</span><div><div class="dt" data-i18n="dt_doviz">Currency Converter</div><div class="dd" data-i18n="dd_doviz">Live rate, 170+ units</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('shape')"><span class="di">📐</span><div><div class="dt" data-i18n="dt_shape">Area / Perimeter</div><div class="dd" data-i18n="dd_shape">Geometric shapes</div></div></button>
+          <button class="nav-dropdown-item" onclick="openTool('percent')"><span class="di">%</span><div><div class="dt" data-i18n="dt_percent">Percentage Calc</div><div class="dd" data-i18n="dd_percent">Discount, increase</div></div></button>
         </div>
       </div>
 
@@ -977,7 +990,7 @@ canvas#work-canvas { display: none; }
 
     <!-- SINGLE TOOL VIEW -->
     <div id="tool-view">
-      <button class="back-btn" onclick="closeTool()">← Geri</button>
+      <button class="back-btn" onclick="closeTool()" data-i18n="back_btn">← Back</button>
       <div id="tool-view-content"></div>
     </div>
 
@@ -1941,56 +1954,174 @@ function toggleTheme() {
 // ── i18n ───────────────────────────────────────────────────────────
 const i18n = {
   en: {
-    search_placeholder: 'Search tools… (pdf, image, currency…)',
-    hero_tag:   '⚡ Files never leave your browser — 100% private',
-    hero_title: 'All Tools<br><em>One Place</em>',
-    hero_sub:   'Image, PDF, video & data converters. Free, fast, privacy-first.',
-    stat_tools: 'Tools', stat_free: 'Free', stat_currencies: 'Currencies',
-    recent_label: 'Recently Used',
-    tab_image: '🖼️ Image', tab_video: '🎬 Video', tab_pdf: '📄 PDF',
-    tab_data: '🔄 Data', tab_text: '✍️ Text', tab_calc: '🧮 Calc',
-    footer_main: 'ConvertAI — All processing happens in your browser. Files are never uploaded.',
-    footer_sub: 'Privacy-first · Completely free · No registration',
-    live_rate: '⬤ Live Rate',
+    hero_tag:'⚡ Files never leave your browser — 100% private',
+    hero_title:'All Tools<br><em>One Place</em>',
+    hero_sub:'Image, PDF, video & data converters. Free, fast, privacy-first.',
+    stat_tools:'Tools', stat_free:'Free', stat_currencies:'Currencies',
+    tab_image:'Image', tab_video:'Video', tab_pdf:'PDF', tab_data:'Data', tab_text:'Text', tab_calc:'Calc',
+    footer_main:'ConvertAI — All processing happens in your browser. Files are never uploaded.',
+    footer_sub:'Privacy-first · Completely free · No registration',
+    live_rate:'⬤ Live Rate', back_btn:'← Back',
+    // Image
+    dt_format:'Format Converter', dd_format:'PNG, JPG, WebP',
+    dt_batch:'Batch Convert', dd_batch:'Multiple images at once',
+    dt_compress:'Image Compressor', dd_compress:'Reduce file size',
+    dt_resize:'Resize Image', dd_resize:'Pixel based',
+    dt_imgb64:'Image → Base64', dd_imgb64:'Web embedding',
+    dt_exif:'Photo Metadata', dd_exif:'EXIF, GPS, camera',
+    // Video
+    dt_vid2mp3:'Video → MP3', dd_vid2mp3:'Extract audio',
+    dt_vidfmt:'Video Converter', dd_vidfmt:'MP4, WebM, MOV',
+    dt_vidcmp:'Video Compressor', dd_vidcmp:'Reduce file size',
+    dt_vid2gif:'Video → GIF', dd_vid2gif:'Create animation',
+    dt_audiocrop:'Audio / Video Cutter', dd_audiocrop:'Cut a segment',
+    dt_thumbnail:'Extract Thumbnail', dd_thumbnail:'Capture a frame',
+    dt_vidinfo:'Video Info', dd_vidinfo:'Duration, resolution',
+    // PDF
+    dt_merge:'Merge PDF', dd_merge:'Multiple PDFs → one',
+    dt_split:'Split PDF', dd_split:'Select page range',
+    dt_delpages:'Delete Pages', dd_delpages:'Remove specific pages',
+    dt_pdfimg:'PDF → Image', dd_pdfimg:'Each page as PNG',
+    dt_imgtopdf:'Image → PDF', dd_imgtopdf:'PNG/JPG → PDF',
+    dt_pdfinfo:'PDF Info', dd_pdfinfo:'View metadata',
+    // Data
+    dt_json2csv:'JSON → CSV', dd_json2csv:'Convert data',
+    dt_csv2json:'CSV → JSON', dd_csv2json:'Table → JSON',
+    dt_jsonfmt:'JSON Formatter', dd_jsonfmt:'Validate & beautify',
+    dt_color:'Color Converter', dd_color:'HEX ↔ RGB ↔ HSL',
+    // Text
+    dt_turkce:'Turkish Characters', dd_turkce:'ASCII → Turkish',
+    dt_caseconv:'Case Converter', dd_caseconv:'Upper/lowercase',
+    dt_b64text:'Base64 Text', dd_b64text:'Encode / Decode',
+    dt_textanalyze:'Text Analysis', dd_textanalyze:'Word, char count',
+    // Calc
+    dt_kdv:'VAT Calculator', dd_kdv:'Add / remove VAT',
+    dt_doviz:'Currency Converter', dd_doviz:'Live rate, 170+ units',
+    dt_shape:'Area / Perimeter', dd_shape:'Geometric shapes',
+    dt_percent:'Percentage Calc', dd_percent:'Discount, increase',
   },
   tr: {
-    search_placeholder: 'Araç ara… (pdf, görsel, döviz…)',
-    hero_tag:   '⚡ Dosyalar sunucuya gönderilmez — tamamen tarayıcıda çalışır',
-    hero_title: 'Tüm Araçlar<br><em>Tek Yerde</em>',
-    hero_sub:   'Görsel, PDF, video ve veri dönüştürücüler. Ücretsiz, hızlı, gizlilik odaklı.',
-    stat_tools: 'Araç', stat_free: 'Ücretsiz', stat_currencies: 'Para Birimi',
-    recent_label: 'Son Kullanılanlar',
-    tab_image: '🖼️ Görsel', tab_video: '🎬 Video', tab_pdf: '📄 PDF',
-    tab_data: '🔄 Veri', tab_text: '✍️ Metin', tab_calc: '🧮 Hesap',
-    footer_main: 'ConvertAI — Tüm işlemler tarayıcınızda gerçekleşir. Dosyalar sunucuya gönderilmez.',
-    footer_sub: 'Gizlilik odaklı · Tamamen ücretsiz · Kayıt gerektirmez',
-    live_rate: '⬤ Anlık Kur',
+    hero_tag:'⚡ Dosyalar sunucuya gönderilmez — tamamen tarayıcıda çalışır',
+    hero_title:'Tüm Araçlar<br><em>Tek Yerde</em>',
+    hero_sub:'Görsel, PDF, video ve veri dönüştürücüler. Ücretsiz, hızlı, gizlilik odaklı.',
+    stat_tools:'Araç', stat_free:'Ücretsiz', stat_currencies:'Para Birimi',
+    tab_image:'Görsel', tab_video:'Video', tab_pdf:'PDF', tab_data:'Veri', tab_text:'Metin', tab_calc:'Hesap',
+    footer_main:'ConvertAI — Tüm işlemler tarayıcınızda gerçekleşir. Dosyalar sunucuya gönderilmez.',
+    footer_sub:'Gizlilik odaklı · Tamamen ücretsiz · Kayıt gerektirmez',
+    live_rate:'⬤ Anlık Kur', back_btn:'← Geri',
+    dt_format:'Format Dönüştürücü', dd_format:'PNG, JPG, WebP',
+    dt_batch:'Toplu Dönüştürme', dd_batch:'Birden fazla görsel',
+    dt_compress:'Görsel Sıkıştırma', dd_compress:'Boyutu küçült',
+    dt_resize:'Yeniden Boyutlandır', dd_resize:'Piksel bazlı',
+    dt_imgb64:'Görsel → Base64', dd_imgb64:'Web embedding',
+    dt_exif:'Fotoğraf Metadata', dd_exif:'EXIF, GPS, kamera',
+    dt_vid2mp3:'Video → MP3', dd_vid2mp3:'Ses çıkar',
+    dt_vidfmt:'Video Dönüştürücü', dd_vidfmt:'MP4, WebM, MOV',
+    dt_vidcmp:'Video Sıkıştırma', dd_vidcmp:'Boyutu küçült',
+    dt_vid2gif:'Video → GIF', dd_vid2gif:'Animasyon oluştur',
+    dt_audiocrop:'Ses / Video Kesici', dd_audiocrop:'Belirli aralığı kes',
+    dt_thumbnail:'Thumbnail Çıkar', dd_thumbnail:'Kare yakala',
+    dt_vidinfo:'Video Bilgisi', dd_vidinfo:'Süre, çözünürlük',
+    dt_merge:'PDF Birleştir', dd_merge:'Çoklu PDF → tek',
+    dt_split:'PDF Böl', dd_split:'Sayfa aralığı seç',
+    dt_delpages:'Sayfa Sil', dd_delpages:'Belirli sayfaları kaldır',
+    dt_pdfimg:'PDF → Görsel', dd_pdfimg:'Her sayfayı PNG yap',
+    dt_imgtopdf:'Görsel → PDF', dd_imgtopdf:'PNG/JPG → PDF',
+    dt_pdfinfo:'PDF Bilgisi', dd_pdfinfo:'Metadata görüntüle',
+    dt_json2csv:'JSON → CSV', dd_json2csv:'Veri dönüştür',
+    dt_csv2json:'CSV → JSON', dd_csv2json:'Tablo → JSON',
+    dt_jsonfmt:'JSON Formatlayıcı', dd_jsonfmt:'Doğrula ve güzelleştir',
+    dt_color:'Renk Dönüştürücü', dd_color:'HEX ↔ RGB ↔ HSL',
+    dt_turkce:'Türkçe Karakter', dd_turkce:'ASCII → Türkçe',
+    dt_caseconv:'Metin Dönüşümü', dd_caseconv:'Büyük/küçük harf',
+    dt_b64text:'Base64 Metin', dd_b64text:'Encode / Decode',
+    dt_textanalyze:'Metin Analizi', dd_textanalyze:'Kelime, karakter sayısı',
+    dt_kdv:'KDV Hesaplayıcı', dd_kdv:'KDV ekle / çıkar',
+    dt_doviz:'Döviz Çevirici', dd_doviz:'Anlık kur, 170+ birim',
+    dt_shape:'Alan / Çevre', dd_shape:'Geometrik şekiller',
+    dt_percent:'Yüzde Hesaplayıcı', dd_percent:'İndirim, artış, oran',
   },
   de: {
-    search_placeholder: 'Tools suchen… (pdf, bild, währung…)',
-    hero_tag:   '⚡ Dateien verlassen nie Ihren Browser — 100% privat',
-    hero_title: 'Alle Tools<br><em>An einem Ort</em>',
-    hero_sub:   'Bild-, PDF-, Video- und Datenkonverter. Kostenlos, schnell, datenschutzorientiert.',
-    stat_tools: 'Tools', stat_free: 'Kostenlos', stat_currencies: 'Währungen',
-    recent_label: 'Zuletzt verwendet',
-    tab_image: '🖼️ Bild', tab_video: '🎬 Video', tab_pdf: '📄 PDF',
-    tab_data: '🔄 Daten', tab_text: '✍️ Text', tab_calc: '🧮 Rechner',
-    footer_main: 'ConvertAI — Alle Verarbeitung erfolgt in Ihrem Browser. Dateien werden nie hochgeladen.',
-    footer_sub: 'Datenschutz zuerst · Völlig kostenlos · Keine Registrierung',
-    live_rate: '⬤ Live-Kurs',
+    hero_tag:'⚡ Dateien verlassen nie Ihren Browser — 100% privat',
+    hero_title:'Alle Tools<br><em>An einem Ort</em>',
+    hero_sub:'Bild-, PDF-, Video- und Datenkonverter. Kostenlos, schnell, datenschutzorientiert.',
+    stat_tools:'Tools', stat_free:'Kostenlos', stat_currencies:'Währungen',
+    tab_image:'Bild', tab_video:'Video', tab_pdf:'PDF', tab_data:'Daten', tab_text:'Text', tab_calc:'Rechner',
+    footer_main:'ConvertAI — Alle Verarbeitung erfolgt in Ihrem Browser. Dateien werden nie hochgeladen.',
+    footer_sub:'Datenschutz zuerst · Völlig kostenlos · Keine Registrierung',
+    live_rate:'⬤ Live-Kurs', back_btn:'← Zurück',
+    dt_format:'Format-Konverter', dd_format:'PNG, JPG, WebP',
+    dt_batch:'Stapelkonvertierung', dd_batch:'Mehrere Bilder',
+    dt_compress:'Bild komprimieren', dd_compress:'Dateigröße reduzieren',
+    dt_resize:'Größe ändern', dd_resize:'Pixelbasiert',
+    dt_imgb64:'Bild → Base64', dd_imgb64:'Web-Einbettung',
+    dt_exif:'Foto-Metadata', dd_exif:'EXIF, GPS, Kamera',
+    dt_vid2mp3:'Video → MP3', dd_vid2mp3:'Audio extrahieren',
+    dt_vidfmt:'Video-Konverter', dd_vidfmt:'MP4, WebM, MOV',
+    dt_vidcmp:'Video komprimieren', dd_vidcmp:'Dateigröße reduzieren',
+    dt_vid2gif:'Video → GIF', dd_vid2gif:'Animation erstellen',
+    dt_audiocrop:'Audio/Video schneiden', dd_audiocrop:'Segment ausschneiden',
+    dt_thumbnail:'Thumbnail extrahieren', dd_thumbnail:'Frame erfassen',
+    dt_vidinfo:'Video-Info', dd_vidinfo:'Dauer, Auflösung',
+    dt_merge:'PDF zusammenführen', dd_merge:'Mehrere PDFs → eine',
+    dt_split:'PDF teilen', dd_split:'Seitenbereich wählen',
+    dt_delpages:'Seiten löschen', dd_delpages:'Bestimmte Seiten entfernen',
+    dt_pdfimg:'PDF → Bild', dd_pdfimg:'Jede Seite als PNG',
+    dt_imgtopdf:'Bild → PDF', dd_imgtopdf:'PNG/JPG → PDF',
+    dt_pdfinfo:'PDF-Info', dd_pdfinfo:'Metadaten anzeigen',
+    dt_json2csv:'JSON → CSV', dd_json2csv:'Daten konvertieren',
+    dt_csv2json:'CSV → JSON', dd_csv2json:'Tabelle → JSON',
+    dt_jsonfmt:'JSON-Formatierer', dd_jsonfmt:'Validieren & verschönern',
+    dt_color:'Farbkonverter', dd_color:'HEX ↔ RGB ↔ HSL',
+    dt_turkce:'Türkische Zeichen', dd_turkce:'ASCII → Türkisch',
+    dt_caseconv:'Groß-/Kleinschreibung', dd_caseconv:'Text umwandeln',
+    dt_b64text:'Base64 Text', dd_b64text:'Codieren / Decodieren',
+    dt_textanalyze:'Textanalyse', dd_textanalyze:'Wörter, Zeichen zählen',
+    dt_kdv:'MwSt-Rechner', dd_kdv:'MwSt hinzufügen / entfernen',
+    dt_doviz:'Währungsrechner', dd_doviz:'Live-Kurs, 170+ Einheiten',
+    dt_shape:'Fläche / Umfang', dd_shape:'Geometrische Formen',
+    dt_percent:'Prozentrechner', dd_percent:'Rabatt, Erhöhung',
   },
   fr: {
-    search_placeholder: 'Rechercher des outils… (pdf, image, devise…)',
-    hero_tag:   '⚡ Les fichiers ne quittent jamais votre navigateur — 100% privé',
-    hero_title: 'Tous les Outils<br><em>En Un Seul Endroit</em>',
-    hero_sub:   'Convertisseurs d\'images, PDF, vidéo et données. Gratuit, rapide, respect de la vie privée.',
-    stat_tools: 'Outils', stat_free: 'Gratuit', stat_currencies: 'Devises',
-    recent_label: 'Récemment utilisés',
-    tab_image: '🖼️ Image', tab_video: '🎬 Vidéo', tab_pdf: '📄 PDF',
-    tab_data: '🔄 Données', tab_text: '✍️ Texte', tab_calc: '🧮 Calcul',
-    footer_main: 'ConvertAI — Tout le traitement se fait dans votre navigateur. Les fichiers ne sont jamais téléchargés.',
-    footer_sub: 'Respect de la vie privée · Entièrement gratuit · Sans inscription',
-    live_rate: '⬤ Taux en direct',
+    hero_tag:'⚡ Les fichiers ne quittent jamais votre navigateur — 100% privé',
+    hero_title:'Tous les Outils<br><em>En Un Seul Endroit</em>',
+    hero_sub:'Convertisseurs d\'images, PDF, vidéo et données. Gratuit, rapide, privé.',
+    stat_tools:'Outils', stat_free:'Gratuit', stat_currencies:'Devises',
+    tab_image:'Image', tab_video:'Vidéo', tab_pdf:'PDF', tab_data:'Données', tab_text:'Texte', tab_calc:'Calcul',
+    footer_main:'ConvertAI — Tout le traitement se fait dans votre navigateur. Les fichiers ne sont jamais téléchargés.',
+    footer_sub:'Respect de la vie privée · Entièrement gratuit · Sans inscription',
+    live_rate:'⬤ Taux en direct', back_btn:'← Retour',
+    dt_format:'Convertisseur de format', dd_format:'PNG, JPG, WebP',
+    dt_batch:'Conversion par lots', dd_batch:'Plusieurs images',
+    dt_compress:'Compresser l\'image', dd_compress:'Réduire la taille',
+    dt_resize:'Redimensionner', dd_resize:'Basé sur les pixels',
+    dt_imgb64:'Image → Base64', dd_imgb64:'Intégration web',
+    dt_exif:'Métadonnées photo', dd_exif:'EXIF, GPS, appareil',
+    dt_vid2mp3:'Vidéo → MP3', dd_vid2mp3:'Extraire l\'audio',
+    dt_vidfmt:'Convertisseur vidéo', dd_vidfmt:'MP4, WebM, MOV',
+    dt_vidcmp:'Compresser la vidéo', dd_vidcmp:'Réduire la taille',
+    dt_vid2gif:'Vidéo → GIF', dd_vid2gif:'Créer une animation',
+    dt_audiocrop:'Couper audio/vidéo', dd_audiocrop:'Couper un segment',
+    dt_thumbnail:'Extraire miniature', dd_thumbnail:'Capturer une image',
+    dt_vidinfo:'Info vidéo', dd_vidinfo:'Durée, résolution',
+    dt_merge:'Fusionner PDF', dd_merge:'Plusieurs PDFs → un',
+    dt_split:'Diviser PDF', dd_split:'Sélectionner des pages',
+    dt_delpages:'Supprimer des pages', dd_delpages:'Retirer des pages',
+    dt_pdfimg:'PDF → Image', dd_pdfimg:'Chaque page en PNG',
+    dt_imgtopdf:'Image → PDF', dd_imgtopdf:'PNG/JPG → PDF',
+    dt_pdfinfo:'Info PDF', dd_pdfinfo:'Afficher les métadonnées',
+    dt_json2csv:'JSON → CSV', dd_json2csv:'Convertir les données',
+    dt_csv2json:'CSV → JSON', dd_csv2json:'Tableau → JSON',
+    dt_jsonfmt:'Formateur JSON', dd_jsonfmt:'Valider et embellir',
+    dt_color:'Convertisseur couleur', dd_color:'HEX ↔ RGB ↔ HSL',
+    dt_turkce:'Caractères turcs', dd_turkce:'ASCII → Turc',
+    dt_caseconv:'Casse du texte', dd_caseconv:'Majuscules/minuscules',
+    dt_b64text:'Base64 Texte', dd_b64text:'Encoder / Décoder',
+    dt_textanalyze:'Analyse de texte', dd_textanalyze:'Compter mots, caractères',
+    dt_kdv:'Calculateur TVA', dd_kdv:'Ajouter / retirer TVA',
+    dt_doviz:'Convertisseur devise', dd_doviz:'Taux en direct, 170+',
+    dt_shape:'Aire / Périmètre', dd_shape:'Formes géométriques',
+    dt_percent:'Calculateur %', dd_percent:'Remise, augmentation',
   },
 };
 
